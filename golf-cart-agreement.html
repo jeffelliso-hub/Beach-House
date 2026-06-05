@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Golf Cart Use Agreement — LegaSea</title>
+  <title>Golf Cart Use Agreement â LegaSea</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -20,54 +21,293 @@
       --green: #3b6d11;
       --green-light: #eaf3de;
     }
-    body { font-family: 'Lato', sans-serif; font-weight: 300; background: var(--sand); color: var(--text); min-height: 100vh; padding-bottom: 3rem; }
-    header { background: var(--ocean); padding: 2rem 1.5rem 1.5rem; text-align: center; }
-    header h1 { font-family: 'Playfair Display', serif; font-weight: 600; font-size: 2rem; color: var(--white); letter-spacing: 0.02em; }
-    header p { color: rgba(255,255,255,0.72); font-size: 0.9rem; margin-top: 0.35rem; letter-spacing: 0.08em; text-transform: uppercase; }
-    .wave { display: block; width: 100%; background: var(--ocean); line-height: 0; }
-    .wave svg { display: block; width: 100%; }
-    .container { max-width: 680px; margin: 0 auto; padding: 0 1.25rem; }
-    .intro { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem 1.5rem; margin: 1.75rem 0 1.25rem; font-size: 0.95rem; line-height: 1.6; color: var(--text-muted); }
-    .intro strong { color: var(--ocean); font-weight: 700; }
-    .section { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem; margin-bottom: 1rem; }
-    .section h2 { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 600; color: var(--ocean); margin-bottom: 1rem; padding-bottom: 0.6rem; border-bottom: 1.5px solid var(--ocean-light); letter-spacing: 0.01em; }
-    .term { display: flex; gap: 0.75rem; margin-bottom: 0.9rem; align-items: flex-start; font-size: 0.9rem; line-height: 1.6; color: var(--text); }
+    body {
+      font-family: 'Lato', sans-serif;
+      font-weight: 300;
+      background: var(--sand);
+      color: var(--text);
+      min-height: 100vh;
+      padding-bottom: 3rem;
+    }
+    header {
+      background: var(--ocean);
+      padding: 2rem 1.5rem 1.5rem;
+      text-align: center;
+    }
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      font-size: 2rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    header p {
+      color: rgba(255,255,255,0.72);
+      font-size: 0.9rem;
+      margin-top: 0.35rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .wave {
+      display: block;
+      width: 100%;
+      background: var(--ocean);
+      line-height: 0;
+    }
+    .wave svg {
+      display: block;
+      width: 100%;
+    }
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+    .intro {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.75rem 0 1.25rem;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+    }
+    .intro strong {
+      color: var(--ocean);
+      font-weight: 700;
+    }
+    .section {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--ocean);
+      margin-bottom: 1rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1.5px solid var(--ocean-light);
+      letter-spacing: 0.01em;
+    }
+    .term {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 0.9rem;
+      align-items: flex-start;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--text);
+    }
     .term:last-child { margin-bottom: 0; }
-    .term-dot { flex-shrink: 0; width: 6px; height: 6px; background: var(--sand-dark); border-radius: 50%; margin-top: 0.55rem; }
-    .warning { background: #fff8e6; border-left: 3px solid #e9a825; border-radius: 0 6px 6px 0; padding: 0.6rem 0.85rem; font-size: 0.85rem; margin: 0.6rem 0 0.9rem 1.25rem; color: #7a5800; line-height: 1.5; }
-    .sign-section { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem; margin-bottom: 1rem; }
-    .sign-section h2 { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 600; color: var(--ocean); margin-bottom: 1.25rem; }
-    .field { margin-bottom: 1.1rem; }
-    .field label { display: block; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.4rem; }
-    .field input[type="text"], .field input[type="date"] { width: 100%; padding: 0.7rem 0.85rem; border: 1.5px solid var(--border); border-radius: 7px; font-family: 'Lato', sans-serif; font-size: 1rem; font-weight: 400; color: var(--text); background: var(--white); appearance: none; transition: border-color 0.15s; }
-    .field input:focus { outline: none; border-color: var(--ocean); }
-    .agree-box { display: flex; gap: 0.85rem; align-items: flex-start; background: var(--ocean-light); border: 1.5px solid #b8dcea; border-radius: 8px; padding: 1rem 1.1rem; margin-bottom: 1.25rem; cursor: pointer; }
-    .agree-box input[type="checkbox"] { flex-shrink: 0; width: 20px; height: 20px; accent-color: var(--ocean); margin-top: 0.15rem; cursor: pointer; }
-    .agree-box span { font-size: 0.9rem; line-height: 1.55; color: var(--ocean); }
-    button[type="submit"] { width: 100%; padding: 1rem; background: var(--ocean); color: var(--white); border: none; border-radius: 8px; font-family: 'Lato', sans-serif; font-size: 1rem; font-weight: 700; letter-spacing: 0.04em; cursor: pointer; transition: background 0.15s, transform 0.1s; }
+    .term-dot {
+      flex-shrink: 0;
+      width: 6px;
+      height: 6px;
+      background: var(--sand-dark);
+      border-radius: 50%;
+      margin-top: 0.55rem;
+    }
+    .warning {
+      background: #fff8e6;
+      border-left: 3px solid #e9a825;
+      border-radius: 0 6px 6px 0;
+      padding: 0.6rem 0.85rem;
+      font-size: 0.85rem;
+      margin: 0.6rem 0 0.9rem 1.25rem;
+      color: #7a5800;
+      line-height: 1.5;
+    }
+    .sign-section {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .sign-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--ocean);
+      margin-bottom: 1.25rem;
+    }
+    .field {
+      margin-bottom: 1.1rem;
+    }
+    .field label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+    .field input[type="text"],
+    .field input[type="date"] {
+      width: 100%;
+      padding: 0.7rem 0.85rem;
+      border: 1.5px solid var(--border);
+      border-radius: 7px;
+      font-family: 'Lato', sans-serif;
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--text);
+      background: var(--white);
+      appearance: none;
+      transition: border-color 0.15s;
+    }
+    .field input:focus {
+      outline: none;
+      border-color: var(--ocean);
+    }
+    .agree-box {
+      display: flex;
+      gap: 0.85rem;
+      align-items: flex-start;
+      background: var(--ocean-light);
+      border: 1.5px solid #b8dcea;
+      border-radius: 8px;
+      padding: 1rem 1.1rem;
+      margin-bottom: 1.25rem;
+      cursor: pointer;
+    }
+    .agree-box input[type="checkbox"] {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      accent-color: var(--ocean);
+      margin-top: 0.15rem;
+      cursor: pointer;
+    }
+    .agree-box span {
+      font-size: 0.9rem;
+      line-height: 1.55;
+      color: var(--ocean);
+    }
+    button[type="submit"] {
+      width: 100%;
+      padding: 1rem;
+      background: var(--ocean);
+      color: var(--white);
+      border: none;
+      border-radius: 8px;
+      font-family: 'Lato', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+    }
     button[type="submit"]:hover { background: #154f66; }
     button[type="submit"]:active { transform: scale(0.98); }
-    button[type="submit"]:disabled { background: var(--sand-dark); cursor: not-allowed; transform: none; }
-    .thank-you { display: none; text-align: center; padding: 3rem 1.5rem; }
-    .thank-you .icon { width: 72px; height: 72px; background: var(--green-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; }
-    .thank-you .icon svg { width: 36px; height: 36px; stroke: var(--green); }
-    .thank-you h2 { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--text); margin-bottom: 0.75rem; }
-    .thank-you p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.65; max-width: 340px; margin: 0 auto; }
-    .section-agree { display: flex; gap: 0.65rem; align-items: center; margin-top: 1rem; padding-top: 0.85rem; border-top: 1px solid var(--border); }
-    .section-agree input[type="checkbox"] { flex-shrink: 0; width: 17px; height: 17px; accent-color: var(--ocean); cursor: pointer; }
-    .section-agree label { font-size: 0.82rem; color: var(--text-muted); cursor: pointer; font-style: italic; }
-    .dl-row { display: flex; align-items: center; gap: 1rem; margin: 1rem 0 0.25rem; flex-wrap: wrap; }
-    .dl-btn { display: inline-block; padding: 0.6rem 1.1rem; background: var(--ocean); color: var(--white); border-radius: 7px; font-family: 'Lato', sans-serif; font-weight: 700; font-size: 0.85rem; text-decoration: none; letter-spacing: 0.03em; white-space: nowrap; }
-    .dl-btn:hover { background: #154f66; }
-    .dl-or { font-size: 0.88rem; color: var(--text-muted); white-space: nowrap; }
-    .dl-or strong { color: var(--text); }
-    .footer-note { text-align: center; font-size: 0.78rem; color: var(--text-muted); margin-top: 2rem; }
+    button[type="submit"]:disabled {
+      background: var(--sand-dark);
+      cursor: not-allowed;
+      transform: none;
+    }
+    .thank-you {
+      display: none;
+      text-align: center;
+      padding: 3rem 1.5rem;
+    }
+    .thank-you .icon {
+      width: 72px;
+      height: 72px;
+      background: var(--green-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+    }
+    .thank-you .icon svg {
+      width: 36px;
+      height: 36px;
+      stroke: var(--green);
+    }
+    .thank-you h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+    }
+    .thank-you p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.65;
+      max-width: 340px;
+      margin: 0 auto;
+    }
+    .section-agree {
+      display: flex;
+      gap: 0.65rem;
+      align-items: center;
+      margin-top: 1rem;
+      padding-top: 0.85rem;
+      border-top: 1px solid var(--border);
+    }
+    .section-agree input[type="checkbox"] {
+      flex-shrink: 0;
+      width: 17px;
+      height: 17px;
+      accent-color: var(--ocean);
+      cursor: pointer;
+    }
+    .section-agree label {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-style: italic;
+    }
+    .dl-upload-wrap { margin: 1rem 0 0.5rem; }
+    .dl-upload-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.6rem 1.1rem;
+      background: var(--ocean);
+      color: var(--white);
+      border-radius: 7px;
+      font-family: 'Lato', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .dl-upload-label:hover { background: #154f66; }
+    #dl-photo { display: none; }
+    .dl-filename {
+      display: block;
+      margin-top: 0.45rem;
+      font-size: 0.82rem;
+      color: var(--ocean);
+      font-style: italic;
+    }
+    .dl-text-option {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 0.6rem;
+    }
+    .dl-text-option strong { color: var(--text); }
+    .footer-note {
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 2rem;
+    }
   </style>
 </head>
 <body>
 <header>
   <h1>LegaSea</h1>
-  <p>Golf Cart Use Agreement &nbsp;&middot;&nbsp; Oak Island, NC</p>
+  <p>Golf Cart Use Agreement &nbsp;Â·&nbsp; Oak Island, NC</p>
 </header>
 <div class="wave">
   <svg viewBox="0 0 1440 40" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
@@ -96,9 +336,9 @@
     <div class="section">
       <h2>Electric Cart Requirements</h2>
       <div class="term"><div class="term-dot"></div><span>The cart is <strong>electric</strong> with lead-acid batteries. I will plug it in to charge when not in use. A full charge takes up to 8 hours.</span></div>
-      <div class="warning">&#x26A0;&#xFE0F; <strong>The garage door must remain open while charging.</strong> Lead-acid batteries produce hydrogen gas during charging. Charging in an enclosed space is a fire and health hazard.</div>
+      <div class="warning">â ï¸ <strong>The garage door must remain open while charging.</strong> Lead-acid batteries produce hydrogen gas during charging. Charging in an enclosed space is a fire and health hazard.</div>
       <div class="term"><div class="term-dot"></div><span>Keeping the cart charged is my responsibility. Failure to do so is an operating error. A <strong>$100 service fee</strong> applies if the cart becomes inoperable due to inadequate charging.</span></div>
-      <div class="warning">&#x26A0;&#xFE0F; Do not operate the cart during a rainstorm or through standing water. Doing so is an operating error and may result in a <strong>$200 fee</strong> for water damage.</div>
+      <div class="warning">â ï¸ Do not operate the cart during a rainstorm or through standing water. Doing so is an operating error and may result in a <strong>$200 fee</strong> for water damage.</div>
       <div class="section-agree">
         <input type="checkbox" id="agree-electric" name="agreed-electric" value="yes" required />
         <label for="agree-electric">I have read and agree to the Electric Cart Requirements above.</label>
@@ -131,14 +371,16 @@
     </div>
     <div class="section">
       <h2>Driver's License</h2>
-      <div class="term"><div class="term-dot"></div><span>All authorized operators must provide a photo of their valid driver's license before using the cart. Upload using the button below, or text a photo to <strong>704-616-7527</strong>.</span></div>
-      <div class="dl-row">
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeF3b0LAttkPS9sPUlhTGgbM94mTO_ySMVQqrP7vRkFo6Ya7w/viewform" target="_blank" class="dl-btn">Upload via Google Form &rarr;</a>
-        <span class="dl-or">or text a photo to <strong>704-616-7527</strong></span>
+      <div class="term"><div class="term-dot"></div><span>All authorized operators must provide a photo of their valid driver's license before using the cart. Attach a photo below, or text it to <strong>704-616-7527</strong>.</span></div>
+      <div class="dl-upload-wrap">
+        <label for="dl-photo" class="dl-upload-label">ð· Attach DL Photo</label>
+        <input type="file" id="dl-photo" name="dl_photo" accept="image/*,application/pdf" />
+        <span class="dl-filename" id="dl-filename"></span>
+        <p class="dl-text-option">â or text a photo to <strong>704-616-7527</strong> â</p>
       </div>
       <div class="section-agree">
         <input type="checkbox" id="agree-dl" name="agreed-dl" value="yes" required />
-        <label for="agree-dl">I will provide a driver's license photo for each authorized operator &mdash; via the form above or by texting 704-616-7527 &mdash; before using the cart.</label>
+        <label for="agree-dl">I will provide a driver's license photo for each authorized operator &mdash; via the upload above or by texting 704-616-7527 &mdash; before using the cart.</label>
       </div>
     </div>
     <div class="sign-section">
@@ -147,6 +389,10 @@
         <input type="hidden" name="access_key" value="76f7bc2d-bc48-4ce2-8474-74964ac7f0ea" />
         <input type="hidden" name="subject" value="LegaSea Golf Cart Agreement Signed" />
         <input type="checkbox" name="botcheck" style="display:none" />
+        <!-- EmailJS template variables (populated by JS on submit) -->
+        <input type="hidden" name="driver_name" id="ejs-driver-name" />
+        <input type="hidden" name="guest_name" id="ejs-guest-name" />
+        <input type="hidden" name="submission_time" id="ejs-submission-time" />
         <div class="field">
           <label for="full-name">Full Name</label>
           <input type="text" id="full-name" name="full-name" placeholder="Your full name" required autocomplete="name" />
@@ -176,18 +422,30 @@
     <h2>You're all set!</h2>
     <p>Your agreement has been recorded. Enjoy the cart, and drive safely!</p>
   </div>
-  <p class="footer-note">LegaSea &nbsp;&middot;&nbsp; Oak Island, NC &nbsp;&middot;&nbsp; Managed by the owners</p>
+  <p class="footer-note">LegaSea &nbsp;Â·&nbsp; Oak Island, NC &nbsp;Â·&nbsp; Managed by the owners</p>
 </div>
 <script>
+  emailjs.init({ publicKey: 'hhVHHpgnzfOmUf6Fp' });
+
   const form = document.getElementById('agreement-form');
   const submitBtn = document.getElementById('submit-btn');
   const agreeCheck = document.getElementById('agree');
   const nameInput = document.getElementById('full-name');
   const dateInput = document.getElementById('sign-date');
+  const dlPhotoInput = document.getElementById('dl-photo');
+  const dlFilename = document.getElementById('dl-filename');
   const sectionChecks = document.querySelectorAll('.section-agree input[type="checkbox"]');
+
   const today = new Date().toISOString().split('T')[0];
   dateInput.value = today;
   dateInput.max = today;
+
+  dlPhotoInput.addEventListener('change', () => {
+    dlFilename.textContent = dlPhotoInput.files.length
+      ? 'â ' + dlPhotoInput.files[0].name
+      : '';
+  });
+
   function checkReady() {
     const allSections = Array.from(sectionChecks).every(c => c.checked);
     const ready = allSections && agreeCheck.checked && nameInput.value.trim().length > 1 && dateInput.value;
@@ -197,14 +455,37 @@
   agreeCheck.addEventListener('change', checkReady);
   nameInput.addEventListener('input', checkReady);
   dateInput.addEventListener('change', checkReady);
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    submitBtn.textContent = 'Submitting…';
+    submitBtn.textContent = 'Submittingâ¦';
     submitBtn.disabled = true;
+
+    // Populate EmailJS template variables
+    const name = nameInput.value.trim();
+    const now = new Date();
+    const timeStr = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+      + ' at ' + now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+    document.getElementById('ejs-driver-name').value = name;
+    document.getElementById('ejs-guest-name').value = name;
+    document.getElementById('ejs-submission-time').value = timeStr;
+
+    // Send DL photo via EmailJS if a file was selected
+    if (dlPhotoInput.files && dlPhotoInput.files.length > 0) {
+      try {
+        await emailjs.sendForm('service_67blfcs', 'template_swlvg2o', form);
+      } catch (err) {
+        console.warn('EmailJS error:', err);
+      }
+    }
+
+    // Submit agreement text to Web3Forms (exclude file binary)
     const data = new FormData(form);
+    data.delete('dl_photo');
     try {
       await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
     } catch (_) {}
+
     document.getElementById('form-area').style.display = 'none';
     document.getElementById('thank-you').style.display = 'block';
     window.scrollTo({ top: 0, behavior: 'smooth' });
