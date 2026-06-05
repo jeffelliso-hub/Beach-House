@@ -303,8 +303,10 @@
     </div>
     <div class="sign-section">
       <h2>Sign Below</h2>
-      <form name="golf-cart-agreement" method="POST" netlify data-netlify="true" id="agreement-form" novalidate>
-        <input type="hidden" name="form-name" value="golf-cart-agreement" />
+      <form action="https://api.web3forms.com/submit" name="golf-cart-agreement" method="POST" id="agreement-form" novalidate>
+        <input type="hidden" name="access_key" value="76f7bc2d-bc48-4ce2-8474-74964ac7f0ea" />
+        <input type="hidden" name="subject" value="LegaSea Golf Cart Agreement Signed" />
+        <input type="checkbox" name="botcheck" style="display:none" />
         <div class="field">
           <label for="full-name">Full Name</label>
           <input type="text" id="full-name" name="full-name" placeholder="Your full name" required autocomplete="name" />
@@ -358,7 +360,7 @@
     submitBtn.disabled = true;
     const data = new FormData(form);
     try {
-      await fetch('/', { method: 'POST', body: data });
+      await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
     } catch (_) {}
     document.getElementById('form-area').style.display = 'none';
     document.getElementById('thank-you').style.display = 'block';
