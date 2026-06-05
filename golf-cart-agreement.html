@@ -47,21 +47,9 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
-    .wave {
-      display: block;
-      width: 100%;
-      background: var(--ocean);
-      line-height: 0;
-    }
-    .wave svg {
-      display: block;
-      width: 100%;
-    }
-    .container {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 0 1.25rem;
-    }
+    .wave { display: block; width: 100%; background: var(--ocean); line-height: 0; }
+    .wave svg { display: block; width: 100%; }
+    .container { max-width: 680px; margin: 0 auto; padding: 0 1.25rem; }
     .intro {
       background: var(--white);
       border: 1px solid var(--border);
@@ -72,10 +60,7 @@
       line-height: 1.6;
       color: var(--text-muted);
     }
-    .intro strong {
-      color: var(--ocean);
-      font-weight: 700;
-    }
+    .intro strong { color: var(--ocean); font-weight: 700; }
     .section {
       background: var(--white);
       border: 1px solid var(--border);
@@ -135,9 +120,7 @@
       color: var(--ocean);
       margin-bottom: 1.25rem;
     }
-    .field {
-      margin-bottom: 1.1rem;
-    }
+    .field { margin-bottom: 1.1rem; }
     .field label {
       display: block;
       font-size: 0.8rem;
@@ -161,10 +144,7 @@
       appearance: none;
       transition: border-color 0.15s;
     }
-    .field input:focus {
-      outline: none;
-      border-color: var(--ocean);
-    }
+    .field input:focus { outline: none; border-color: var(--ocean); }
     .agree-box {
       display: flex;
       gap: 0.85rem;
@@ -184,11 +164,7 @@
       margin-top: 0.15rem;
       cursor: pointer;
     }
-    .agree-box span {
-      font-size: 0.9rem;
-      line-height: 1.55;
-      color: var(--ocean);
-    }
+    .agree-box span { font-size: 0.9rem; line-height: 1.55; color: var(--ocean); }
     button[type="submit"] {
       width: 100%;
       padding: 1rem;
@@ -205,56 +181,48 @@
     }
     button[type="submit"]:hover { background: #154f66; }
     button[type="submit"]:active { transform: scale(0.98); }
-    button[type="submit"]:disabled {
-      background: var(--sand-dark);
-      cursor: not-allowed;
-      transform: none;
-    }
-    .thank-you {
-      display: none;
-      text-align: center;
-      padding: 3rem 1.5rem;
-    }
+    button[type="submit"]:disabled { background: var(--sand-dark); cursor: not-allowed; transform: none; }
+    .thank-you { display: none; text-align: center; padding: 3rem 1.5rem; }
     .thank-you .icon {
-      width: 72px;
-      height: 72px;
+      width: 72px; height: 72px;
       background: var(--green-light);
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       margin: 0 auto 1.5rem;
     }
-    .thank-you .icon svg {
-      width: 36px;
-      height: 36px;
-      stroke: var(--green);
+    .thank-you .icon svg { width: 36px; height: 36px; stroke: var(--green); }
+    .thank-you h2 { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--text); margin-bottom: 0.75rem; }
+    .thank-you p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.65; max-width: 340px; margin: 0 auto; }
+    .section-agree {
+      display: flex; gap: 0.65rem; align-items: center;
+      margin-top: 1rem; padding-top: 0.85rem;
+      border-top: 1px solid var(--border);
     }
-    .thank-you h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.6rem;
-      color: var(--text);
-      margin-bottom: 0.75rem;
+    .section-agree input[type="checkbox"] {
+      flex-shrink: 0; width: 17px; height: 17px;
+      accent-color: var(--ocean); cursor: pointer;
     }
-    .thank-you p {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      line-height: 1.65;
-      max-width: 340px;
-      margin: 0 auto;
+    .section-agree label { font-size: 0.82rem; color: var(--text-muted); cursor: pointer; font-style: italic; }
+    .upload-step {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1.5rem; margin-top: 1.5rem; text-align: center;
     }
-    .footer-note {
-      text-align: center;
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      margin-top: 2rem;
+    .upload-step h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--ocean); margin-bottom: 0.6rem; }
+    .upload-step p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1rem; }
+    .upload-btn {
+      display: inline-block; padding: 0.75rem 1.5rem;
+      background: var(--ocean); color: var(--white);
+      border-radius: 8px; font-family: 'Lato', sans-serif;
+      font-weight: 700; font-size: 0.9rem; text-decoration: none; letter-spacing: 0.03em;
     }
+    .upload-btn:hover { background: #154f66; }
+    .footer-note { text-align: center; font-size: 0.78rem; color: var(--text-muted); margin-top: 2rem; }
   </style>
 </head>
 <body>
 <header>
   <h1>LegaSea</h1>
-  <p>Golf Cart Use Agreement &nbsp;·&nbsp; Oak Island, NC</p>
+  <p>Golf Cart Use Agreement &nbsp;&middot;&nbsp; Oak Island, NC</p>
 </header>
 <div class="wave">
   <svg viewBox="0 0 1440 40" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
@@ -275,14 +243,21 @@
       <div class="term"><div class="term-dot"></div><span>I agree to hold harmless the owners for any and all damages and claims arising from use of the golf cart.</span></div>
       <div class="term"><div class="term-dot"></div><span>I agree to contact the owners immediately if I or any guest cause damage to the cart or others. I will inspect the cart before driving and report any concerns prior to use.</span></div>
       <div class="term"><div class="term-dot"></div><span>If the cart becomes inoperable through no fault of mine, the owners will take reasonable steps to repair or replace it.</span></div>
+      <div class="section-agree">
+        <input type="checkbox" id="agree-liability" name="agreed-liability" value="yes" required />
+        <label for="agree-liability">I have read and agree to the Operation &amp; Liability terms above.</label>
+      </div>
     </div>
     <div class="section">
       <h2>Electric Cart Requirements</h2>
       <div class="term"><div class="term-dot"></div><span>The cart is <strong>electric</strong> with lead-acid batteries. I will plug it in to charge when not in use. A full charge takes up to 8 hours.</span></div>
-      <div class="warning">⚠️ <strong>The garage door must remain open while charging.</strong> Lead-acid batteries produce hydrogen gas during charging. Charging in an enclosed space is a fire and health hazard.</div>
+      <div class="warning">&#x26A0;&#xFE0F; <strong>The garage door must remain open while charging.</strong> Lead-acid batteries produce hydrogen gas during charging. Charging in an enclosed space is a fire and health hazard.</div>
       <div class="term"><div class="term-dot"></div><span>Keeping the cart charged is my responsibility. Failure to do so is an operating error. A <strong>$100 service fee</strong> applies if the cart becomes inoperable due to inadequate charging.</span></div>
-      <div class="warning">⚠️ Do not operate the cart during a rainstorm or through standing water. Doing so is an operating error and may result in a <strong>$200 fee</strong> for water damage.</div>
-      <div class="term"><div class="term-dot"></div><span>I confirm the rental property has an exterior electrical outlet to charge the cart.</span></div>
+      <div class="warning">&#x26A0;&#xFE0F; Do not operate the cart during a rainstorm or through standing water. Doing so is an operating error and may result in a <strong>$200 fee</strong> for water damage.</div>
+      <div class="section-agree">
+        <input type="checkbox" id="agree-electric" name="agreed-electric" value="yes" required />
+        <label for="agree-electric">I have read and agree to the Electric Cart Requirements above.</label>
+      </div>
     </div>
     <div class="section">
       <h2>State &amp; Local Requirements</h2>
@@ -292,6 +267,10 @@
       <div class="term"><div class="term-dot"></div><span>The cart may <strong>not</strong> be operated under the influence of alcohol or drugs. Open containers of alcohol are not permitted on the cart.</span></div>
       <div class="term"><div class="term-dot"></div><span>Only listed authorized operators with a valid driver's license may drive the cart.</span></div>
       <div class="term"><div class="term-dot"></div><span>The cart will not carry more passengers than the number of seat belts available.</span></div>
+      <div class="section-agree">
+        <input type="checkbox" id="agree-state" name="agreed-state" value="yes" required />
+        <label for="agree-state">I have read and agree to the State &amp; Local Requirements above.</label>
+      </div>
     </div>
     <div class="section">
       <h2>User Agreement</h2>
@@ -300,6 +279,10 @@
       <div class="term"><div class="term-dot"></div><span>At the beach front, the cart may <strong>only park in designated Town of Oak Island parking spaces</strong>. Parking in non-designated areas may result in a citation for which I will be solely responsible.</span></div>
       <div class="term"><div class="term-dot"></div><span>There is <strong>no smoking</strong> permitted on the cart.</span></div>
       <div class="term"><div class="term-dot"></div><span>I agree to allow the owners to charge my credit card for any fees incurred in accordance with these terms, and will not dispute charges consistent with this agreement.</span></div>
+      <div class="section-agree">
+        <input type="checkbox" id="agree-user" name="agreed-user" value="yes" required />
+        <label for="agree-user">I have read and agree to the User Agreement terms above.</label>
+      </div>
     </div>
     <div class="sign-section">
       <h2>Sign Below</h2>
@@ -333,10 +316,15 @@
         <polyline points="20 6 9 17 4 12"/>
       </svg>
     </div>
-    <h2>You're all set!</h2>
-    <p>Your agreement has been recorded. Enjoy the cart and have a wonderful stay at LegaSea.</p>
+    <h2>Agreement signed!</h2>
+    <p>Your agreement has been recorded. One more step below.</p>
   </div>
-  <p class="footer-note">LegaSea &nbsp;·&nbsp; Oak Island, NC &nbsp;·&nbsp; Managed by the owners</p>
+  <div class="upload-step" id="upload-step" style="display:none;">
+    <h3>Step 2 &mdash; Upload Your Driver's License</h3>
+    <p>Please upload a clear photo of your driver's license. All authorized operators must submit one before using the cart.</p>
+    <a href="https://docs.google.com/forms/d/1cLDyYWNQXTHBLk1z1Lqje_U25_vaDyAYl407cFsDyfY/viewform" target="_blank" class="upload-btn">Upload Driver's License &rarr;</a>
+  </div>
+  <p class="footer-note">LegaSea &nbsp;&middot;&nbsp; Oak Island, NC &nbsp;&middot;&nbsp; Managed by the owners</p>
 </div>
 <script>
   const form = document.getElementById('agreement-form');
@@ -344,13 +332,16 @@
   const agreeCheck = document.getElementById('agree');
   const nameInput = document.getElementById('full-name');
   const dateInput = document.getElementById('sign-date');
+  const sectionChecks = document.querySelectorAll('.section-agree input[type="checkbox"]');
   const today = new Date().toISOString().split('T')[0];
   dateInput.value = today;
   dateInput.max = today;
   function checkReady() {
-    const ready = agreeCheck.checked && nameInput.value.trim().length > 1 && dateInput.value;
+    const allSections = Array.from(sectionChecks).every(c => c.checked);
+    const ready = allSections && agreeCheck.checked && nameInput.value.trim().length > 1 && dateInput.value;
     submitBtn.disabled = !ready;
   }
+  sectionChecks.forEach(c => c.addEventListener('change', checkReady));
   agreeCheck.addEventListener('change', checkReady);
   nameInput.addEventListener('input', checkReady);
   dateInput.addEventListener('change', checkReady);
@@ -364,6 +355,7 @@
     } catch (_) {}
     document.getElementById('form-area').style.display = 'none';
     document.getElementById('thank-you').style.display = 'block';
+    document.getElementById('upload-step').style.display = 'block';
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 </script>
