@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Golf Cart Use Agreement &ndash; LegaSea</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -89,9 +88,9 @@
       <input type="hidden" name="access_key" value="76f7bc2d-bc48-4ce2-8474-74964ac7f0ea" />
       <input type="hidden" name="subject" value="LegaSea Golf Cart Agreement Signed" />
       <input type="checkbox" name="botcheck" style="display:none" />
-      <input type="hidden" name="driver_name" id="ejs-driver-name" />
-      <input type="hidden" name="guest_name" id="ejs-guest-name" />
-      <input type="hidden" name="submission_time" id="ejs-submission-time" />
+      <input type="hidden" name="driver_name" id="w3f-driver-name" />
+      <input type="hidden" name="guest_name" id="w3f-guest-name" />
+      <input type="hidden" name="submission_time" id="w3f-submission-time" />
 
       <div class="section">
         <h2>Operation &amp; Liability</h2>
@@ -204,7 +203,7 @@
       </div>
     </form>
   </div>
-  <div class="thank-you" id="thank-you">
+  <div class="thank-you" id="thank.you">
     <div class="icon">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <polyline points="20 6 9 17 4 12"/>
@@ -216,8 +215,6 @@
   <p class="footer-note">LegaSea &nbsp;&middot;&nbsp; Oak Island, NC &nbsp;&middot;&nbsp; Managed by the owners</p>
 </div>
 <script>
-  emailjs.init({ publicKey: 'hhVHHpgnzfOmUf6Fp' });
-
   const form = document.getElementById('agreement-form');
   const submitBtn = document.getElementById('submit-btn');
   const agreeCheck = document.getElementById('agree');
@@ -349,22 +346,12 @@
       return 'Driver ' + (i + 1) + ': ' + dName + ' (DOB: ' + dDob + ')' + (hasPhoto ? ' [photo attached]' : ' [no photo - texting]');
     }).join('; ');
 
-    document.getElementById('ejs-driver-name').value = driverSummary;
-    document.getElementById('ejs-guest-name').value = name;
-    document.getElementById('ejs-submission-time').value = timeStr;
+    document.getElementById('w3f-driver-name').value = driverSummary;
+    document.getElementById('w3f-guest-name').value = name;
+    document.getElementById('w3f-submission-time').value = timeStr;
 
-    const anyPhoto = Array.from(document.querySelectorAll('[name^="dl_photo_"]')).some(f => f.files && f.files.length > 0);
-    if (anyPhoto) {
-      try {
-        await emailjs.sendForm('service_67blfcs', 'template_swlvg2o', form);
-      } catch (err) {
-        console.warn('EmailJS error:', err);
-      }
-    }
-
-    const data = new FormData(form);
-    document.querySelectorAll('[name^="dl_photo_"]').forEach(f => data.delete(f.name));
     try {
+      const data = new FormData(form);
       await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
     } catch (_) {}
 
