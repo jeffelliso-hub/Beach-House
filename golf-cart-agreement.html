@@ -50,10 +50,15 @@
     .driver-entry { position: relative; background: var(--sand); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; margin-bottom: 0.75rem; }
     .driver-entry-header { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--ocean); margin-bottom: 0.75rem; }
     .driver-row { display: flex; gap: 0.75rem; align-items: flex-end; flex-wrap: wrap; }
-    .driver-name-wrap { flex: 1; min-width: 160px; }
-    .driver-name-wrap input[type="text"] { width: 100%; padding: 0.65rem 0.8rem; border: 1.5px solid var(--border); border-radius: 7px; font-family: 'Lato', sans-serif; font-size: 0.95rem; font-weight: 400; color: var(--text); background: var(--white); appearance: none; transition: border-color 0.15s; }
-    .driver-name-wrap input[type="text"]:focus { outline: none; border-color: var(--ocean); }
-    .driver-photo-wrap { flex-shrink: 0; }
+    .driver-name-wrap { flex: 2; min-width: 160px; }
+    .driver-dl-wrap { flex: 2; min-width: 130px; }
+    .driver-state-wrap { flex: 1; min-width: 70px; max-width: 100px; }
+    .driver-name-wrap input[type="text"],
+    .driver-dl-wrap input[type="text"],
+    .driver-state-wrap input[type="text"] { width: 100%; padding: 0.65rem 0.8rem; border: 1.5px solid var(--border); border-radius: 7px; font-family: 'Lato', sans-serif; font-size: 0.95rem; font-weight: 400; color: var(--text); background: var(--white); appearance: none; transition: border-color 0.15s; }
+    .driver-name-wrap input[type="text"]:focus,
+    .driver-dl-wrap input[type="text"]:focus,
+    .driver-state-wrap input[type="text"]:focus { outline: none; border-color: var(--ocean); }
     .driver-dob-row { display: flex; align-items: center; gap: 0.75rem; margin-top: 0.65rem; flex-wrap: wrap; }
     .driver-dob-wrap input[type="date"] { padding: 0.55rem 0.7rem; border: 1.5px solid var(--border); border-radius: 7px; font-family: 'Lato', sans-serif; font-size: 0.9rem; color: var(--text); background: var(--white); appearance: none; }
     .driver-dob-wrap input[type="date"]:focus { outline: none; border-color: var(--ocean); }
@@ -62,10 +67,6 @@
     .remove-driver-btn:hover { background: #fde8e8; color: var(--red); }
     .add-driver-btn { display: flex; align-items: center; justify-content: center; width: 100%; padding: 0.6rem 1rem; background: none; border: 1.5px dashed var(--ocean); border-radius: 7px; color: var(--ocean); font-family: 'Lato', sans-serif; font-size: 0.85rem; font-weight: 700; cursor: pointer; margin: 0.25rem 0 1rem; }
     .add-driver-btn:hover { background: var(--ocean-light); }
-    .dl-upload-label { display: inline-flex; align-items: center; padding: 0.55rem 0.9rem; background: var(--ocean); color: var(--white); border-radius: 7px; font-family: 'Lato', sans-serif; font-weight: 700; font-size: 0.82rem; letter-spacing: 0.03em; cursor: pointer; white-space: nowrap; }
-    .dl-upload-label:hover { background: #154f66; }
-    input.dl-file-input { display: none; }
-    .dl-filename { display: block; margin-top: 0.3rem; font-size: 0.78rem; color: var(--ocean); font-style: italic; max-width: 130px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .footer-note { text-align: center; font-size: 0.78rem; color: var(--text-muted); margin-top: 2rem; }
   </style>
 </head>
@@ -86,9 +87,9 @@
   <div id="form-area">
     <form id="agreement-form" novalidate>
       <input type="hidden" name="access_key" value="76f7bc2d-bc48-4ce2-8474-74964ac7f0ea" />
-      <input type="hidden" name="subject" value="LegaSea Golf Cart Agreement Signed" />
-      <input type="checkbox" name="botcheck" style="display:none" />
-      <input type="hidden" name="driver_name" id="w3f-driver-name" />
+      <input type="hidden" name="subject" id="w3f-subject" />
+      <input type="hidden" name="from_name" value="LegaSea Golf Cart Form" />
+      <input type="hidden" name="drivers" id="w3f-drivers" />
       <input type="hidden" name="guest_name" id="w3f-guest-name" />
       <input type="hidden" name="submission_time" id="w3f-submission-time" />
 
@@ -147,8 +148,8 @@
       </div>
 
       <div class="section">
-        <h2>Driver&#8217;s Licenses</h2>
-        <div class="term"><div class="term-dot"></div><span>All authorized operators must be <strong>21 or older</strong> and provide a photo of their valid driver&#8217;s license before using the cart. Upload a photo for each driver below, or text it to <strong>704-616-7527</strong>.</span></div>
+        <h2>Authorized Drivers</h2>
+        <div class="term"><div class="term-dot"></div><span>All authorized operators must be <strong>21 or older</strong> and hold a valid driver&#8217;s license. Enter each driver&#8217;s name, license number, issuing state, and date of birth below.</span></div>
         <div id="driver-list">
           <div class="driver-entry" id="driver-0">
             <div class="driver-entry-header">Driver 1</div>
@@ -158,11 +159,13 @@
                 <label class="field-label" for="driver-name-0">Full Name</label>
                 <input type="text" id="driver-name-0" name="driver_0_name" placeholder="Driver's full name" autocomplete="off" />
               </div>
-              <div class="driver-photo-wrap">
-                <label class="field-label">DL Photo</label>
-                <label for="dl-photo-0" class="dl-upload-label">Attach Photo</label>
-                <input type="file" id="dl-photo-0" name="dl_photo_0" class="dl-file-input" accept="image/*,application/pdf" />
-                <span class="dl-filename" id="dl-filename-0"></span>
+              <div class="driver-dl-wrap">
+                <label class="field-label" for="driver-dl-0">DL Number</label>
+                <input type="text" id="driver-dl-0" name="driver_0_dl" placeholder="License number" autocomplete="off" />
+              </div>
+              <div class="driver-state-wrap">
+                <label class="field-label" for="driver-state-0">State</label>
+                <input type="text" id="driver-state-0" name="driver_0_state" placeholder="NC" maxlength="2" autocomplete="off" style="text-transform:uppercase" />
               </div>
             </div>
             <div class="driver-dob-row">
@@ -177,7 +180,7 @@
         <button type="button" id="add-driver-btn" class="add-driver-btn">+ Add Another Driver</button>
         <div class="section-agree">
           <input type="checkbox" id="agree-dl" name="agreed-dl" value="yes" required />
-          <label for="agree-dl">All listed drivers are 21 or older and will provide a valid driver&#8217;s license photo &mdash; via upload above or by texting 704-616-7527 &mdash; before using the cart.</label>
+          <label for="agree-dl">All listed drivers are 21 or older and hold a valid driver&#8217;s license.</label>
         </div>
       </div>
 
@@ -203,7 +206,7 @@
       </div>
     </form>
   </div>
-  <div class="thank-you" id="thank.you">
+  <div class="thank-you" id="thank-you">
     <div class="icon">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <polyline points="20 6 9 17 4 12"/>
@@ -241,9 +244,11 @@
     const allSections = Array.from(sectionChecks).every(c => c.checked);
     const driverEntries = document.querySelectorAll('.driver-entry');
     const driversValid = Array.from(driverEntries).every(entry => {
-      const n = entry.querySelector('input[type="text"]').value.trim();
+      const n = entry.querySelector('.driver-name-wrap input').value.trim();
+      const dl = entry.querySelector('.driver-dl-wrap input').value.trim();
+      const state = entry.querySelector('.driver-state-wrap input').value.trim();
       const d = entry.querySelector('.driver-dob').value;
-      return n.length > 0 && d && calcAge(d) >= 21;
+      return n.length > 0 && dl.length > 0 && state.length > 0 && d && calcAge(d) >= 21;
     });
     const ready = allSections && agreeCheck.checked
       && nameInput.value.trim().length > 1 && dateInput.value && driversValid;
@@ -252,25 +257,22 @@
 
   function setupDriverEntry(idx, entry) {
     const dobInput = entry.querySelector('.driver-dob');
-    const nameEl = entry.querySelector('input[type="text"]');
-    const photoInput = entry.querySelector('input[type="file"]');
-    const filenameSpan = entry.querySelector('.dl-filename');
-    const removeBtn = entry.querySelector('.remove-driver-btn');
-
+    entry.querySelectorAll('input[type="text"]').forEach(el => el.addEventListener('input', checkReady));
     dobInput.addEventListener('change', () => {
       const err = document.getElementById('dob-error-' + idx);
       err.style.display = (dobInput.value && calcAge(dobInput.value) < 21) ? 'block' : 'none';
       checkReady();
     });
-    nameEl.addEventListener('input', checkReady);
-    photoInput.addEventListener('change', () => {
-      filenameSpan.textContent = photoInput.files.length ? 'Selected: ' + photoInput.files[0].name : '';
-    });
-    removeBtn.addEventListener('click', () => {
+    entry.querySelector('.remove-driver-btn').addEventListener('click', () => {
       entry.remove();
       updateDriverHeaders();
       updateRemoveButtons();
       checkReady();
+    });
+    // Auto-uppercase state field
+    const stateInput = entry.querySelector('.driver-state-wrap input');
+    stateInput.addEventListener('input', () => {
+      stateInput.value = stateInput.value.toUpperCase();
     });
   }
 
@@ -303,11 +305,13 @@
           '<label class="field-label" for="driver-name-' + idx + '">Full Name</label>' +
           '<input type="text" id="driver-name-' + idx + '" name="driver_' + idx + '_name" placeholder="Driver\'s full name" autocomplete="off" />' +
         '</div>' +
-        '<div class="driver-photo-wrap">' +
-          '<label class="field-label">DL Photo</label>' +
-          '<label for="dl-photo-' + idx + '" class="dl-upload-label">Attach Photo</label>' +
-          '<input type="file" id="dl-photo-' + idx + '" name="dl_photo_' + idx + '" class="dl-file-input" accept="image/*,application/pdf" />' +
-          '<span class="dl-filename" id="dl-filename-' + idx + '"></span>' +
+        '<div class="driver-dl-wrap">' +
+          '<label class="field-label" for="driver-dl-' + idx + '">DL Number</label>' +
+          '<input type="text" id="driver-dl-' + idx + '" name="driver_' + idx + '_dl" placeholder="License number" autocomplete="off" />' +
+        '</div>' +
+        '<div class="driver-state-wrap">' +
+          '<label class="field-label" for="driver-state-' + idx + '">State</label>' +
+          '<input type="text" id="driver-state-' + idx + '" name="driver_' + idx + '_state" placeholder="NC" maxlength="2" autocomplete="off" style="text-transform:uppercase" />' +
         '</div>' +
       '</div>' +
       '<div class="driver-dob-row">' +
@@ -340,20 +344,34 @@
 
     const driverEntries = document.querySelectorAll('.driver-entry');
     const driverSummary = Array.from(driverEntries).map((entry, i) => {
-      const dName = entry.querySelector('input[type="text"]').value.trim();
+      const dName = entry.querySelector('.driver-name-wrap input').value.trim();
+      const dDl = entry.querySelector('.driver-dl-wrap input').value.trim();
+      const dState = entry.querySelector('.driver-state-wrap input').value.trim().toUpperCase();
       const dDob = entry.querySelector('.driver-dob').value;
-      const hasPhoto = entry.querySelector('input[type="file"]').files.length > 0;
-      return 'Driver ' + (i + 1) + ': ' + dName + ' (DOB: ' + dDob + ')' + (hasPhoto ? ' [photo attached]' : ' [no photo - texting]');
-    }).join('; ');
+      return 'Driver ' + (i + 1) + ': ' + dName + ' | DL# ' + dDl + ' (' + dState + ') | DOB: ' + dDob;
+    }).join('\n');
 
-    document.getElementById('w3f-driver-name').value = driverSummary;
-    document.getElementById('w3f-guest-name').value = name;
-    document.getElementById('w3f-submission-time').value = timeStr;
+    const emailVal = document.getElementById('email').value.trim();
 
     try {
-      const data = new FormData(form);
-      await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
-    } catch (_) {}
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          access_key: '76f7bc2d-bc48-4ce2-8474-74964ac7f0ea',
+          subject: 'Golf Cart Agreement - ' + name,
+          from_name: 'LegaSea Golf Cart Form',
+          guest_name: name,
+          email: emailVal || 'not provided',
+          submission_time: timeStr,
+          drivers: driverSummary
+        })
+      });
+      const json = await res.json();
+      if (!json.success) console.warn('Web3Forms:', json);
+    } catch (err) {
+      console.error('Submit error:', err);
+    }
 
     document.getElementById('form-area').style.display = 'none';
     document.getElementById('thank-you').style.display = 'block';
