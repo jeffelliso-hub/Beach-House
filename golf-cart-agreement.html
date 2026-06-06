@@ -82,7 +82,7 @@
 </div>
 <div class="container">
   <div class="intro">
-    The electric golf cart is included with your stay at <strong>LegaSea</strong>. Please read and sign the agreement below before use. Questions? Contact the owners at the number provided in your rental details.
+    The electric golf cart is included with your stay at <strong>LegaSea</strong>. Please read and sign the agreement below before use. Questions? Call us at <strong><a href="tel:7046167527" style="color:var(--ocean);text-decoration:none;">704-616-7527</a></strong>.
   </div>
   <div id="form-area">
     <form id="agreement-form" novalidate>
@@ -214,10 +214,14 @@
     </div>
     <h2>You&#8217;re all set!</h2>
     <p>Your agreement has been recorded. Enjoy the cart, and drive safely!</p>
+    <p style="margin-top:1rem;">If you have any difficulties, call us at <strong><a href="tel:7046167527" style="color:var(--ocean);text-decoration:none;">704-616-7527</a></strong>.</p>
   </div>
-  <p class="footer-note">LegaSea &nbsp;&middot;&nbsp; Oak Island, NC &nbsp;&middot;&nbsp; Managed by the owners</p>
+  <p class="footer-note">LegaSea &nbsp;&middot;&nbsp; Oak Island, NC &nbsp;&middot;&nbsp; 704-616-7527</p>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
+  emailjs.init('hhVHHpgnzfOmUf6Fp');
+
   const form = document.getElementById('agreement-form');
   const submitBtn = document.getElementById('submit-btn');
   const agreeCheck = document.getElementById('agree');
@@ -269,7 +273,6 @@
       updateRemoveButtons();
       checkReady();
     });
-    // Auto-uppercase state field
     const stateInput = entry.querySelector('.driver-state-wrap input');
     stateInput.addEventListener('input', () => {
       stateInput.value = stateInput.value.toUpperCase();
@@ -338,21 +341,29 @@
     submitBtn.disabled = true;
 
     const name = nameInput.value.trim();
+    const emailVal = document.getElementById('email').value.trim();
+    const dateSigned = dateInput.value;
+
     const now = new Date();
     const timeStr = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
       + ' at ' + now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
 
+    const liabilityAgreed = document.getElementById('agree-liability').checked ? 'YES' : 'NO';
+    const electricAgreed  = document.getElementById('agree-electric').checked  ? 'YES' : 'NO';
+    const stateAgreed     = document.getElementById('agree-state').checked     ? 'YES' : 'NO';
+    const userAgreed      = document.getElementById('agree-user').checked      ? 'YES' : 'NO';
+    const dlAgreed        = document.getElementById('agree-dl').checked        ? 'YES' : 'NO';
+
     const driverEntries = document.querySelectorAll('.driver-entry');
     const driverSummary = Array.from(driverEntries).map((entry, i) => {
-      const dName = entry.querySelector('.driver-name-wrap input').value.trim();
-      const dDl = entry.querySelector('.driver-dl-wrap input').value.trim();
+      const dName  = entry.querySelector('.driver-name-wrap input').value.trim();
+      const dDl    = entry.querySelector('.driver-dl-wrap input').value.trim();
       const dState = entry.querySelector('.driver-state-wrap input').value.trim().toUpperCase();
-      const dDob = entry.querySelector('.driver-dob').value;
+      const dDob   = entry.querySelector('.driver-dob').value;
       return 'Driver ' + (i + 1) + ': ' + dName + ' | DL# ' + dDl + ' (' + dState + ') | DOB: ' + dDob;
     }).join('\n');
 
-    const emailVal = document.getElementById('email').value.trim();
-
+    // 1. Notify Jeff via Web3Forms (richer data)
     try {
       const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
@@ -362,15 +373,36 @@
           subject: 'Golf Cart Agreement - ' + name,
           from_name: 'LegaSea Golf Cart Form',
           guest_name: name,
-          email: emailVal || 'not provided',
+          guest_email: emailVal || 'not provided',
+          date_signed: dateSigned,
           submission_time: timeStr,
+          'Operation & Liability': liabilityAgreed,
+          'Electric Cart Requirements': electricAgreed,
+          'State & Local Requirements': stateAgreed,
+          'User Agreement': userAgreed,
+          'Driver License Confirmation': dlAgreed,
           drivers: driverSummary
         })
       });
       const json = await res.json();
       if (!json.success) console.warn('Web3Forms:', json);
     } catch (err) {
-      console.error('Submit error:', err);
+      console.error('Web3Forms error:', err);
+    }
+
+    // 2. Send confirmation email to guest via EmailJS
+    if (emailVal) {
+      try {
+        await emailjs.send('service_67blfcs', 'template_swlvg2o', {
+          to_name:    name,
+          to_email:   emailVal,
+          date_signed: dateSigned,
+          drivers:    driverSummary,
+          phone:      '704-616-7527'
+        });
+      } catch (err) {
+        console.warn('EmailJS error:', err);
+      }
     }
 
     document.getElementById('form-area').style.display = 'none';
