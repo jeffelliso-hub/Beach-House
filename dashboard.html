@@ -115,14 +115,21 @@ html, body {
   grid-template-rows: 1fr 1fr;
 }
 
-.time-quadrant,
-.calendar-quadrant {
+.time-quadrant {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   text-align: center;
-  padding: 36px 40px;
+  padding: 36px 40px 28px;
+}
+.calendar-quadrant {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  text-align: left;
+  padding: 36px 24px;
 }
 
 /* Weather is a button for reliable tap */
@@ -130,9 +137,9 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   text-align: center;
-  padding: 28px 40px;
+  padding: 20px 40px 36px;
   border-top: 1px solid var(--divider);
   background: none;
   border-left: none; border-right: none; border-bottom: none;
@@ -222,6 +229,8 @@ html, body {
 
 /* ── CALENDAR ── */
 .cal-header {
+  align-self: flex-start;
+  width: 100%;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -298,6 +307,7 @@ html, body {
 
 /* ── SIGN IN ── */
 .cal-signin {
+  align-self: flex-start;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -823,6 +833,8 @@ setInterval(fetchWeather, 10 * 60 * 1000);
 // ════════════════════════════════
 var detailTimer = null;
 var detailSecs  = 10;
+var calDetailTimer = null;
+var calDetailSecs  = 10;
 var C = 2 * Math.PI * 13; // circumference for r=13
 
 function openWeatherDetail() {
@@ -991,10 +1003,23 @@ function openCalDetail(i) {
   document.getElementById('cal-detail-time').textContent  = ev.time;
   document.getElementById('cal-detail-title').textContent = ev.title;
   document.getElementById('cal-detail').style.display = 'flex';
+  calDetailSecs = 10;
+  clearInterval(calDetailTimer);
+  var closeEl = document.querySelector('.cal-detail-close');
+  if (closeEl) closeEl.textContent = 'Tap to dismiss (10)';
+  calDetailTimer = setInterval(function() {
+    calDetailSecs--;
+    var closeEl = document.querySelector('.cal-detail-close');
+    if (closeEl) closeEl.textContent = 'Tap to dismiss (' + calDetailSecs + ')';
+    if (calDetailSecs <= 0) closeCalDetail();
+  }, 1000);
 }
 
 function closeCalDetail() {
+  clearInterval(calDetailTimer);
   document.getElementById('cal-detail').style.display = 'none';
+  var closeEl = document.querySelector('.cal-detail-close');
+  if (closeEl) closeEl.textContent = 'Tap to dismiss';
 }
 
 fetchCalendar();
