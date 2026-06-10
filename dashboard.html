@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Dashboard">
+<title>Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 100%; height: 100%;
+  background: #08090d;
+  color: #e8eaf0;
+  font-family: 'DM Sans', sans-serif;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ══ MAIN LAYOUT ══ */
+.main-screen {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  height: 100vh;
+  width: 100vw;
+}
+
+.divider {
+  background: rgba(255,255,255,0.06);
+  margin: 48px 0;
+}
+
+.left-col {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+}
+
+.time-quadrant,
+.calendar-quadrant {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 36px 40px;
+}
+
+/* Weather is a button for reliable tap */
+.weather-quadrant {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 28px 40px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  background: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+  cursor: pointer;
+  color: inherit;
+  font-family: inherit;
+  width: 100%;
+  -webkit-tap-highlight-color: rgba(255,255,255,0.05);
+  outline: none;
+}
+.weather-quadrant:active { background: rgba(255,255,255,0.02); }
+
+/* ── TIME ── */
+.time-display {
+  font-family: 'DM Serif Display', serif;
+  font-size: 130px;
+  line-height: 0.9;
+  letter-spacing: -4px;
+  color: #f0f2f7;
+  font-weight: normal;
+}
+.time-ampm {
+  font-size: 18px;
+  font-weight: 200;
+  color: #343d4a;
+  letter-spacing: 0.18em;
+  margin-top: 14px;
+}
+.time-date {
+  font-size: 13px;
+  font-weight: 300;
+  color: #3e4754;
+  margin-top: 8px;
+  letter-spacing: 0.06em;
+}
+
+/* ── WEATHER ── */
+.wx-temp-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 10px;
+  line-height: 1;
+}
+.wx-icon { font-size: 44px; margin-bottom: 8px; }
+.wx-temp {
+  font-family: 'DM Serif Display', serif;
+  font-size: 100px;
+  color: #f0f2f7;
+  letter-spacing: -3px;
+  font-weight: normal;
+  line-height: 1;
+}
+.wx-unit { font-size: 32px; font-weight: 200; color: #343d4a; margin-bottom: 12px; }
+.wx-desc {
+  font-size: 15px;
+  font-weight: 300;
+  color: #4e5a6a;
+  margin-top: 10px;
+  text-transform: capitalize;
+  letter-spacing: 0.04em;
+}
+.wx-meta {
+  display: flex;
+  gap: 28px;
+  margin-top: 16px;
+  justify-content: center;
+}
+.wx-meta-item { text-align: center; }
+.wx-meta-label {
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #2e3540;
+  margin-bottom: 4px;
+}
+.wx-meta-val { font-size: 16px; font-weight: 300; color: #6a7a8e; }
+.wx-meta-val.rain { color: #5a8dab; }
+.wx-tap-hint {
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #1e2630;
+  margin-top: 14px;
+}
+
+/* ── CALENDAR ── */
+.cal-header {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #2e3540;
+  margin-bottom: 28px;
+}
+.cal-list { display: flex; flex-direction: column; gap: 18px; width: 100%; max-width: 300px; }
+.cal-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: opacity 0.15s;
+  text-align: left;
+}
+.cal-item:active { opacity: 0.6; }
+.cal-item.past { opacity: 0.28; }
+.cal-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: #3a5c78;
+  flex-shrink: 0;
+}
+.cal-item.soon .cal-dot { background: #b89a52; }
+.cal-item.past .cal-dot { background: #2a3340; }
+.cal-time {
+  font-size: 11px; font-weight: 300; color: #3a424f;
+  min-width: 52px; letter-spacing: 0.03em;
+}
+.cal-title { font-size: 15px; font-weight: 300; color: #b0bac8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cal-empty { font-size: 14px; font-weight: 300; color: #272e38; font-style: italic; }
+.cal-loading { font-size: 13px; font-weight: 300; color: #2a3340; font-style: italic; }
+
+/* ══ WEATHER DETAIL OVERLAY ══ */
+.detail-screen {
+  position: fixed;
+  inset: 0;
+  background: #08090d;
+  z-index: 100;
+  display: none;
+  flex-direction: column;
+  padding: 40px 48px 32px;
+}
+
+.detail-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 36px;
+}
+.detail-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 26px;
+  color: #c0c8d8;
+  font-style: italic;
+  font-weight: normal;
+}
+.detail-close-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+.countdown-wrap { position: relative; width: 34px; height: 34px; }
+.countdown-svg { transform: rotate(-90deg); }
+.countdown-track { fill: none; stroke: #1a2030; stroke-width: 2.5; }
+.countdown-arc {
+  fill: none; stroke: #3a5c78; stroke-width: 2.5; stroke-linecap: round;
+  stroke-dasharray: 88; stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1s linear;
+}
+.countdown-num {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 300; color: #3a5c78;
+}
+.detail-close-hint { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #2a333e; }
+
+/* HOURLY */
+.section-label { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: #2a333e; margin-bottom: 14px; }
+.hourly-strip {
+  display: flex; overflow-x: auto; scrollbar-width: none;
+  -webkit-overflow-scrolling: touch; margin-bottom: 32px;
+}
+.hourly-strip::-webkit-scrollbar { display: none; }
+.hour-item {
+  display: flex; flex-direction: column; align-items: center; gap: 7px;
+  min-width: 64px; padding: 12px 0;
+  border-right: 1px solid rgba(255,255,255,0.04);
+}
+.hour-item:last-child { border-right: none; }
+.hour-item.now { background: rgba(255,255,255,0.025); border-radius: 12px; }
+.hour-label { font-size: 10px; color: #3a424f; font-weight: 300; }
+.hour-item.now .hour-label { color: #5a8dab; }
+.hour-wx-icon { font-size: 22px; line-height: 1; }
+.hour-temp { font-size: 16px; font-weight: 300; color: #c0c8d8; }
+.hour-rain { font-size: 10px; color: #4a7a9b; }
+
+/* DAILY */
+.daily-strip { display: flex; }
+.day-item {
+  flex: 1; display: flex; flex-direction: column; align-items: center; gap: 7px;
+  padding: 12px 0; border-right: 1px solid rgba(255,255,255,0.04);
+}
+.day-item:last-child { border-right: none; }
+.day-name { font-size: 10px; color: #3a424f; font-weight: 300; letter-spacing: 0.08em; text-transform: uppercase; }
+.day-icon { font-size: 24px; line-height: 1; }
+.day-hi { font-family: 'DM Serif Display', serif; font-size: 22px; color: #c0c8d8; font-weight: normal; line-height: 1; }
+.day-lo { font-size: 12px; color: #3a424f; font-weight: 300; }
+.day-rain { font-size: 10px; color: #4a7a9b; }
+
+/* ══ CAL DETAIL OVERLAY ══ */
+.cal-detail {
+  position: fixed; inset: 0;
+  background: rgba(8,9,13,0.94);
+  z-index: 200; display: none;
+  align-items: center; justify-content: center;
+}
+.cal-detail-card { text-align: center; padding: 48px; max-width: 380px; }
+.cal-detail-time { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #3a5c78; margin-bottom: 16px; }
+.cal-detail-title { font-family: 'DM Serif Display', serif; font-size: 30px; color: #e0e8f0; line-height: 1.25; font-style: italic; }
+.cal-detail-close { margin-top: 36px; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: #2a333e; cursor: pointer; }
+</style>
+</head>
+<body>
+
+<!-- ═══ MAIN SCREEN ═══ -->
+<div class="main-screen" id="main-screen">
+  <div class="left-col">
+
+    <!-- TIME -->
+    <div class="time-quadrant">
+      <div class="time-display" id="clock-time">10:47</div>
+      <div class="time-ampm" id="clock-ampm">AM</div>
+      <div class="time-date" id="clock-date">Thursday, June 7</div>
+    </div>
+
+    <!-- WEATHER — button for reliable click/tap -->
+    <button class="weather-quadrant" id="wx-btn" onclick="openWeatherDetail()">
+      <div class="wx-temp-row">
+        <div class="wx-icon" id="wx-icon">⛅</div>
+        <div class="wx-temp" id="wx-temp">--</div>
+        <div class="wx-unit">°F</div>
+      </div>
+      <div class="wx-desc" id="wx-desc">Loading…</div>
+      <div class="wx-meta">
+        <div class="wx-meta-item">
+          <div class="wx-meta-label">High / Low</div>
+          <div class="wx-meta-val" id="wx-hilo">--°</div>
+        </div>
+        <div class="wx-meta-item">
+          <div class="wx-meta-label">Humidity</div>
+          <div class="wx-meta-val" id="wx-humidity">--%</div>
+        </div>
+        <div class="wx-meta-item" id="wx-rain-block" style="display:none">
+          <div class="wx-meta-label">Rain</div>
+          <div class="wx-meta-val rain" id="wx-precip">--%</div>
+        </div>
+      </div>
+      <div class="wx-tap-hint">Tap for forecast ↓</div>
+    </button>
+
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CALENDAR -->
+  <div class="calendar-quadrant">
+    <div class="cal-header">Today</div>
+    <div class="cal-list" id="cal-list">
+      <div class="cal-loading">Loading calendar…</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ WEATHER DETAIL ═══ -->
+<div class="detail-screen" id="detail-screen" onclick="closeWeatherDetail()">
+  <div class="detail-top">
+    <div class="detail-title">Weather Forecast</div>
+    <div class="detail-close-row">
+      <div class="countdown-wrap">
+        <svg class="countdown-svg" viewBox="0 0 34 34" width="34" height="34">
+          <circle class="countdown-track" cx="17" cy="17" r="13"/>
+          <circle class="countdown-arc" id="countdown-arc" cx="17" cy="17" r="13"/>
+        </svg>
+        <div class="countdown-num" id="countdown-num">10</div>
+      </div>
+      <div class="detail-close-hint">Tap to close</div>
+    </div>
+  </div>
+  <div class="section-label">Hourly</div>
+  <div class="hourly-strip" id="hourly-strip"></div>
+  <div class="section-label">7-Day</div>
+  <div class="daily-strip" id="daily-strip"></div>
+</div>
+
+<!-- ═══ CALENDAR EVENT DETAIL ═══ -->
+<div class="cal-detail" id="cal-detail" onclick="closeCalDetail()">
+  <div class="cal-detail-card">
+    <div class="cal-detail-time" id="cal-detail-time"></div>
+    <div class="cal-detail-title" id="cal-detail-title"></div>
+    <div class="cal-detail-close">Tap to dismiss</div>
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════
+// CONFIG
+// ════════════════════════════════
+var GOOGLE_API_KEY     = 'AIzaSyCgFzWFwYBPnhoND4sII22ojUXheW5-7Q8';
+var GOOGLE_CALENDAR_ID = 'jeffelliso@gmail.com';
+
+// ════════════════════════════════
+// CLOCK
+// ════════════════════════════════
+function updateClock() {
+  var now = new Date();
+  var h = now.getHours(), m = now.getMinutes();
+  var ampm = h >= 12 ? 'PM' : 'AM';
+  h = h % 12 || 12;
+  document.getElementById('clock-time').textContent = h + ':' + (m < 10 ? '0' : '') + m;
+  document.getElementById('clock-ampm').textContent = ampm;
+  var days   = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  document.getElementById('clock-date').textContent = days[now.getDay()] + ', ' + months[now.getMonth()] + ' ' + now.getDate();
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+// ════════════════════════════════
+// WEATHER
+// ════════════════════════════════
+var WX_ICONS = {0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',48:'🌫️',51:'🌦️',53:'🌦️',55:'🌧️',61:'🌧️',63:'🌧️',65:'🌧️',71:'❄️',73:'❄️',75:'❄️',80:'🌦️',81:'🌧️',82:'⛈️',95:'⛈️',96:'⛈️',99:'⛈️'};
+var WX_DESCS = {0:'Clear sky',1:'Mainly clear',2:'Partly cloudy',3:'Overcast',45:'Foggy',48:'Foggy',51:'Light drizzle',53:'Drizzle',55:'Heavy drizzle',61:'Light rain',63:'Rain',65:'Heavy rain',71:'Light snow',73:'Snow',75:'Heavy snow',80:'Showers',81:'Rain showers',82:'Violent showers',95:'Thunderstorm',96:'Thunderstorm',99:'Thunderstorm'};
+
+var cachedWeatherData = null;
+
+function fetchWeather() {
+  fetch('https://api.open-meteo.com/v1/forecast?latitude=35.11&longitude=-81.06&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,weather_code,precipitation_probability&daily=temperature_2m_max,temperature_2m_min,weather_code_dominant,precipitation_probability_max&temperature_unit=fahrenheit&timezone=America%2FNew_York&forecast_days=7')
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      cachedWeatherData = d;
+      var c = d.current, daily = d.daily;
+      var code = c.weather_code;
+      document.getElementById('wx-icon').textContent    = WX_ICONS[code] || '🌡️';
+      document.getElementById('wx-temp').textContent    = Math.round(c.temperature_2m);
+      document.getElementById('wx-desc').textContent    = WX_DESCS[code] || '';
+      document.getElementById('wx-humidity').textContent = c.relative_humidity_2m + '%';
+      document.getElementById('wx-hilo').textContent    = Math.round(daily.temperature_2m_max[0]) + ' / ' + Math.round(daily.temperature_2m_min[0]) + '°';
+      var rain = daily.precipitation_probability_max[0];
+      if (rain > 0) {
+        document.getElementById('wx-precip').textContent = rain + '%';
+        document.getElementById('wx-rain-block').style.display = 'block';
+      }
+    })
+    .catch(function() {
+      document.getElementById('wx-desc').textContent = 'Unavailable';
+    });
+}
+fetchWeather();
+setInterval(fetchWeather, 10 * 60 * 1000);
+
+// ════════════════════════════════
+// WEATHER DETAIL
+// ════════════════════════════════
+var detailTimer = null;
+var detailSecs  = 10;
+var C = 2 * Math.PI * 13;
+
+function openWeatherDetail() {
+  if (cachedWeatherData) {
+    renderHourly(cachedWeatherData);
+    renderDaily(cachedWeatherData);
+  } else {
+    document.getElementById('hourly-strip').innerHTML = '<span style="color:#2a333e;font-size:13px;font-weight:300;padding:14px">Loading…</span>';
+    document.getElementById('daily-strip').innerHTML  = '';
+  }
+  document.getElementById('detail-screen').style.display = 'flex';
+  detailSecs = 10;
+  tickCountdown();
+  clearInterval(detailTimer);
+  detailTimer = setInterval(function() {
+    detailSecs--;
+    tickCountdown();
+    if (detailSecs <= 0) closeWeatherDetail();
+  }, 1000);
+}
+
+function closeWeatherDetail() {
+  clearInterval(detailTimer);
+  document.getElementById('detail-screen').style.display = 'none';
+}
+
+function tickCountdown() {
+  document.getElementById('countdown-num').textContent = detailSecs;
+  document.getElementById('countdown-arc').style.strokeDashoffset = C * (1 - detailSecs / 10);
+}
+
+function renderHourly(d) {
+  var now = new Date();
+  var todayStr = now.toISOString().split('T')[0];
+  var curHour  = now.getHours();
+  var times    = d.hourly.time;
+  var startIdx = 0;
+  for (var i = 0; i < times.length; i++) {
+    if (times[i] === todayStr + 'T' + (curHour < 10 ? '0' : '') + curHour + ':00') { startIdx = i; break; }
+  }
+  var html = '';
+  for (var i = startIdx; i < Math.min(startIdx + 13, times.length); i++) {
+    var dt   = new Date(times[i] + ':00');
+    var hh   = dt.getHours();
+    var ampm = hh >= 12 ? 'PM' : 'AM';
+    var h12  = hh % 12 || 12;
+    var label = (i === startIdx) ? 'Now' : h12 + ' ' + ampm;
+    var rain  = d.hourly.precipitation_probability[i];
+    html += '<div class="hour-item' + (i === startIdx ? ' now' : '') + '">' +
+      '<div class="hour-label">' + label + '</div>' +
+      '<div class="hour-wx-icon">' + (WX_ICONS[d.hourly.weather_code[i]] || '🌡️') + '</div>' +
+      '<div class="hour-temp">' + Math.round(d.hourly.temperature_2m[i]) + '°</div>' +
+      (rain > 0 ? '<div class="hour-rain">' + rain + '%</div>' : '<div class="hour-rain" style="opacity:0">0%</div>') +
+      '</div>';
+  }
+  document.getElementById('hourly-strip').innerHTML = html;
+}
+
+function renderDaily(d) {
+  var dayNames = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  var html = '';
+  for (var i = 0; i < d.daily.time.length; i++) {
+    var dow  = i === 0 ? 'Today' : dayNames[new Date(d.daily.time[i] + 'T12:00:00').getDay()];
+    var rain = d.daily.precipitation_probability_max[i];
+    html += '<div class="day-item">' +
+      '<div class="day-name">' + dow + '</div>' +
+      '<div class="day-icon">' + (WX_ICONS[d.daily.weather_code_dominant[i]] || '🌡️') + '</div>' +
+      '<div class="day-hi">' + Math.round(d.daily.temperature_2m_max[i]) + '°</div>' +
+      '<div class="day-lo">' + Math.round(d.daily.temperature_2m_min[i]) + '°</div>' +
+      (rain > 0 ? '<div class="day-rain">' + rain + '%</div>' : '<div class="day-rain" style="opacity:0">0%</div>') +
+      '</div>';
+  }
+  document.getElementById('daily-strip').innerHTML = html;
+}
+
+// ════════════════════════════════
+// CALENDAR
+// ════════════════════════════════
+var calEvents = [];
+
+function fetchCalendar() {
+  var now   = new Date();
+  var start = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0).toISOString();
+  var end   = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59).toISOString();
+  var url   = 'https://www.googleapis.com/calendar/v3/calendars/' +
+    encodeURIComponent(GOOGLE_CALENDAR_ID) + '/events' +
+    '?key=' + GOOGLE_API_KEY +
+    '&timeMin=' + encodeURIComponent(start) +
+    '&timeMax=' + encodeURIComponent(end) +
+    '&singleEvents=true&orderBy=startTime';
+
+  fetch(url)
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      if (d.error) { renderCalendar([], d.error.message); return; }
+      var events = (d.items || []).map(function(item) {
+        var startDT = item.start.dateTime || item.start.date;
+        var timeLabel = 'All day', past = false, soon = false;
+        if (item.start.dateTime) {
+          var dt = new Date(item.start.dateTime);
+          var hh = dt.getHours(), mm = dt.getMinutes();
+          var ap = hh >= 12 ? 'PM' : 'AM';
+          timeLabel = (hh % 12 || 12) + ':' + (mm < 10 ? '0' : '') + mm + ' ' + ap;
+          past = dt < new Date();
+          soon = !past && (dt - new Date()) < 3600000;
+        }
+        return { title: item.summary || 'Untitled', time: timeLabel, past: past, soon: soon };
+      });
+      renderCalendar(events, null);
+    })
+    .catch(function(e) {
+      renderCalendar([], 'Network error');
+    });
+}
+
+function renderCalendar(events, errMsg) {
+  calEvents = events;
+  var el = document.getElementById('cal-list');
+  if (errMsg) {
+    el.innerHTML = '<div class="cal-empty" style="font-size:11px;color:#2a333e">' + errMsg + '</div>';
+    return;
+  }
+  if (!events.length) {
+    el.innerHTML = '<div class="cal-empty">No events today</div>';
+    return;
+  }
+  var html = '';
+  for (var i = 0; i < Math.min(events.length, 6); i++) {
+    var ev = events[i];
+    html += '<div class="cal-item ' + (ev.past ? 'past' : ev.soon ? 'soon' : '') + '" onclick="openCalDetail(' + i + ')">' +
+      '<div class="cal-dot"></div>' +
+      '<div class="cal-time">' + ev.time + '</div>' +
+      '<div class="cal-title">' + ev.title + '</div>' +
+      '</div>';
+  }
+  el.innerHTML = html;
+}
+
+function openCalDetail(i) {
+  var ev = calEvents[i];
+  if (!ev) return;
+  document.getElementById('cal-detail-time').textContent  = ev.time;
+  document.getElementById('cal-detail-title').textContent = ev.title;
+  document.getElementById('cal-detail').style.display = 'flex';
+}
+
+function closeCalDetail() {
+  document.getElementById('cal-detail').style.display = 'none';
+}
+
+fetchCalendar();
+setInterval(fetchCalendar, 5 * 60 * 1000);
+
+window.addEventListener('load', function() { setTimeout(function() { window.scrollTo(0, 1); }, 100); });
+</script>
+</body>
+</html>
