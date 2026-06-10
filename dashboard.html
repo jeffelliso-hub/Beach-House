@@ -19,9 +19,9 @@
   --bg-overlay:  rgba(8,9,13,0.96);
   --text-1:      #f0f2f7;
   --text-2:      #c8d2e0;
-  --text-3:      #8896a8;
-  --text-4:      #4a5566;
-  --text-5:      #2e3848;
+  --text-3:      #aabccc;
+  --text-4:      #8090a6;
+  --text-5:      #5e6e82;
   --text-6:      #1e2834;
   --divider:     rgba(255,255,255,0.06);
   --card-bg:     rgba(255,255,255,0.03);
@@ -71,7 +71,7 @@ html, body {
   border: 1px solid var(--btn-border);
   border-radius: 50%;
   width: 38px; height: 38px;
-  font-size: 18px;
+  font-size: 23px;
   cursor: pointer;
   display: flex; align-items: center; justify-content: center;
   -webkit-tap-highlight-color: transparent;
@@ -88,7 +88,7 @@ html, body {
   border: 1px solid var(--card-border);
   border-radius: 12px;
   padding: 10px 18px;
-  font-size: 11px; font-weight: 300;
+  font-size: 16px; font-weight: 400;
   color: var(--text-4);
   letter-spacing: 0.06em;
   text-align: center;
@@ -149,21 +149,21 @@ html, body {
 /* ── TIME ── */
 .time-display {
   font-family: 'DM Serif Display', serif;
-  font-size: 130px;
+  font-size: 163px;
   line-height: 0.9;
   letter-spacing: -4px;
   color: var(--text-1);
   font-weight: normal;
 }
 .time-ampm {
-  font-size: 22px;
+  font-size: 28px;
   font-weight: 200;
   color: var(--text-5);
   letter-spacing: 0.18em;
   margin-top: 14px;
 }
 .time-date {
-  font-size: 17px;
+  font-size: 22px;
   font-weight: 300;
   color: var(--text-5);
   margin-top: 8px;
@@ -178,18 +178,18 @@ html, body {
   gap: 10px;
   line-height: 1;
 }
-.wx-icon { font-size: 44px; margin-bottom: 8px; }
+.wx-icon { font-size: 55px; margin-bottom: 8px; }
 .wx-temp {
   font-family: 'DM Serif Display', serif;
-  font-size: 100px;
+  font-size: 125px;
   color: var(--text-1);
   letter-spacing: -3px;
   font-weight: normal;
   line-height: 1;
 }
-.wx-unit { font-size: 32px; font-weight: 200; color: var(--text-4); margin-bottom: 12px; }
+.wx-unit { font-size: 40px; font-weight: 300; color: var(--text-4); margin-bottom: 12px; }
 .wx-desc {
-  font-size: 20px;
+  font-size: 25px;
   font-weight: 300;
   color: var(--text-3);
   margin-top: 10px;
@@ -204,16 +204,16 @@ html, body {
 }
 .wx-meta-item { text-align: center; }
 .wx-meta-label {
-  font-size: 12px;
+  font-size: 17px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--text-5);
   margin-bottom: 6px;
 }
-.wx-meta-val { font-size: 24px; font-weight: 300; color: var(--text-3); }
+.wx-meta-val { font-size: 30px; font-weight: 400; color: var(--text-3); }
 .wx-meta-val.rain { color: var(--rain-color); }
 .wx-tap-hint {
-  font-size: 12px;
+  font-size: 17px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--text-5);
@@ -228,7 +228,7 @@ html, body {
   margin-bottom: 28px;
 }
 .cal-day-label {
-  font-size: 16px;
+  font-size: 23px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--text-3);
@@ -238,7 +238,7 @@ html, body {
   border: 1px solid var(--card-border);
   border-radius: 8px;
   color: var(--text-3);
-  font-size: 22px;
+  font-size: 28px;
   line-height: 1;
   padding: 4px 12px 6px;
   cursor: pointer;
@@ -254,7 +254,7 @@ html, body {
   border: 1px solid var(--accent-dim);
   border-radius: 8px;
   color: var(--accent);
-  font-size: 13px;
+  font-size: 19px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   padding: 6px 12px;
@@ -289,12 +289,12 @@ html, body {
 .cal-item.soon .cal-dot { background: var(--soon-dot); }
 .cal-item.past .cal-dot { background: var(--text-5); }
 .cal-time {
-  font-size: 18px; font-weight: 300; color: var(--text-3);
+  font-size: 23px; font-weight: 400; color: var(--text-3);
   min-width: 68px; letter-spacing: 0.03em;
 }
-.cal-title { font-size: 26px; font-weight: 300; color: var(--text-1); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.cal-empty { font-size: 20px; font-weight: 300; color: var(--text-4); font-style: italic; }
-.cal-loading { font-size: 18px; font-weight: 300; color: var(--text-5); font-style: italic; }
+.cal-title { font-size: 33px; font-weight: 400; color: var(--text-1); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cal-empty { font-size: 25px; font-weight: 400; color: var(--text-4); font-style: italic; }
+.cal-loading { font-size: 23px; font-weight: 400; color: var(--text-5); font-style: italic; }
 
 /* ── SIGN IN ── */
 .cal-signin {
@@ -305,7 +305,7 @@ html, body {
   padding: 8px 0;
 }
 .cal-signin-hint {
-  font-size: 17px;
+  font-size: 22px;
   font-weight: 300;
   color: var(--text-4);
   letter-spacing: 0.06em;
@@ -322,7 +322,7 @@ html, body {
   cursor: pointer;
   color: var(--text-2);
   font-family: 'DM Sans', sans-serif;
-  font-size: 17px;
+  font-size: 22px;
   font-weight: 300;
   letter-spacing: 0.04em;
   -webkit-tap-highlight-color: transparent;
@@ -352,7 +352,7 @@ html, body {
 }
 .detail-title {
   font-family: 'DM Serif Display', serif;
-  font-size: 32px;
+  font-size: 40px;
   color: var(--text-2);
   font-style: italic;
   font-weight: normal;
@@ -377,12 +377,12 @@ html, body {
 .countdown-num {
   position: absolute; inset: 0;
   display: flex; align-items: center; justify-content: center;
-  font-size: 11px; font-weight: 300; color: var(--accent);
+  font-size: 16px; font-weight: 400; color: var(--accent);
 }
-.detail-close-hint { font-size: 14px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-5); }
+.detail-close-hint { font-size: 20px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-5); }
 
 /* HOURLY */
-.section-label { font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-4); margin-bottom: 16px; }
+.section-label { font-size: 19px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-4); margin-bottom: 16px; }
 .hourly-strip {
   display: flex; overflow-x: auto; scrollbar-width: none;
   -webkit-overflow-scrolling: touch; margin-bottom: 36px;
@@ -395,11 +395,11 @@ html, body {
 }
 .hour-item:last-child { border-right: none; }
 .hour-item.now { background: var(--card-bg); border-radius: 12px; }
-.hour-label { font-size: 14px; color: var(--text-4); font-weight: 300; }
+.hour-label { font-size: 20px; color: var(--text-4); font-weight: 400; }
 .hour-item.now .hour-label { color: var(--accent); }
-.hour-wx-icon { font-size: 26px; line-height: 1; }
-.hour-temp { font-size: 22px; font-weight: 300; color: var(--text-2); }
-.hour-rain { font-size: 13px; color: var(--rain-color); }
+.hour-wx-icon { font-size: 33px; line-height: 1; }
+.hour-temp { font-size: 28px; font-weight: 400; color: var(--text-2); }
+.hour-rain { font-size: 19px; color: var(--rain-color); }
 
 /* DAILY */
 .daily-strip { display: flex; }
@@ -408,11 +408,11 @@ html, body {
   padding: 14px 0; border-right: 1px solid var(--divider);
 }
 .day-item:last-child { border-right: none; }
-.day-name { font-size: 14px; color: var(--text-4); font-weight: 300; letter-spacing: 0.08em; text-transform: uppercase; }
-.day-icon { font-size: 28px; line-height: 1; }
-.day-hi { font-family: 'DM Serif Display', serif; font-size: 28px; color: var(--text-2); font-weight: normal; line-height: 1; }
-.day-lo { font-size: 17px; color: var(--text-4); font-weight: 300; }
-.day-rain { font-size: 13px; color: var(--rain-color); }
+.day-name { font-size: 20px; color: var(--text-4); font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; }
+.day-icon { font-size: 35px; line-height: 1; }
+.day-hi { font-family: 'DM Serif Display', serif; font-size: 35px; color: var(--text-2); font-weight: 500; line-height: 1; }
+.day-lo { font-size: 22px; color: var(--text-4); font-weight: 400; }
+.day-rain { font-size: 19px; color: var(--rain-color); }
 
 /* ══ CAL DETAIL OVERLAY ══ */
 .cal-detail {
@@ -422,9 +422,9 @@ html, body {
   align-items: center; justify-content: center;
 }
 .cal-detail-card { text-align: center; padding: 48px; max-width: 380px; }
-.cal-detail-time { font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
-.cal-detail-title { font-family: 'DM Serif Display', serif; font-size: 38px; color: var(--text-1); line-height: 1.25; font-style: italic; }
-.cal-detail-close { margin-top: 36px; font-size: 14px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-5); cursor: pointer; min-height: 44px; display: flex; align-items: center; justify-content: center; touch-action: manipulation; }
+.cal-detail-time { font-size: 22px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+.cal-detail-title { font-family: 'DM Serif Display', serif; font-size: 48px; color: var(--text-1); line-height: 1.25; font-style: italic; }
+.cal-detail-close { margin-top: 36px; font-size: 20px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-5); cursor: pointer; min-height: 44px; display: flex; align-items: center; justify-content: center; touch-action: manipulation; }
 
 /* ══ CALENDAR PICKER OVERLAY ══ */
 .cal-picker {
@@ -436,7 +436,7 @@ html, body {
   padding: 48px;
 }
 .cal-picker-title {
-  font-size: 14px; letter-spacing: 0.18em; text-transform: uppercase;
+  font-size: 20px; letter-spacing: 0.18em; text-transform: uppercase;
   color: var(--accent); margin-bottom: 28px;
 }
 .cal-picker-list { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 340px; }
@@ -450,7 +450,7 @@ html, body {
 .cal-picker-item:active { background: var(--card-border); }
 .cal-picker-item.selected { border-color: var(--accent-dim); background: rgba(74,127,168,0.12); }
 .cal-picker-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-.cal-picker-name { font-size: 21px; font-weight: 300; color: var(--text-3); }
+.cal-picker-name { font-size: 26px; font-weight: 400; color: var(--text-3); }
 .cal-picker-item.selected .cal-picker-name { color: var(--text-2); }
 </style>
 </head>
@@ -564,7 +564,7 @@ html, body {
 window.onerror = function(msg, src, line) {
   var el = document.getElementById('cal-list');
   if (el && el.innerHTML === '<div class="cal-loading">Loading calendar…</div>') {
-    el.innerHTML = '<div class="cal-empty" style="font-size:14px;color:var(--text-5)">JS error: ' + msg + '</div>';
+    el.innerHTML = '<div class="cal-empty" style="font-size:20px;color:var(--text-5)">JS error: ' + msg + '</div>';
   }
   return false;
 };
@@ -830,7 +830,7 @@ function openWeatherDetail() {
     renderHourly(cachedWeatherData);
     renderDaily(cachedWeatherData);
   } else {
-    document.getElementById('hourly-strip').innerHTML = '<span style="color:var(--text-5);font-size:13px;font-weight:300;padding:14px">Loading…</span>';
+    document.getElementById('hourly-strip').innerHTML = '<span style="color:var(--text-5);font-size:19px;font-weight:400;padding:14px">Loading…</span>';
     document.getElementById('daily-strip').innerHTML  = '';
   }
   document.getElementById('detail-screen').style.display = 'flex';
@@ -961,7 +961,7 @@ function renderCalendar(events, errMsg) {
   calEvents = events;
   var el = document.getElementById('cal-list');
   if (errMsg) {
-    el.innerHTML = '<div class="cal-empty" style="font-size:13px;color:var(--text-4)">' + escHtml(errMsg) + '</div>';
+    el.innerHTML = '<div class="cal-empty" style="font-size:19px;color:var(--text-4)">' + escHtml(errMsg) + '</div>';
     return;
   }
   if (!events.length) {
