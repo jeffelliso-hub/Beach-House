@@ -13,7 +13,7 @@
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* ââ THEME VARIABLES ââ */
+/* ══ THEME VARIABLES ══ */
 :root {
   --bg:          #08090d;
   --bg-overlay:  rgba(8,9,13,0.96);
@@ -62,7 +62,7 @@ html, body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ââ THEME TOGGLE ââ */
+/* ══ THEME TOGGLE ══ */
 #theme-btn {
   position: fixed;
   top: 14px; right: 14px;
@@ -80,7 +80,7 @@ html, body {
 }
 #theme-btn:active { background: var(--card-border); }
 
-/* ââ ADD-TO-HOME HINT ââ */
+/* ══ ADD-TO-HOME HINT ══ */
 #home-hint {
   position: fixed;
   bottom: 18px; left: 50%; transform: translateX(-50%);
@@ -97,7 +97,7 @@ html, body {
   white-space: nowrap;
 }
 
-/* ââ MAIN LAYOUT ââ */
+/* ══ MAIN LAYOUT ══ */
 .main-screen {
   display: grid;
   grid-template-columns: 1fr 1px 1fr;
@@ -146,7 +146,7 @@ html, body {
 }
 .weather-quadrant:active { background: var(--card-bg); }
 
-/* ââ TIME ââ */
+/* ── TIME ── */
 .time-display {
   font-family: 'DM Serif Display', serif;
   font-size: 130px;
@@ -170,7 +170,7 @@ html, body {
   letter-spacing: 0.06em;
 }
 
-/* ââ WEATHER ââ */
+/* ── WEATHER ── */
 .wx-temp-row {
   display: flex;
   align-items: flex-end;
@@ -220,7 +220,7 @@ html, body {
   margin-top: 14px;
 }
 
-/* ââ CALENDAR ââ */
+/* ── CALENDAR ── */
 .cal-header {
   display: flex;
   align-items: center;
@@ -296,7 +296,7 @@ html, body {
 .cal-empty { font-size: 20px; font-weight: 300; color: var(--text-4); font-style: italic; }
 .cal-loading { font-size: 18px; font-weight: 300; color: var(--text-5); font-style: italic; }
 
-/* ââ SIGN IN ââ */
+/* ── SIGN IN ── */
 .cal-signin {
   display: flex;
   flex-direction: column;
@@ -330,10 +330,10 @@ html, body {
   transition: background 0.15s, border-color 0.15s;
   min-height: 54px;
 }
-.btn-signin:active { b!ckground: var(--card-border); }
+.btn-signin:active { background: var(--card-border); }
 .btn-signin svg { flex-shrink: 0; width: 20px; height: 20px; }
 
-/* ââ WEATHER DETAIL OVERLAY ââ */
+/* ══ WEATHER DETAIL OVERLAY ══ */
 .detail-screen {
   position: fixed;
   inset: 0;
@@ -371,7 +371,7 @@ html, body {
 .countdown-track { fill: none; stroke: var(--text-6); stroke-width: 2.5; }
 .countdown-arc {
   fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-linecap: round;
-  stroke-dashar2ay: 88; stroke-dashoffset: 0;
+  stroke-dasharray: 88; stroke-dashoffset: 0;
   transition: stroke-dashoffset 1s linear;
 }
 .countdown-num {
@@ -396,7 +396,7 @@ html, body {
 .hour-item:last-child { border-right: none; }
 .hour-item.now { background: var(--card-bg); border-radius: 12px; }
 .hour-label { font-size: 14px; color: var(--text-4); font-weight: 300; }
-.hour-)tem.now .hour-label { color: var(--accent); }
+.hour-item.now .hour-label { color: var(--accent); }
 .hour-wx-icon { font-size: 26px; line-height: 1; }
 .hour-temp { font-size: 22px; font-weight: 300; color: var(--text-2); }
 .hour-rain { font-size: 13px; color: var(--rain-color); }
@@ -414,19 +414,19 @@ html, body {
 .day-lo { font-size: 17px; color: var(--text-4); font-weight: 300; }
 .day-rain { font-size: 13px; color: var(--rain-color); }
 
-/* ââ CAL DETAIL OVERLAY ââ */
+/* ══ CAL DETAIL OVERLAY ══ */
 .cal-detail {
   position: fixed; inset: 0;
   background: var(--bg-overlay);
   z-index: 200; display: none;
-  align-)tems: center; justify-content: center;
+  align-items: center; justify-content: center;
 }
 .cal-detail-card { text-align: center; padding: 48px; max-width: 380px; }
 .cal-detail-time { font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
 .cal-detail-title { font-family: 'DM Serif Display', serif; font-size: 38px; color: var(--text-1); line-height: 1.25; font-style: italic; }
 .cal-detail-close { margin-top: 36px; font-size: 14px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-5); cursor: pointer; min-height: 44px; display: flex; align-items: center; justify-content: center; touch-action: manipulation; }
 
-/* ââ CALENDAR PICKER OVERLAY ââ */
+/* ══ CALENDAR PICKER OVERLAY ══ */
 .cal-picker {
   position: fixed; inset: 0;
   background: var(--bg-overlay);
@@ -456,13 +456,13 @@ html, body {
 </head>
 <body>
 
-<!-- âââ THEME TOGGLE âââ -->
-<button id="theme-btn" onclick="toggleTheme()" title="Toggle light/dark">âï¸</button>
+<!-- ═══ THEME TOGGLE ═══ -->
+<button id="theme-btn" onclick="toggleTheme()" title="Toggle light/dark">☀️</button>
 
-<!-- âââ ADD TO HOME SCREEN HINT âââ -->
-<div id="home-hint">Tap Share â Add to Home Screen for fullscreen</div>
+<!-- ═══ ADD TO HOME SCREEN HINT ═══ -->
+<div id="home-hint">Tap Share → Add to Home Screen for fullscreen</div>
 
-<!-- âââ MAIN SCREEN âââ -->
+<!-- ═══ MAIN SCREEN ═══ -->
 <div class="main-screen" id="main-screen">
   <div class="left-col">
 
@@ -476,15 +476,15 @@ html, body {
     <!-- WEATHER -->
     <button class="weather-quadrant" id="wx-btn">
       <div class="wx-temp-row">
-        <div class="wx-icon" id="wx-icon">â</div>
+        <div class="wx-icon" id="wx-icon">⛅</div>
         <div class="wx-temp" id="wx-temp">--</div>
-        <div class="wx-unit">Â°F</div>
+        <div class="wx-unit">°F</div>
       </div>
-      <div class="wx-desc" id="wx-desc">Loadingâ¦</div>
+      <div class="wx-desc" id="wx-desc">Loading…</div>
       <div class="wx-meta">
         <div class="wx-meta-item">
           <div class="wx-meta-label">High / Low</div>
-          <div class="wx-meta-val" id="wx-hilo">--Â°</div>
+          <div class="wx-meta-val" id="wx-hilo">--°</div>
         </div>
         <div class="wx-meta-item">
           <div class="wx-meta-label">Humidity</div>
@@ -495,7 +495,7 @@ html, body {
           <div class="wx-meta-val rain" id="wx-precip">--%</div>
         </div>
       </div>
-      <div class="wx-tap-hint">Tap for forecast â</div>
+      <div class="wx-tap-hint">Tap for forecast ↓</div>
     </button>
 
   </div>
@@ -505,13 +505,13 @@ html, body {
   <!-- CALENDAR -->
   <div class="calendar-quadrant">
     <div class="cal-header">
-      <button class="cal-nav-btn" id="cal-prev" onclick="calNav(-1)">â¹</button>
+      <button class="cal-nav-btn" id="cal-prev" onclick="calNav(-1)">‹</button>
       <span class="cal-day-label" id="cal-day-label">Today</span>
-      <button class="cal-nav-btn" id="cal-next" onclick="calNav(1)">âº</button>
-      <button class="cal-change-btn" id="cal-change-btn">change â</button>
+      <button class="cal-nav-btn" id="cal-next" onclick="calNav(1)">›</button>
+      <button class="cal-change-btn" id="cal-change-btn">change ↓</button>
     </div>
     <div class="cal-list" id="cal-list">
-      <div class="cal-loading">Loading calendarâ¦</div>
+      <div class="cal-loading">Loading calendar…</div>
     </div>
     <div class="cal-signin" id="cal-signin" style="display:none">
       <div class="cal-signin-hint">Sign in to see your calendar</div>
@@ -523,7 +523,7 @@ html, body {
   </div>
 </div>
 
-<!-- âââ WEATHER DETAIL âââ -->
+<!-- ═══ WEATHER DETAIL ═══ -->
 <div class="detail-screen" id="detail-screen">
   <div class="detail-top">
     <div class="detail-title">Weather Forecast</div>
@@ -544,7 +544,7 @@ html, body {
   <div class="daily-strip" id="daily-strip"></div>
 </div>
 
-<!-- âââ CALENDAR EVENT DETAIL âââ -->
+<!-- ═══ CALENDAR EVENT DETAIL ═══ -->
 <div class="cal-detail" id="cal-detail">
   <div class="cal-detail-card">
     <div class="cal-detail-time" id="cal-detail-time"></div>
@@ -553,7 +553,7 @@ html, body {
   </div>
 </div>
 
-<!-- âââ CALENDAR PICKER âââ -->
+<!-- ═══ CALENDAR PICKER ═══ -->
 <div class="cal-picker" id="cal-picker">
   <div class="cal-picker-title">Choose Calendar</div>
   <div class="cal-picker-list" id="cal-picker-list"></div>
@@ -563,18 +563,18 @@ html, body {
 // Prevent white screen from uncaught JS errors
 window.onerror = function(msg, src, line) {
   var el = document.getElementById('cal-list');
-  if (el && el.innerHTML === '<div class="cal-loading">Loading calendarâ¦</div>') {
+  if (el && el.innerHTML === '<div class="cal-loading">Loading calendar…</div>') {
     el.innerHTML = '<div class="cal-empty" style="font-size:14px;color:var(--text-5)">JS error: ' + msg + '</div>';
   }
   return false;
 };
 
-// ââââââââââââââââââââââââââââââââ
+// ════════════════════════════════
 // CONFIG
-// ââââââââââââââââââââââââââââââââ
+// ════════════════════════════════
 var GOOGLE_CLIENT_ID = '828383751809-nuco42cfljhtlh98adracrlepl3s2ca3.apps.googleusercontent.com';
 
-// XHR helper (replaces fetch â works on old iOS Safari)
+// XHR helper (replaces fetch — works on old iOS Safari)
 function xhrGet(url, headers, onSuccess, onError) {
   var xhr = new XMLHttpRequest();
   xhr.open('GET', url, true);
@@ -594,18 +594,18 @@ function xhrGet(url, headers, onSuccess, onError) {
   xhr.send();
 }
 
-// ââââââââââââââââââââââââââââââââ
+// ════════════════════════════════
 // THEME
-// ââââââââââââââââââââââââââââââââ
+// ════════════════════════════════
 var theme = localStorage.getItem('theme') || 'dark';
 document.documentElement.setAttribute('data-theme', theme);
-document.getElementById('theme-btn').textContent = (theme === 'dark') ? 'âï¸' : 'ð';
+document.getElementById('theme-btn').textContent = (theme === 'dark') ? '☀️' : '🌙';
 
 function toggleTheme() {
   theme = (theme === 'dark') ? 'light' : 'dark';
   localStorage.setItem('theme', theme);
   document.documentElement.setAttribute('data-theme', theme);
-  document.getElementById('theme-btn').textContent = (theme === 'dark') ? 'âï¸' : 'ð';
+  document.getElementById('theme-btn').textContent = (theme === 'dark') ? '☀️' : '🌙';
 }
 
 // Show add-to-home hint on iOS Safari (not in standalone mode)
@@ -617,9 +617,9 @@ function toggleTheme() {
   }
 })();
 
-// ââââââââââââââââââââââââââââââââ
+// ════════════════════════════════
 // GOOGLE OAUTH + CALENDAR PICKER
-// ââââââââââââââââââââââââââââââââ
+// ════════════════════════════════
 var tokenClient   = null;
 var accessToken   = null;
 var selectedCalId = localStorage.getItem('selectedCalId') || 'primary';
@@ -647,7 +647,7 @@ function signInWithGoogle() {
   tokenClient.requestAccessToken();
 }
 
-// Wire up sign-in button (no inline onclick â better for old iOS)
+// Wire up sign-in button (no inline onclick — better for old iOS)
 document.getElementById('signin-btn').addEventListener('touchend', function(e) {
   e.preventDefault();
   signInWithGoogle();
@@ -693,7 +693,7 @@ function openCalPicker() {
     item.innerHTML =
       '<div class="cal-picker-dot" style="background:' + (cal.backgroundColor || '#4a7fa8') + '"></div>' +
       '<div class="cal-picker-name">' + escHtml(cal.summary || cal.id) + '</div>';
-    // Use data attribute + addEventListener â no inline onclick (better for old Safari)
+    // Use data attribute + addEventListener — no inline onclick (better for old Safari)
     item.setAttribute('data-calid', cal.id);
     item.addEventListener('touchend', function(e) { e.preventDefault(); pickCalendar(this.getAttribute('data-calid')); });
     item.addEventListener('click', function() { pickCalendar(this.getAttribute('data-calid')); });
@@ -737,9 +737,9 @@ function pickCalendar(id) {
   overlay.addEventListener('click',    function() { closeCalDetail(); });
 })();
 
-// ââââââââââââââââââââââââââââââââ
+// ════════════════════════════════
 // CLOCK
-// ââââââââââââââââââââââââââââââââ
+// ════════════════════════════════
 function updateClock() {
   var now = new Date();
   var h = now.getHours(), m = now.getMinutes();
@@ -754,10 +754,10 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
-// ââââââââââââââââââââââââââââââââ
+// ════════════════════════════════
 // WEATHER
-// ââââââââââââââââââââââââââââââââ
-var WX_ICONS  = {0:'âï¸',1:'ð¤ï¸',2:'â',3:'âï¸',45:'ð«ï¸',48:'ð«ï¸',51:'ð¦ï¸',53:'ð¦ï¸',55:'ð§ï¸',61:'ð§ï¸',63:'ð§ï¸',65:'ð§ï¸',71:'âï¸',73:'âï¸',75:'âï¸',80:'ð¦ï¸',81:'ð§ï¸',82:'âï¸',95:'âï¸',96:'âï¸',99:'âï¸'};
+// ════════════════════════════════
+var WX_ICONS  = {0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',48:'🌫️',51:'🌦️',53:'🌦️',55:'🌧️',61:'🌧️',63:'🌧️',65:'🌧️',71:'❄️',73:'❄️',75:'❄️',80:'🌦️',81:'🌧️',82:'⛈️',95:'⛈️',96:'⛈️',99:'⛈️'};
 var WX_DESCS  = {0:'Clear sky',1:'Mainly clear',2:'Partly cloudy',3:'Overcast',45:'Foggy',48:'Foggy',51:'Light drizzle',53:'Drizzle',55:'Heavy drizzle',61:'Light rain',63:'Rain',65:'Heavy rain',71:'Light snow',73:'Snow',75:'Heavy snow',80:'Showers',81:'Rain showers',82:'Violent showers',95:'Thunderstorm',96:'Thunderstorm',99:'Thunderstorm'};
 
 var cachedWeatherData = null;
@@ -789,11 +789,11 @@ function doFetchWeather() {
       wxRetries = 0;
       var c = d.current, daily = d.daily;
       var code = c.weather_code;
-      document.getElementById('wx-icon').textContent     = WX_ICONS[code] || 'ð¡ï¸';
+      document.getElementById('wx-icon').textContent     = WX_ICONS[code] || '🌡️';
       document.getElementById('wx-temp').textContent     = Math.round(c.temperature_2m);
       document.getElementById('wx-desc').textContent     = WX_DESCS[code] || '';
       document.getElementById('wx-humidity').textContent = c.relative_humidity_2m + '%';
-      document.getElementById('wx-hilo').textContent     = Math.round(daily.temperature_2m_max[0]) + ' / ' + Math.round(daily.temperature_2m_min[0]) + 'Â°';
+      document.getElementById('wx-hilo').textContent     = Math.round(daily.temperature_2m_max[0]) + ' / ' + Math.round(daily.temperature_2m_min[0]) + '°';
       var rain = daily.precipitation_probability_max[0];
       if (rain > 0) {
         document.getElementById('wx-precip').textContent        = rain + '%';
@@ -818,9 +818,9 @@ function handleWxError() {
 setTimeout(fetchWeather, 300);
 setInterval(fetchWeather, 10 * 60 * 1000);
 
-// ââââââââââââââââââââââââââââââââ
+// ════════════════════════════════
 // WEATHER DETAIL
-// ââââââââââââââââââââââââââââââââ
+// ════════════════════════════════
 var detailTimer = null;
 var detailSecs  = 10;
 var C = 2 * Math.PI * 13; // circumference for r=13
@@ -830,7 +830,7 @@ function openWeatherDetail() {
     renderHourly(cachedWeatherData);
     renderDaily(cachedWeatherData);
   } else {
-    document.getElementById('hourly-strip').innerHTML = '<span style="color:var(--text-5);font-size:13px;font-weight:300;padding:14px">Loadingâ¦</span>';
+    document.getElementById('hourly-strip').innerHTML = '<span style="color:var(--text-5);font-size:13px;font-weight:300;padding:14px">Loading…</span>';
     document.getElementById('daily-strip').innerHTML  = '';
   }
   document.getElementById('detail-screen').style.display = 'flex';
@@ -868,8 +868,8 @@ function renderHourly(d) {
     var rain  = d.hourly.precipitation_probability[i];
     html += '<div class="hour-item' + (i === startIdx ? ' now' : '') + '">' +
       '<div class="hour-label">' + label + '</div>' +
-      '<div class="hour-wx-icon">' + (WX_ICONS[d.hourly.weather_code[i]] || 'ð¡ï¸') + '</div>' +
-      '<div class="hour-temp">' + Math.round(d.hourly.temperature_2m[i]) + 'Â°</div>' +
+      '<div class="hour-wx-icon">' + (WX_ICONS[d.hourly.weather_code[i]] || '🌡️') + '</div>' +
+      '<div class="hour-temp">' + Math.round(d.hourly.temperature_2m[i]) + '°</div>' +
       (rain > 0 ? '<div class="hour-rain">' + rain + '%</div>' : '<div class="hour-rain" style="opacity:0">0%</div>') +
       '</div>';
   }
@@ -884,18 +884,18 @@ function renderDaily(d) {
     var rain = d.daily.precipitation_probability_max[i];
     html += '<div class="day-item">' +
       '<div class="day-name">' + dow + '</div>' +
-      '<div class="day-icon">' + (WX_ICONS[d.daily.weather_code[i]] || 'ð¡ï¸') + '</div>' +
-      '<div class="day-hi">' + Math.round(d.daily.temperature_2m_max[i]) + 'Â°</div>' +
-      '<div class="day-lo">' + Math.round(d.daily.temperature_2m_min[i]) + 'Â°</div>' +
+      '<div class="day-icon">' + (WX_ICONS[d.daily.weather_code[i]] || '🌡️') + '</div>' +
+      '<div class="day-hi">' + Math.round(d.daily.temperature_2m_max[i]) + '°</div>' +
+      '<div class="day-lo">' + Math.round(d.daily.temperature_2m_min[i]) + '°</div>' +
       (rain > 0 ? '<div class="day-rain">' + rain + '%</div>' : '<div class="day-rain" style="opacity:0">0%</div>') +
       '</div>';
   }
   document.getElementById('daily-strip').innerHTML = html;
 }
 
-// ââââââââââââââââââââââââââââââââ
+// ════════════════════════════════
 // CALENDAR
-// ââââââââââââââââââââââââââââââââ
+// ════════════════════════════════
 var calEvents    = [];
 var calDayOffset = 0;
 
@@ -1000,9 +1000,9 @@ function closeCalDetail() {
 fetchCalendar();
 setInterval(fetchCalendar, 5 * 60 * 1000);
 
-// ââââââââââââââââââââââââââââââââ
+// ════════════════════════════════
 // HELPERS
-// ââââââââââââââââââââââââââââââââ
+// ════════════════════════════════
 function escHtml(s) {
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
