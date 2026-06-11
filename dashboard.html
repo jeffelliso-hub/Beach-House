@@ -347,7 +347,7 @@ html, body {
 /* ══ WEATHER DETAIL OVERLAY ══ */
 .detail-screen {
   position: fixed;
-  inset: 0;
+  top: 0; right: 0; bottom: 0; left: 0;
   background: var(--bg);
   z-index: 100;
   display: none;
@@ -386,7 +386,7 @@ html, body {
   transition: stroke-dashoffset 1s linear;
 }
 .countdown-num {
-  position: absolute; inset: 0;
+  position: absolute; top: 0; right: 0; bottom: 0; left: 0;
   display: flex; align-items: center; justify-content: center;
   font-size: 16px; font-weight: 400; color: var(--accent);
 }
@@ -427,7 +427,7 @@ html, body {
 
 /* ══ CAL DETAIL OVERLAY ══ */
 .cal-detail {
-  position: fixed; inset: 0;
+  position: fixed; top: 0; right: 0; bottom: 0; left: 0;
   background: var(--bg-overlay);
   z-index: 200; display: none;
   align-items: center; justify-content: center;
@@ -439,7 +439,7 @@ html, body {
 
 /* ══ CALENDAR PICKER OVERLAY ══ */
 .cal-picker {
-  position: fixed; inset: 0;
+  position: fixed; top: 0; right: 0; bottom: 0; left: 0;
   background: var(--bg-overlay);
   z-index: 300; display: none;
   flex-direction: column;
@@ -472,6 +472,9 @@ html, body {
 
 <!-- ═══ ADD TO HOME SCREEN HINT ═══ -->
 <div id="home-hint">Tap Share → Add to Home Screen for fullscreen</div>
+
+<!-- ═══ BUILD MARKER (temporary — confirms new version loaded) ═══ -->
+<div style="position:fixed;bottom:4px;left:6px;font-size:11px;color:var(--text-5);opacity:0.55;z-index:500;font-family:sans-serif">build 3</div>
 
 <!-- ═══ MAIN SCREEN ═══ -->
 <div class="main-screen" id="main-screen">
