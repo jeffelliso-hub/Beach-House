@@ -480,7 +480,7 @@ html, body {
 <div id="home-hint">Tap Share → Add to Home Screen for fullscreen</div>
 
 <!-- ═══ BUILD MARKER (temporary — confirms new version loaded) ═══ -->
-<div style="position:fixed;bottom:4px;left:6px;font-size:11px;color:var(--text-5);opacity:0.55;z-index:500;font-family:sans-serif">build 6</div>
+<div style="position:fixed;bottom:4px;left:6px;font-size:11px;color:var(--text-5);opacity:0.55;z-index:500;font-family:sans-serif">build 7</div>
 
 <!-- ═══ MAIN SCREEN ═══ -->
 <div class="main-screen" id="main-screen">
@@ -904,10 +904,15 @@ function tickCountdown() {
 }
 
 function renderHourly(d) {
-  var now = new Date(), todayStr = now.toISOString().split('T')[0];
-  var curHour = now.getHours(), times = d.hourly.time, startIdx = 0;
-  for (var i = 0; i < times.length; i++) {
-    if (times[i] === todayStr + 'T' + (curHour < 10 ? '0' : '') + curHour + ':00') { startIdx = i; break; }
+  var times = d.hourly.time, startIdx = 0;
+  // Pick the "Now" hour by comparing against the API's own current time, which
+  // is in the same timezone as the hourly timestamps. (The old code mixed a UTC
+  // date with the local hour, which selected the wrong hour — and temperature.)
+  var nowT = (d.current && d.current.time) ? d.current.time : '';
+  if (nowT) {
+    for (var j = 0; j < times.length; j++) {
+      if (times[j] <= nowT) startIdx = j; else break;
+    }
   }
   var html = '';
   for (var i = startIdx; i < Math.min(startIdx + 13, times.length); i++) {
