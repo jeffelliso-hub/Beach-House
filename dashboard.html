@@ -276,11 +276,11 @@ html, body {
   min-height: 44px;
 }
 .cal-change-btn:active { background: var(--accent-dim); }
-.cal-list { display: flex; flex-direction: column; width: 100%; max-width: 340px; }
+.cal-list { display: flex; flex-direction: column; width: 100%; max-width: 460px; }
 .cal-list > * + * { margin-top: 22px; }
 .cal-item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
@@ -300,9 +300,9 @@ html, body {
 .cal-item.past .cal-dot { background: var(--text-5); }
 .cal-time {
   font-size: 23px; font-weight: 400; color: var(--text-3);
-  min-width: 68px; letter-spacing: 0.03em;
+  min-width: 96px; width: 96px; white-space: nowrap; line-height: 1.2; letter-spacing: 0.03em;
 }
-.cal-title { font-size: 33px; font-weight: 400; color: var(--text-1); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cal-title { font-size: 28px; font-weight: 400; color: var(--text-1); white-space: normal; line-height: 1.2; }
 .cal-empty { font-size: 25px; font-weight: 400; color: var(--text-4); font-style: italic; }
 .cal-loading { font-size: 23px; font-weight: 400; color: var(--text-5); font-style: italic; }
 
@@ -480,7 +480,7 @@ html, body {
 <div id="home-hint">Tap Share → Add to Home Screen for fullscreen</div>
 
 <!-- ═══ BUILD MARKER (temporary — confirms new version loaded) ═══ -->
-<div style="position:fixed;bottom:4px;left:6px;font-size:11px;color:var(--text-5);opacity:0.55;z-index:500;font-family:sans-serif">build 5</div>
+<div style="position:fixed;bottom:4px;left:6px;font-size:11px;color:var(--text-5);opacity:0.55;z-index:500;font-family:sans-serif">build 6</div>
 
 <!-- ═══ MAIN SCREEN ═══ -->
 <div class="main-screen" id="main-screen">
