@@ -502,7 +502,7 @@ html, body {
 <div id="home-hint">Tap Share → Add to Home Screen for fullscreen</div>
 
 <!-- ═══ BUILD MARKER (temporary — confirms new version loaded) ═══ -->
-<div style="position:fixed;bottom:4px;left:6px;font-size:11px;color:var(--text-5);opacity:0.55;z-index:500;font-family:sans-serif">build 8</div>
+<div style="position:fixed;bottom:4px;left:6px;font-size:11px;color:var(--text-5);opacity:0.55;z-index:500;font-family:sans-serif">build 9</div>
 
 <!-- ═══ MAIN SCREEN ═══ -->
 <div class="main-screen" id="main-screen">
@@ -690,8 +690,9 @@ function toggleTheme() {
 // ════════════════════════════════
 // GOOGLE OAUTH + CALENDAR PICKER
 // ════════════════════════════════
-var tokenClient   = null;
-var accessToken   = null;
+var tokenClient       = null;
+var accessToken       = null;
+var tokenRefreshTimer = null;
 var selectedCalId = localStorage.getItem('selectedCalId') || 'primary';
 var calendarList  = [];
 
@@ -701,12 +702,37 @@ function initGoogleAuth() {
     client_id: GOOGLE_CLIENT_ID,
     scope: 'https://www.googleapis.com/auth/calendar.readonly',
     callback: function(response) {
-      if (response.error) { renderCalendar([], 'Sign-in failed'); return; }
+      if (response.error) {
+        // Token request / silent refresh failed → show the sign-in button
+        accessToken = null;
+        document.getElementById('cal-list').innerHTML = '';
+        document.getElementById('cal-signin').style.display = 'flex';
+        return;
+      }
       accessToken = response.access_token;
       document.getElementById('cal-signin').style.display = 'none';
+      scheduleTokenRefresh(response.expires_in);
       fetchCalendarList();
     }
   });
+}
+
+// Google access tokens last ~1 hour. Refresh silently a few minutes before they
+// expire so the calendar keeps working overnight without a manual re-sign-in.
+function scheduleTokenRefresh(expiresInSec) {
+  if (tokenRefreshTimer) clearTimeout(tokenRefreshTimer);
+  var ms = Math.max(60, (Number(expiresInSec) || 3600) - 300) * 1000;
+  tokenRefreshTimer = setTimeout(silentRefresh, ms);
+}
+
+// Try to get a fresh token without any popup. Works if the user has already
+// granted access and still has a Google session; otherwise the callback above
+// falls back to showing the sign-in button.
+function silentRefresh() {
+  if (!tokenClient) initGoogleAuth();
+  if (tokenClient) {
+    try { tokenClient.requestAccessToken({ prompt: '' }); } catch (e) {}
+  }
 }
 
 function signInWithGoogle() {
@@ -724,9 +750,10 @@ document.getElementById('signin-btn').addEventListener('touchend', function(e) {
 });
 document.getElementById('signin-btn').addEventListener('click', signInWithGoogle);
 
-// Try init after GIS loads (async)
+// Try init after GIS loads (async), then attempt a silent sign-in so the
+// calendar restores itself on reload / overnight without a manual tap.
 window.addEventListener('load', function() {
-  setTimeout(initGoogleAuth, 800);
+  setTimeout(function() { initGoogleAuth(); silentRefresh(); }, 800);
 });
 
 function fetchCalendarList() {
@@ -987,14 +1014,18 @@ function renderHourly(d) {
   }
   var html = '';
   for (var i = startIdx; i < Math.min(startIdx + 13, times.length); i++) {
+    var isNow = (i === startIdx);
     var dt = new Date(times[i] + ':00');
     var hh = dt.getHours(), ampm = hh >= 12 ? 'PM' : 'AM', h12 = hh % 12 || 12;
-    var label = (i === startIdx) ? 'Now' : h12 + ' ' + ampm;
+    var label = isNow ? 'Now' : h12 + ' ' + ampm;
     var rain  = d.hourly.precipitation_probability[i];
-    html += '<div class="hour-item' + (i === startIdx ? ' now' : '') + '">' +
+    // The "Now" cell uses the live current reading so it always matches the main display
+    var temp = (isNow && d.current && d.current.temperature_2m != null) ? d.current.temperature_2m : d.hourly.temperature_2m[i];
+    var code = (isNow && d.current && d.current.weather_code != null) ? d.current.weather_code : d.hourly.weather_code[i];
+    html += '<div class="hour-item' + (isNow ? ' now' : '') + '">' +
       '<div class="hour-label">' + label + '</div>' +
-      '<div class="hour-wx-icon">' + (WX_ICONS[d.hourly.weather_code[i]] || '🌡️') + '</div>' +
-      '<div class="hour-temp">' + Math.round(d.hourly.temperature_2m[i]) + '°</div>' +
+      '<div class="hour-wx-icon">' + (WX_ICONS[code] || '🌡️') + '</div>' +
+      '<div class="hour-temp">' + Math.round(temp) + '°</div>' +
       (rain > 0 ? '<div class="hour-rain">' + rain + '%</div>' : '<div class="hour-rain" style="opacity:0">0%</div>') +
       '</div>';
   }
@@ -1060,7 +1091,7 @@ function fetchCalendar() {
   xhrGet(url, { 'Authorization': 'Bearer ' + accessToken },
     function(d) {
       if (d.error) {
-        if (d.error.code === 401) { accessToken = null; fetchCalendar(); return; }
+        if (d.error.code === 401) { accessToken = null; silentRefresh(); return; }
         renderCalendar([], d.error.message); return;
       }
       var now = new Date();
