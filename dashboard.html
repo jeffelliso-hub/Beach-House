@@ -585,6 +585,24 @@ window.onerror = function(msg, src, line) {
 // ════════════════════════════════
 var GOOGLE_CLIENT_ID = '828383751809-nuco42cfljhtlh98adracrlepl3s2ca3.apps.googleusercontent.com';
 
+// ════════════════════════════════
+// iOS GHOST-CLICK SHIELD
+// ════════════════════════════════
+// On old iOS Safari, e.preventDefault() in a touchend handler does NOT reliably
+// suppress the ~300-350ms delayed synthetic click. When a tap opens a full-screen
+// overlay, that delayed click lands on the overlay (now under the finger) and
+// triggers its "tap to close" handler — so the overlay opens then instantly
+// closes, looking like the button "does nothing."
+//
+// Fix: when an overlay opens, make it ignore ALL pointer input for a short window.
+// The stray synthetic click then hits nothing on the overlay and is harmless.
+// This does not depend on guessing the exact click delay, so it is robust across
+// old and new iOS versions.
+function gateOverlay(el) {
+  el.style.pointerEvents = 'none';
+  setTimeout(function() { el.style.pointerEvents = ''; }, 600);
+}
+
 // XHR helper (replaces fetch — works on old iOS Safari)
 function xhrGet(url, headers, onSuccess, onError) {
   var xhr = new XMLHttpRequest();
@@ -711,7 +729,9 @@ function openCalPicker() {
     list.appendChild(item);
   });
   calPickerOpenedAt = Date.now();
-  document.getElementById('cal-picker').style.display = 'flex';
+  var cp = document.getElementById('cal-picker');
+  cp.style.display = 'flex';
+  gateOverlay(cp);
 }
 
 function pickCalendar(id) {
@@ -745,8 +765,8 @@ function pickCalendar(id) {
 // Wire cal-detail overlay close (touchend + click)
 (function() {
   var overlay = document.getElementById('cal-detail');
-  overlay.addEventListener('touchend', function(e) { e.preventDefault(); closeCalDetail(); });
-  overlay.addEventListener('click',    function() { closeCalDetail(); });
+  overlay.addEventListener('touchend', function(e) { e.preventDefault(); if (Date.now() - calDetailOpenedAt < 400) return; closeCalDetail(); });
+  overlay.addEventListener('click',    function() { if (Date.now() - calDetailOpenedAt < 400) return; closeCalDetail(); });
 })();
 
 // ════════════════════════════════
@@ -837,6 +857,7 @@ var detailTimer = null;
 var detailSecs  = 10;
 var wxDetailOpenedAt = 0;
 var calPickerOpenedAt = 0;
+var calDetailOpenedAt = 0;
 var calDetailTimer = null;
 var calDetailSecs  = 10;
 var C = 2 * Math.PI * 13; // circumference for r=13
@@ -850,7 +871,9 @@ function openWeatherDetail() {
     document.getElementById('daily-strip').innerHTML  = '';
   }
   wxDetailOpenedAt = Date.now();
-  document.getElementById('detail-screen').style.display = 'flex';
+  var ds = document.getElementById('detail-screen');
+  ds.style.display = 'flex';
+  gateOverlay(ds);
   detailSecs = 10;
   tickCountdown();
   clearInterval(detailTimer);
@@ -1007,7 +1030,10 @@ function openCalDetail(i) {
   if (!ev) return;
   document.getElementById('cal-detail-time').textContent  = ev.time;
   document.getElementById('cal-detail-title').textContent = ev.title;
-  document.getElementById('cal-detail').style.display = 'flex';
+  calDetailOpenedAt = Date.now();
+  var cd = document.getElementById('cal-detail');
+  cd.style.display = 'flex';
+  gateOverlay(cd);
   calDetailSecs = 10;
   clearInterval(calDetailTimer);
   var closeEl = document.querySelector('.cal-detail-close');
