@@ -341,7 +341,7 @@ html, body {
   min-height: 54px;
 }
 .btn-signin:active { background: var(--card-border); }
-.btn-signin svg { flex-shrink: 0; width: 20px; height: 20px; }
+.btn-signin svg { flex-shrink: 0; width: 20px; height: 20px; margin-right: 12px; }
 
 /* ══ WEATHER DETAIL OVERLAY ══ */
 .detail-screen {
@@ -465,7 +465,6 @@ html, body {
 
 /* ══ FLEX-GAP FALLBACK (old iOS Safari ignores flexbox gap) ══ */
 .cal-item > * + *        { margin-left: 16px; }
-.btn-signin > * + *      { margin-left: 12px; }
 .detail-close-row > * + * { margin-left: 12px; }
 .hour-item > * + *       { margin-top: 8px; }
 .day-item > * + *        { margin-top: 8px; }
@@ -481,7 +480,7 @@ html, body {
 <div id="home-hint">Tap Share → Add to Home Screen for fullscreen</div>
 
 <!-- ═══ BUILD MARKER (temporary — confirms new version loaded) ═══ -->
-<div style="position:fixed;bottom:4px;left:6px;font-size:11px;color:var(--text-5);opacity:0.55;z-index:500;font-family:sans-serif">build 4</div>
+<div style="position:fixed;bottom:4px;left:6px;font-size:11px;color:var(--text-5);opacity:0.55;z-index:500;font-family:sans-serif">build 5</div>
 
 <!-- ═══ MAIN SCREEN ═══ -->
 <div class="main-screen" id="main-screen">
