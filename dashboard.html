@@ -111,8 +111,9 @@ html, body {
 }
 
 .left-col {
-  display: grid;
-  grid-template-rows: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .time-quadrant {
@@ -182,9 +183,9 @@ html, body {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  gap: 10px;
   line-height: 1;
 }
+.wx-temp-row > * + * { margin-left: 10px; }
 .wx-icon { font-size: 55px; margin-bottom: 8px; }
 .wx-temp {
   font-family: 'DM Serif Display', serif;
@@ -206,11 +207,10 @@ html, body {
 .wx-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 14px 32px;
-  margin-top: 16px;
+  margin-top: 9px;
   justify-content: center;
 }
-.wx-meta-item { text-align: center; }
+.wx-meta-item { text-align: center; margin: 7px 16px; }
 .wx-meta-label {
   font-size: 17px;
   letter-spacing: 0.12em;
@@ -234,9 +234,9 @@ html, body {
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 10px;
   margin-bottom: 28px;
 }
+.cal-header > * + * { margin-left: 10px; }
 .cal-day-label {
   font-size: 23px;
   letter-spacing: 0.14em;
@@ -276,11 +276,11 @@ html, body {
   min-height: 44px;
 }
 .cal-change-btn:active { background: var(--accent-dim); }
-.cal-list { display: flex; flex-direction: column; gap: 22px; width: 100%; max-width: 340px; }
+.cal-list { display: flex; flex-direction: column; width: 100%; max-width: 340px; }
+.cal-list > * + * { margin-top: 22px; }
 .cal-item {
   display: flex;
   align-items: center;
-  gap: 16px;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
@@ -312,9 +312,9 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 14px;
   padding: 8px 0;
 }
+.cal-signin > * + * { margin-top: 14px; }
 .cal-signin-hint {
   font-size: 22px;
   font-weight: 300;
@@ -325,7 +325,6 @@ html, body {
 .btn-signin {
   display: flex;
   align-items: center;
-  gap: 12px;
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: 10px;
@@ -371,7 +370,6 @@ html, body {
 .detail-close-row {
   display: flex;
   align-items: center;
-  gap: 12px;
   cursor: pointer;
   min-height: 44px;
   -webkit-tap-highlight-color: transparent;
@@ -400,7 +398,7 @@ html, body {
 }
 .hourly-strip::-webkit-scrollbar { display: none; }
 .hour-item {
-  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  display: flex; flex-direction: column; align-items: center;
   min-width: 74px; padding: 14px 0;
   border-right: 1px solid var(--divider);
 }
@@ -415,7 +413,7 @@ html, body {
 /* DAILY */
 .daily-strip { display: flex; }
 .day-item {
-  flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px;
+  flex: 1; display: flex; flex-direction: column; align-items: center;
   padding: 14px 0; border-right: 1px solid var(--divider);
 }
 .day-item:last-child { border-right: none; }
@@ -450,9 +448,10 @@ html, body {
   font-size: 20px; letter-spacing: 0.18em; text-transform: uppercase;
   color: var(--accent); margin-bottom: 28px;
 }
-.cal-picker-list { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 340px; }
+.cal-picker-list { display: flex; flex-direction: column; width: 100%; max-width: 340px; }
+.cal-picker-list > * + * { margin-top: 10px; }
 .cal-picker-item {
-  display: flex; align-items: center; gap: 14px;
+  display: flex; align-items: center;
   background: var(--card-bg); border: 1px solid var(--card-border);
   border-radius: 10px; padding: 16px 18px; cursor: pointer;
   -webkit-tap-highlight-color: transparent;
@@ -463,6 +462,14 @@ html, body {
 .cal-picker-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
 .cal-picker-name { font-size: 26px; font-weight: 400; color: var(--text-3); }
 .cal-picker-item.selected .cal-picker-name { color: var(--text-2); }
+
+/* ══ FLEX-GAP FALLBACK (old iOS Safari ignores flexbox gap) ══ */
+.cal-item > * + *        { margin-left: 16px; }
+.btn-signin > * + *      { margin-left: 12px; }
+.detail-close-row > * + * { margin-left: 12px; }
+.hour-item > * + *       { margin-top: 8px; }
+.day-item > * + *        { margin-top: 8px; }
+.cal-picker-item > * + * { margin-left: 14px; }
 </style>
 </head>
 <body>
@@ -474,7 +481,7 @@ html, body {
 <div id="home-hint">Tap Share → Add to Home Screen for fullscreen</div>
 
 <!-- ═══ BUILD MARKER (temporary — confirms new version loaded) ═══ -->
-<div style="position:fixed;bottom:4px;left:6px;font-size:11px;color:var(--text-5);opacity:0.55;z-index:500;font-family:sans-serif">build 3</div>
+<div style="position:fixed;bottom:4px;left:6px;font-size:11px;color:var(--text-5);opacity:0.55;z-index:500;font-family:sans-serif">build 4</div>
 
 <!-- ═══ MAIN SCREEN ═══ -->
 <div class="main-screen" id="main-screen">
