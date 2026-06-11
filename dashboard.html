@@ -121,7 +121,7 @@ html, body {
   align-items: center;
   justify-content: flex-end;
   text-align: center;
-  padding: 36px 40px 28px;
+  padding: 24px 40px 28px;
 }
 .calendar-quadrant {
   display: flex;
@@ -205,7 +205,8 @@ html, body {
 }
 .wx-meta {
   display: flex;
-  gap: 28px;
+  flex-wrap: wrap;
+  gap: 14px 32px;
   margin-top: 16px;
   justify-content: center;
 }
@@ -709,6 +710,7 @@ function openCalPicker() {
     item.addEventListener('click', function() { pickCalendar(this.getAttribute('data-calid')); });
     list.appendChild(item);
   });
+  calPickerOpenedAt = Date.now();
   document.getElementById('cal-picker').style.display = 'flex';
 }
 
@@ -722,8 +724,8 @@ function pickCalendar(id) {
 // Close picker on background tap
 (function() {
   var picker = document.getElementById('cal-picker');
-  picker.addEventListener('touchend', function(e) { if (e.target === this) { e.preventDefault(); this.style.display = 'none'; } });
-  picker.addEventListener('click',    function(e) { if (e.target === this) { this.style.display = 'none'; } });
+  picker.addEventListener('touchend', function(e) { if (e.target === this) { e.preventDefault(); if (Date.now() - calPickerOpenedAt < 400) return; this.style.display = 'none'; } });
+  picker.addEventListener('click',    function(e) { if (e.target === this) { if (Date.now() - calPickerOpenedAt < 400) return; this.style.display = 'none'; } });
 })();
 
 // Wire weather button with touchend + click
@@ -736,8 +738,8 @@ function pickCalendar(id) {
 // Wire weather detail overlay close (touchend + click)
 (function() {
   var overlay = document.getElementById('detail-screen');
-  overlay.addEventListener('touchend', function(e) { e.preventDefault(); closeWeatherDetail(); });
-  overlay.addEventListener('click',    function() { closeWeatherDetail(); });
+  overlay.addEventListener('touchend', function(e) { e.preventDefault(); if (Date.now() - wxDetailOpenedAt < 400) return; closeWeatherDetail(); });
+  overlay.addEventListener('click',    function() { if (Date.now() - wxDetailOpenedAt < 400) return; closeWeatherDetail(); });
 })();
 
 // Wire cal-detail overlay close (touchend + click)
@@ -833,6 +835,8 @@ setInterval(fetchWeather, 10 * 60 * 1000);
 // ════════════════════════════════
 var detailTimer = null;
 var detailSecs  = 10;
+var wxDetailOpenedAt = 0;
+var calPickerOpenedAt = 0;
 var calDetailTimer = null;
 var calDetailSecs  = 10;
 var C = 2 * Math.PI * 13; // circumference for r=13
@@ -845,6 +849,7 @@ function openWeatherDetail() {
     document.getElementById('hourly-strip').innerHTML = '<span style="color:var(--text-5);font-size:19px;font-weight:400;padding:14px">Loading…</span>';
     document.getElementById('daily-strip').innerHTML  = '';
   }
+  wxDetailOpenedAt = Date.now();
   document.getElementById('detail-screen').style.display = 'flex';
   detailSecs = 10;
   tickCountdown();
