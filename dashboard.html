@@ -502,7 +502,7 @@ html, body {
 <div id="home-hint">Tap Share → Add to Home Screen for fullscreen</div>
 
 <!-- ═══ BUILD MARKER (temporary — confirms new version loaded) ═══ -->
-<div style="position:fixed;bottom:4px;left:6px;font-size:11px;color:var(--text-5);opacity:0.55;z-index:500;font-family:sans-serif">build 9</div>
+<div style="position:fixed;bottom:4px;left:6px;font-size:11px;color:var(--text-5);opacity:0.55;z-index:500;font-family:sans-serif">build 10</div>
 
 <!-- ═══ MAIN SCREEN ═══ -->
 <div class="main-screen" id="main-screen">
@@ -577,7 +577,7 @@ html, body {
           <circle class="countdown-track" cx="17" cy="17" r="13"/>
           <circle class="countdown-arc" id="countdown-arc" cx="17" cy="17" r="13"/>
         </svg>
-        <div class="countdown-num" id="countdown-num">10</div>
+        <div class="countdown-num" id="countdown-num">20</div>
       </div>
       <div class="detail-close-hint">Tap to close</div>
     </div>
@@ -961,12 +961,12 @@ setInterval(fetchWeather, 10 * 60 * 1000);
 // WEATHER DETAIL
 // ════════════════════════════════
 var detailTimer = null;
-var detailSecs  = 10;
+var detailSecs  = 20;
 var wxDetailOpenedAt = 0;
 var calPickerOpenedAt = 0;
 var calDetailOpenedAt = 0;
 var calDetailTimer = null;
-var calDetailSecs  = 10;
+var calDetailSecs  = 20;
 var C = 2 * Math.PI * 13; // circumference for r=13
 
 function openWeatherDetail() {
@@ -981,7 +981,7 @@ function openWeatherDetail() {
   var ds = document.getElementById('detail-screen');
   ds.style.display = 'flex';
   gateOverlay(ds);
-  detailSecs = 10;
+  detailSecs = 20;
   tickCountdown();
   clearInterval(detailTimer);
   detailTimer = setInterval(function() {
@@ -998,25 +998,22 @@ function closeWeatherDetail() {
 
 function tickCountdown() {
   document.getElementById('countdown-num').textContent = detailSecs;
-  document.getElementById('countdown-arc').style.strokeDashoffset = C * (1 - detailSecs / 10);
+  document.getElementById('countdown-arc').style.strokeDashoffset = C * (1 - detailSecs / 20);
 }
 
 function renderHourly(d) {
   var times = d.hourly.time, startIdx = 0;
-  // Pick the "Now" hour by comparing against the API's own current time, which
-  // is in the same timezone as the hourly timestamps. (The old code mixed a UTC
-  // date with the local hour, which selected the wrong hour — and temperature.)
-  var nowT = (d.current && d.current.time) ? d.current.time : '';
-  if (nowT) {
-    for (var j = 0; j < times.length; j++) {
-      if (times[j] <= nowT) startIdx = j; else break;
-    }
-  }
+  // Find "Now" using the forecast's own UTC offset, so it is correct regardless of
+  // the iPad's timezone and avoids old-Safari date-string parsing quirks.
+  var offMs = (typeof d.utc_offset_seconds === 'number' ? d.utc_offset_seconds : 0) * 1000;
+  var ln = new Date(Date.now() + offMs);
+  var nowKey = ln.getUTCFullYear() + '-' + pad2(ln.getUTCMonth() + 1) + '-' + pad2(ln.getUTCDate()) + 'T' + pad2(ln.getUTCHours()) + ':00';
+  for (var j = 0; j < times.length; j++) { if (times[j] <= nowKey) startIdx = j; else break; }
   var html = '';
   for (var i = startIdx; i < Math.min(startIdx + 13, times.length); i++) {
     var isNow = (i === startIdx);
-    var dt = new Date(times[i] + ':00');
-    var hh = dt.getHours(), ampm = hh >= 12 ? 'PM' : 'AM', h12 = hh % 12 || 12;
+    var hh = parseInt(times[i].slice(11, 13), 10); // hour read straight from "YYYY-MM-DDTHH:MM"
+    var ampm = hh >= 12 ? 'PM' : 'AM', h12 = hh % 12 || 12;
     var label = isNow ? 'Now' : h12 + ' ' + ampm;
     var rain  = d.hourly.precipitation_probability[i];
     // The "Now" cell uses the live current reading so it always matches the main display
@@ -1036,7 +1033,8 @@ function renderDaily(d) {
   var dayNames = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
   var html = '';
   for (var i = 0; i < d.daily.time.length; i++) {
-    var dow  = i === 0 ? 'Today' : dayNames[new Date(d.daily.time[i] + 'T12:00:00').getDay()];
+    var dp = d.daily.time[i].split('-');
+    var dow = (i === 0) ? 'Today' : dayNames[new Date(+dp[0], +dp[1] - 1, +dp[2]).getDay()];
     var rain = d.daily.precipitation_probability_max[i];
     html += '<div class="day-item">' +
       '<div class="day-name">' + dow + '</div>' +
@@ -1076,6 +1074,7 @@ function fetchCalendar() {
   if (!accessToken) {
     document.getElementById('cal-list').innerHTML = '';
     document.getElementById('cal-signin').style.display = 'flex';
+    silentRefresh(); // keep trying to reconnect automatically (e.g. after overnight token loss)
     return;
   }
   var base = new Date();
@@ -1150,10 +1149,10 @@ function openCalDetail(i) {
   var cd = document.getElementById('cal-detail');
   cd.style.display = 'flex';
   gateOverlay(cd);
-  calDetailSecs = 10;
+  calDetailSecs = 20;
   clearInterval(calDetailTimer);
   var closeEl = document.querySelector('.cal-detail-close');
-  if (closeEl) closeEl.textContent = 'Tap to dismiss (10)';
+  if (closeEl) closeEl.textContent = 'Tap to dismiss (20)';
   calDetailTimer = setInterval(function() {
     calDetailSecs--;
     var closeEl = document.querySelector('.cal-detail-close');
@@ -1175,6 +1174,8 @@ setInterval(fetchCalendar, 5 * 60 * 1000);
 // ════════════════════════════════
 // HELPERS
 // ════════════════════════════════
+function pad2(n) { return (n < 10 ? '0' : '') + n; }
+
 function escHtml(s) {
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
