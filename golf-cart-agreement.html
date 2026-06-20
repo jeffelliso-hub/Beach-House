@@ -62,6 +62,13 @@
     .driver-dob-row { display: flex; align-items: center; gap: 0.75rem; margin-top: 0.65rem; flex-wrap: wrap; }
     .driver-dob-wrap input[type="date"] { padding: 0.55rem 0.7rem; border: 1.5px solid var(--border); border-radius: 7px; font-family: 'Lato', sans-serif; font-size: 0.9rem; color: var(--text); background: var(--white); appearance: none; }
     .driver-dob-wrap input[type="date"]:focus { outline: none; border-color: var(--ocean); }
+    .input-error { border-color: #dc2626 !important; background: #fff5f5 !important; }
+    .check-error { outline: 2px solid rgba(220,38,38,0.45); border-radius: 6px; }
+    #validation-msg {
+      display: none; background: #fef2f2; border: 1.5px solid #dc2626;
+      border-radius: 8px; padding: 0.85rem 1.1rem; color: #b91c1c;
+      font-size: 0.9rem; font-weight: 600; margin-bottom: 1rem; line-height: 1.5;
+    }
     .dob-error { font-size: 0.78rem; color: var(--red); display: none; }
     .remove-driver-btn { position: absolute; top: 0.5rem; right: 0.5rem; background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 0.85rem; padding: 0.2rem 0.4rem; border-radius: 4px; line-height: 1; }
     .remove-driver-btn:hover { background: #fde8e8; color: var(--red); }
@@ -202,7 +209,8 @@
           <input type="checkbox" id="agree" name="agreed" value="yes" required />
           <span>I have carefully read all terms above and agree to the LegaSea Golf Cart Use Agreement.</span>
         </label>
-        <button type="submit" id="submit-btn" disabled>Submit Agreement</button>
+        <div id="validation-msg"></div>
+        <button type="submit" id="submit-btn">Submit Agreement</button>
       </div>
     </form>
   </div>
@@ -256,7 +264,6 @@
     });
     const ready = allSections && agreeCheck.checked
       && nameInput.value.trim().length > 1 && dateInput.value && driversValid;
-    submitBtn.disabled = !ready;
   }
 
   function setupDriverEntry(idx, entry) {
@@ -335,8 +342,96 @@
   nameInput.addEventListener('input', checkReady);
   dateInput.addEventListener('change', checkReady);
 
+  // Clear all error highlights when user touches a field
+  function clearErrors() {
+    document.querySelectorAll('.input-error').forEach(el => el.classList.remove('input-error'));
+    document.querySelectorAll('.check-error').forEach(el => el.classList.remove('check-error'));
+    document.getElementById('validation-msg').style.display = 'none';
+  }
+  document.querySelectorAll('#agreement-form input').forEach(el => {
+    el.addEventListener('input', clearErrors);
+    el.addEventListener('change', clearErrors);
+  });
+
+  function validateForm() {
+    const errors = [];
+    clearErrors();
+
+    // Section checkboxes
+    const sectionMap = [
+      { id: 'agree-liability', label: 'Operation & Liability' },
+      { id: 'agree-electric',  label: 'Electric Cart Requirements' },
+      { id: 'agree-state',     label: 'State & Local Requirements' },
+      { id: 'agree-user',      label: 'User Agreement' },
+    ];
+    sectionMap.forEach(s => {
+      const el = document.getElementById(s.id);
+      if (!el.checked) {
+        el.closest('.section-agree').classList.add('check-error');
+        errors.push('Check the box for: ' + s.label);
+      }
+    });
+
+    // Drivers
+    document.querySelectorAll('.driver-entry').forEach((entry, i) => {
+      const nameEl  = entry.querySelector('.driver-name-wrap input');
+      const dlEl    = entry.querySelector('.driver-dl-wrap input');
+      const stateEl = entry.querySelector('.driver-state-wrap input');
+      const dobEl   = entry.querySelector('.driver-dob');
+      const label   = 'Driver ' + (i + 1);
+      if (!nameEl.value.trim())  { nameEl.classList.add('input-error');  errors.push(label + ': Full name required'); }
+      if (!dlEl.value.trim())    { dlEl.classList.add('input-error');    errors.push(label + ': DL number required'); }
+      if (!stateEl.value.trim()) { stateEl.classList.add('input-error'); errors.push(label + ': State required'); }
+      if (!dobEl.value) {
+        dobEl.classList.add('input-error');
+        errors.push(label + ': Date of birth required');
+      } else if (calcAge(dobEl.value) < 21) {
+        dobEl.classList.add('input-error');
+        errors.push(label + ': Must be 21 or older');
+      }
+    });
+
+    // Agree-DL checkbox
+    const dlCheck = document.getElementById('agree-dl');
+    if (!dlCheck.checked) {
+      dlCheck.closest('.section-agree').classList.add('check-error');
+      errors.push('Confirm all listed drivers are 21+ with a valid license');
+    }
+
+    // Full name
+    if (nameInput.value.trim().length < 2) {
+      nameInput.classList.add('input-error');
+      errors.push('Full name (guest signing) is required');
+    }
+
+    // Sign date
+    if (!dateInput.value) {
+      dateInput.classList.add('input-error');
+      errors.push('Date is required');
+    }
+
+    // Final agreement checkbox
+    if (!agreeCheck.checked) {
+      agreeCheck.closest('.agree-box').classList.add('check-error');
+      errors.push('Check the final agreement box to confirm you have read and agree to all terms');
+    }
+
+    if (errors.length > 0) {
+      const msg = document.getElementById('validation-msg');
+      msg.innerHTML = '<strong>Please complete the following before submitting:</strong><br>' +
+        errors.map(e => '• ' + e).join('<br>');
+      msg.style.display = 'block';
+      // Scroll to first error
+      const firstErr = document.querySelector('.input-error, .check-error');
+      if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return false;
+    }
+    return true;
+  }
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
+    if (!validateForm()) return;
     submitBtn.textContent = 'Submitting...';
     submitBtn.disabled = true;
 
