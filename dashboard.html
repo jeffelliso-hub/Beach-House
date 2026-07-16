@@ -9,7 +9,6 @@
 <title>Dashboard</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet">
-<script src="https://accounts.google.com/gsi/client" async defer></script>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -502,7 +501,7 @@ html, body {
 <div id="home-hint">Tap Share → Add to Home Screen for fullscreen</div>
 
 <!-- ═══ BUILD MARKER (temporary — confirms new version loaded) ═══ -->
-<div style="position:fixed;bottom:4px;left:6px;font-size:11px;color:var(--text-5);opacity:0.55;z-index:500;font-family:sans-serif">build 10</div>
+<div style="position:fixed;bottom:4px;left:6px;font-size:11px;color:var(--text-5);opacity:0.55;z-index:500;font-family:sans-serif">build 11</div>
 
 <!-- ═══ MAIN SCREEN ═══ -->
 <div class="main-screen" id="main-screen">
@@ -552,17 +551,9 @@ html, body {
       <button class="cal-nav-btn" id="cal-prev" onclick="calNav(-1)">‹</button>
       <span class="cal-day-label" id="cal-day-label">Today</span>
       <button class="cal-nav-btn" id="cal-next" onclick="calNav(1)">›</button>
-      <button class="cal-change-btn" id="cal-change-btn">change ↓</button>
     </div>
     <div class="cal-list" id="cal-list">
       <div class="cal-loading">Loading calendar…</div>
-    </div>
-    <div class="cal-signin" id="cal-signin" style="display:none">
-      <div class="cal-signin-hint">Sign in to see your calendar</div>
-      <button class="btn-signin" id="signin-btn">
-        <svg width="16" height="16" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
-        Sign in with Google
-      </button>
     </div>
   </div>
 </div>
@@ -597,12 +588,6 @@ html, body {
   </div>
 </div>
 
-<!-- ═══ CALENDAR PICKER ═══ -->
-<div class="cal-picker" id="cal-picker">
-  <div class="cal-picker-title">Choose Calendar</div>
-  <div class="cal-picker-list" id="cal-picker-list"></div>
-</div>
-
 <script>
 // Prevent white screen from uncaught JS errors
 window.onerror = function(msg, src, line) {
@@ -616,8 +601,6 @@ window.onerror = function(msg, src, line) {
 // ════════════════════════════════
 // CONFIG
 // ════════════════════════════════
-var GOOGLE_CLIENT_ID = '828383751809-nuco42cfljhtlh98adracrlepl3s2ca3.apps.googleusercontent.com';
-
 // Weather locations (toggle on the main screen). Both are Eastern time.
 var LOCATIONS = {
   clover:    { name: 'Clover',     lat: 35.11,   lon: -81.06 },
@@ -685,135 +668,6 @@ function toggleTheme() {
   if (iOS && !standalone) {
     document.getElementById('home-hint').style.display = 'block';
   }
-})();
-
-// ════════════════════════════════
-// GOOGLE OAUTH + CALENDAR PICKER
-// ════════════════════════════════
-var tokenClient       = null;
-var accessToken       = null;
-var tokenRefreshTimer = null;
-var selectedCalId = localStorage.getItem('selectedCalId') || 'primary';
-var calendarList  = [];
-
-function initGoogleAuth() {
-  if (!window.google || !google.accounts) { return; }
-  tokenClient = google.accounts.oauth2.initTokenClient({
-    client_id: GOOGLE_CLIENT_ID,
-    scope: 'https://www.googleapis.com/auth/calendar.readonly',
-    callback: function(response) {
-      if (response.error) {
-        // Token request / silent refresh failed → show the sign-in button
-        accessToken = null;
-        document.getElementById('cal-list').innerHTML = '';
-        document.getElementById('cal-signin').style.display = 'flex';
-        return;
-      }
-      accessToken = response.access_token;
-      document.getElementById('cal-signin').style.display = 'none';
-      scheduleTokenRefresh(response.expires_in);
-      fetchCalendarList();
-    }
-  });
-}
-
-// Google access tokens last ~1 hour. Refresh silently a few minutes before they
-// expire so the calendar keeps working overnight without a manual re-sign-in.
-function scheduleTokenRefresh(expiresInSec) {
-  if (tokenRefreshTimer) clearTimeout(tokenRefreshTimer);
-  var ms = Math.max(60, (Number(expiresInSec) || 3600) - 300) * 1000;
-  tokenRefreshTimer = setTimeout(silentRefresh, ms);
-}
-
-// Try to get a fresh token without any popup. Works if the user has already
-// granted access and still has a Google session; otherwise the callback above
-// falls back to showing the sign-in button.
-function silentRefresh() {
-  if (!tokenClient) initGoogleAuth();
-  if (tokenClient) {
-    try { tokenClient.requestAccessToken({ prompt: '' }); } catch (e) {}
-  }
-}
-
-function signInWithGoogle() {
-  if (!tokenClient) {
-    setTimeout(function() { initGoogleAuth(); if (tokenClient) tokenClient.requestAccessToken(); }, 800);
-    return;
-  }
-  tokenClient.requestAccessToken();
-}
-
-// Wire up sign-in button (no inline onclick — better for old iOS)
-document.getElementById('signin-btn').addEventListener('touchend', function(e) {
-  e.preventDefault();
-  signInWithGoogle();
-});
-document.getElementById('signin-btn').addEventListener('click', signInWithGoogle);
-
-// Try init after GIS loads (async), then attempt a silent sign-in so the
-// calendar restores itself on reload / overnight without a manual tap.
-window.addEventListener('load', function() {
-  setTimeout(function() { initGoogleAuth(); silentRefresh(); }, 800);
-});
-
-function fetchCalendarList() {
-  xhrGet(
-    'https://www.googleapis.com/calendar/v3/users/me/calendarList?maxResults=50',
-    { 'Authorization': 'Bearer ' + accessToken },
-    function(d) {
-      calendarList = (d.items || []).filter(function(c) { return !c.deleted; });
-      var btn = document.getElementById('cal-change-btn');
-      if (calendarList.length > 1) { btn.style.display = 'inline-flex'; }
-      var found = false;
-      for (var i = 0; i < calendarList.length; i++) { if (calendarList[i].id === selectedCalId) { found = true; break; } }
-      if (!found && calendarList.length) { selectedCalId = calendarList[0].id; localStorage.setItem('selectedCalId', selectedCalId); }
-      fetchCalendar();
-    },
-    function() { fetchCalendar(); }
-  );
-}
-
-// Wire up cal-change-btn with both click and touchend for old iPad
-(function() {
-  var btn = document.getElementById('cal-change-btn');
-  btn.addEventListener('touchend', function(e) { e.preventDefault(); openCalPicker(); });
-  btn.addEventListener('click', openCalPicker);
-})();
-
-function openCalPicker() {
-  if (!calendarList.length) return;
-  var list = document.getElementById('cal-picker-list');
-  list.innerHTML = '';
-  calendarList.forEach(function(cal) {
-    var item = document.createElement('div');
-    item.className = 'cal-picker-item' + (cal.id === selectedCalId ? ' selected' : '');
-    item.innerHTML =
-      '<div class="cal-picker-dot" style="background:' + (cal.backgroundColor || '#4a7fa8') + '"></div>' +
-      '<div class="cal-picker-name">' + escHtml(cal.summary || cal.id) + '</div>';
-    // Use data attribute + addEventListener — no inline onclick (better for old Safari)
-    item.setAttribute('data-calid', cal.id);
-    item.addEventListener('touchend', function(e) { e.preventDefault(); pickCalendar(this.getAttribute('data-calid')); });
-    item.addEventListener('click', function() { pickCalendar(this.getAttribute('data-calid')); });
-    list.appendChild(item);
-  });
-  calPickerOpenedAt = Date.now();
-  var cp = document.getElementById('cal-picker');
-  cp.style.display = 'flex';
-  gateOverlay(cp);
-}
-
-function pickCalendar(id) {
-  selectedCalId = id;
-  localStorage.setItem('selectedCalId', id);
-  document.getElementById('cal-picker').style.display = 'none';
-  fetchCalendar();
-}
-
-// Close picker on background tap
-(function() {
-  var picker = document.getElementById('cal-picker');
-  picker.addEventListener('touchend', function(e) { if (e.target === this) { e.preventDefault(); if (Date.now() - calPickerOpenedAt < 400) return; this.style.display = 'none'; } });
-  picker.addEventListener('click',    function(e) { if (e.target === this) { if (Date.now() - calPickerOpenedAt < 400) return; this.style.display = 'none'; } });
 })();
 
 // Wire weather button with touchend + click
@@ -963,7 +817,6 @@ setInterval(fetchWeather, 10 * 60 * 1000);
 var detailTimer = null;
 var detailSecs  = 20;
 var wxDetailOpenedAt = 0;
-var calPickerOpenedAt = 0;
 var calDetailOpenedAt = 0;
 var calDetailTimer = null;
 var calDetailSecs  = 20;
@@ -1067,49 +920,56 @@ function calDayLabel() {
 function calNav(delta) {
   calDayOffset = Math.max(-30, Math.min(30, calDayOffset + delta));
   document.getElementById('cal-day-label').textContent = calDayLabel();
-  fetchCalendar();
+  renderFromCache(null); // instant — the ±31-day window is already cached
 }
 
-function fetchCalendar() {
-  if (!accessToken) {
-    document.getElementById('cal-list').innerHTML = '';
-    document.getElementById('cal-signin').style.display = 'flex';
-    silentRefresh(); // keep trying to reconnect automatically (e.g. after overnight token loss)
-    return;
-  }
-  var base = new Date();
-  base.setDate(base.getDate() + calDayOffset);
-  var start = new Date(base.getFullYear(), base.getMonth(), base.getDate(), 0, 0, 0).toISOString();
-  var end   = new Date(base.getFullYear(), base.getMonth(), base.getDate(), 23, 59, 59).toISOString();
-  var calId = encodeURIComponent(selectedCalId || 'primary');
-  var url   = 'https://www.googleapis.com/calendar/v3/calendars/' + calId + '/events' +
-    '?timeMin=' + encodeURIComponent(start) +
-    '&timeMax=' + encodeURIComponent(end) +
-    '&singleEvents=true&orderBy=startTime';
+// Calendar data comes from the site's own Netlify function, which reads the
+// calendar's private iCal feed. No sign-in, no tokens, nothing to expire.
+var calAll = null; // cached ±31-day event window from the server
 
-  xhrGet(url, { 'Authorization': 'Bearer ' + accessToken },
+function fetchCalendar() {
+  xhrGet('/.netlify/functions/calendar', null,
     function(d) {
-      if (d.error) {
-        if (d.error.code === 401) { accessToken = null; silentRefresh(); return; }
-        renderCalendar([], d.error.message); return;
+      if (d && d.error) {
+        if (!calAll) renderCalendar([], d.error === 'ICAL_URL not set' ? 'Calendar not configured yet' : 'Calendar unavailable');
+        return; // keep showing the cached events on a transient feed error
       }
-      var now = new Date();
-      var events = (d.items || []).map(function(item) {
-        var timeLabel = 'All day', past = false, soon = false;
-        if (item.start && item.start.dateTime) {
-          var dt = new Date(item.start.dateTime);
-          var hh = dt.getHours(), mm = dt.getMinutes();
-          var ap = hh >= 12 ? 'PM' : 'AM';
-          timeLabel = (hh % 12 || 12) + ':' + (mm < 10 ? '0' : '') + mm + ' ' + ap;
-          past = dt < now;
-          soon = !past && (dt - now) < 3600000;
-        }
-        return { title: (item.summary || 'Untitled'), time: timeLabel, past: past, soon: soon };
-      });
-      renderCalendar(events, null);
+      calAll = (d && d.events) || [];
+      renderFromCache(null);
     },
-    function() { renderCalendar([], 'Network error'); }
+    function() {
+      if (calAll) renderFromCache(null); else renderCalendar([], 'Network error');
+    }
   );
+}
+
+// Filter the cached window down to the selected day and render it
+function renderFromCache(errMsg) {
+  if (!calAll) { fetchCalendar(); return; }
+  var base = new Date();
+  var dayStart = new Date(base.getFullYear(), base.getMonth(), base.getDate() + calDayOffset, 0, 0, 0).getTime();
+  var dayEnd = dayStart + 86400000;
+  var now = Date.now();
+  var events = [];
+  for (var i = 0; i < calAll.length; i++) {
+    var ev = calAll[i];
+    var end = Math.max(ev.end || ev.start, ev.start);
+    if (ev.start < dayEnd && end > dayStart) {
+      var timeLabel = 'All day', past = false, soon = false;
+      if (!ev.allDay) {
+        var dt = new Date(ev.start);
+        var hh = dt.getHours(), mm = dt.getMinutes();
+        var ap = hh >= 12 ? 'PM' : 'AM';
+        timeLabel = (hh % 12 || 12) + ':' + (mm < 10 ? '0' : '') + mm + ' ' + ap;
+        past = ev.start < now;
+        soon = !past && (ev.start - now) < 3600000;
+      } else {
+        past = end <= now;
+      }
+      events.push({ title: ev.title || 'Untitled', time: timeLabel, past: past, soon: soon });
+    }
+  }
+  renderCalendar(events, errMsg);
 }
 
 function renderCalendar(events, errMsg) {
