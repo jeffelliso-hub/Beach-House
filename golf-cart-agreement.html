@@ -1,103 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Golf Cart Use Agreement &ndash; LegaSea</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --ocean: #1a5f7a; --ocean-light: #e8f4f8; --sand: #f5f0e8; --sand-dark: #d4c9b0;
-      --text: #2c2c2a; --text-muted: #6b6b68; --white: #ffffff; --border: #ddd8ce;
-      --green: #3b6d11; --green-light: #eaf3de; --red: #c0392b;
-    }
-    body { font-family: 'Lato', sans-serif; font-weight: 300; background: var(--sand); color: var(--text); min-height: 100vh; padding-bottom: 3rem; }
-    header { background: var(--ocean); padding: 2rem 1.5rem 1.5rem; text-align: center; }
-    header h1 { font-family: 'Playfair Display', serif; font-weight: 600; font-size: 2rem; color: var(--white); letter-spacing: 0.02em; }
-    header p { color: rgba(255,255,255,0.72); font-size: 0.9rem; margin-top: 0.35rem; letter-spacing: 0.08em; text-transform: uppercase; }
-    .wave { display: block; width: 100%; background: var(--ocean); line-height: 0; }
-    .wave svg { display: block; width: 100%; }
-    .container { max-width: 680px; margin: 0 auto; padding: 0 1.25rem; }
-    .intro { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem 1.5rem; margin: 1.75rem 0 1.25rem; font-size: 0.95rem; line-height: 1.6; color: var(--text-muted); }
-    .intro strong { color: var(--ocean); font-weight: 700; }
-    .section { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem; margin-bottom: 1rem; }
-    .section h2 { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 600; color: var(--ocean); margin-bottom: 1rem; padding-bottom: 0.6rem; border-bottom: 1.5px solid var(--ocean-light); letter-spacing: 0.01em; }
-    .term { display: flex; gap: 0.75rem; margin-bottom: 0.9rem; align-items: flex-start; font-size: 0.9rem; line-height: 1.6; color: var(--text); }
-    .term-dot { flex-shrink: 0; width: 6px; height: 6px; background: var(--sand-dark); border-radius: 50%; margin-top: 0.55rem; }
-    .warning { background: #fff8e6; border-left: 3px solid #e9a825; border-radius: 0 6px 6px 0; padding: 0.6rem 0.85rem; font-size: 0.85rem; margin: 0.6rem 0 0.9rem 1.25rem; color: #7a5800; line-height: 1.5; }
-    .sign-section { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem; margin-bottom: 1rem; }
-    .sign-section h2 { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 600; color: var(--ocean); margin-bottom: 1.25rem; }
-    .field { margin-bottom: 1.1rem; }
-    .field label, .field-label { display: block; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.4rem; }
-    .field input[type="text"], .field input[type="date"] { width: 100%; padding: 0.7rem 0.85rem; border: 1.5px solid var(--border); border-radius: 7px; font-family: 'Lato', sans-serif; font-size: 1rem; font-weight: 400; color: var(--text); background: var(--white); appearance: none; transition: border-color 0.15s; }
-    .field input:focus { outline: none; border-color: var(--ocean); }
-    .agree-box { display: flex; gap: 0.85rem; align-items: flex-start; background: var(--ocean-light); border: 1.5px solid #b8dcea; border-radius: 8px; padding: 1rem 1.1rem; margin-bottom: 1.25rem; cursor: pointer; }
-    .agree-box input[type="checkbox"] { flex-shrink: 0; width: 20px; height: 20px; accent-color: var(--ocean); margin-top: 0.15rem; cursor: pointer; }
-    .agree-box span { font-size: 0.9rem; line-height: 1.55; color: var(--ocean); }
-    button[type="submit"] { width: 100%; padding: 1rem; background: var(--ocean); color: var(--white); border: none; border-radius: 8px; font-family: 'Lato', sans-serif; font-size: 1rem; font-weight: 700; letter-spacing: 0.04em; cursor: pointer; transition: background 0.15s, transform 0.1s; }
-    button[type="submit"]:hover { background: #154f66; }
-    button[type="submit"]:active { transform: scale(0.98); }
-    button[type="submit"]:disabled { background: var(--sand-dark); cursor: not-allowed; transform: none; }
-    .thank-you { display: none; text-align: center; padding: 3rem 1.5rem; }
-    .thank-you .icon { width: 72px; height: 72px; background: var(--green-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; }
-    .thank-you .icon svg { width: 36px; height: 36px; stroke: var(--green); }
-    .thank-you h2 { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--text); margin-bottom: 0.75rem; }
-    .thank-you p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.65; max-width: 340px; margin: 0 auto; }
-    .section-agree { display: flex; gap: 0.65rem; align-items: center; margin-top: 1rem; padding-top: 0.85rem; border-top: 1px solid var(--border); }
-    .section-agree input[type="checkbox"] { flex-shrink: 0; width: 17px; height: 17px; accent-color: var(--ocean); cursor: pointer; }
-    .section-agree label { font-size: 0.82rem; color: var(--text-muted); cursor: pointer; font-style: italic; }
-    .driver-entry { position: relative; background: var(--sand); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; margin-bottom: 0.75rem; }
-    .driver-entry-header { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--ocean); margin-bottom: 0.75rem; }
-    .driver-row { display: flex; gap: 0.75rem; align-items: flex-end; flex-wrap: wrap; }
-    .driver-name-wrap { flex: 2; min-width: 160px; }
-    .driver-dl-wrap { flex: 2; min-width: 130px; }
-    .driver-state-wrap { flex: 1; min-width: 70px; max-width: 100px; }
-    .driver-name-wrap input[type="text"],
-    .driver-dl-wrap input[type="text"],
-    .driver-state-wrap input[type="text"] { width: 100%; padding: 0.65rem 0.8rem; border: 1.5px solid var(--border); border-radius: 7px; font-family: 'Lato', sans-serif; font-size: 0.95rem; font-weight: 400; color: var(--text); background: var(--white); appearance: none; transition: border-color 0.15s; }
-    .driver-name-wrap input[type="text"]:focus,
-    .driver-dl-wrap input[type="text"]:focus,
-    .driver-state-wrap input[type="text"]:focus { outline: none; border-color: var(--ocean); }
-    .driver-dob-row { display: flex; align-items: center; gap: 0.75rem; margin-top: 0.65rem; flex-wrap: wrap; }
-    .driver-dob-wrap input[type="date"] { padding: 0.55rem 0.7rem; border: 1.5px solid var(--border); border-radius: 7px; font-family: 'Lato', sans-serif; font-size: 0.9rem; color: var(--text); background: var(--white); appearance: none; }
-    .driver-dob-wrap input[type="date"]:focus { outline: none; border-color: var(--ocean); }
-    .input-error { border-color: #dc2626 !important; background: #fff5f5 !important; }
-    .check-error { outline: 2px solid rgba(220,38,38,0.45); border-radius: 6px; }
-    #validation-msg {
-      display: none; background: #fef2f2; border: 1.5px solid #dc2626;
-      border-radius: 8px; padding: 0.85rem 1.1rem; color: #b91c1c;
-      font-size: 0.9rem; font-weight: 600; margin-bottom: 1rem; line-height: 1.5;
-    }
-    .dob-error { font-size: 0.78rem; color: var(--red); display: none; }
-    .remove-driver-btn { position: absolute; top: 0.5rem; right: 0.5rem; background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 0.85rem; padding: 0.2rem 0.4rem; border-radius: 4px; line-height: 1; }
-    .remove-driver-btn:hover { background: #fde8e8; color: var(--red); }
-    .add-driver-btn { display: flex; align-items: center; justify-content: center; width: 100%; padding: 0.6rem 1rem; background: none; border: 1.5px dashed var(--ocean); border-radius: 7px; color: var(--ocean); font-family: 'Lato', sans-serif; font-size: 0.85rem; font-weight: 700; cursor: pointer; margin: 0.25rem 0 1rem; }
-    .add-driver-btn:hover { background: var(--ocean-light); }
-    .footer-note { text-align: center; font-size: 0.78rem; color: var(--text-muted); margin-top: 2rem; }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Golf Cart Use Agreement — LegaSea · Oak Island, NC</title>
+<meta name="description" content="LegaSea Golf Cart Use Agreement — read and sign before operating the electric golf cart at our Oak Island rental." />
+<meta name="robots" content="noindex" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%8A%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --sand: #f5efe6; --dune: #e8d9c5; --ocean: #2c6b7a; --deep: #1a3f4a;
+  --foam: #c9e8ee; --coral: #d4705a; --text: #1e2a2d; --light: #f9f5f0;
+  --green: #3b6d4a; --green-light: #e4f0e8; --red: #c0392b;
+  --nav-h: 56px;
+}
+html, body { scroll-behavior: smooth; overflow-x: hidden; scroll-padding-top: calc(var(--nav-h) + 8px); }
+body { font-family: 'DM Sans', sans-serif; background: var(--light); color: var(--text); }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: var(--nav-h);
+  display: flex; justify-content: space-between; align-items: center; padding: 0 2rem;
+  background: rgba(249,245,240,0.95); backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(44,107,122,0.1);
+}
+.nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; color: var(--ocean); text-decoration: none; }
+.nav-back { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--deep); text-decoration: none; transition: color 0.2s; }
+.nav-back:hover { color: var(--ocean); }
+
+/* HEADER */
+header { background: linear-gradient(160deg, var(--ocean), var(--deep)); padding: calc(var(--nav-h) + 2.5rem) 1.5rem 1.5rem; text-align: center; color: white; }
+header h1 { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: clamp(2rem, 5vw, 2.75rem); letter-spacing: 0.01em; }
+header h1 em { font-style: italic; color: var(--foam); }
+header p { color: rgba(255,255,255,0.72); font-size: 0.78rem; margin-top: 0.4rem; letter-spacing: 0.14em; text-transform: uppercase; }
+.wave { display: block; width: 100%; line-height: 0; background: var(--deep); }
+.wave svg { display: block; width: 100%; height: 32px; }
+
+/* CONTAINER */
+.container { max-width: 700px; margin: 0 auto; padding: 1.75rem 1.25rem 4rem; }
+.intro { background: white; border-radius: 1rem; padding: 1.4rem 1.6rem; margin-bottom: 1.5rem; font-size: 0.92rem; line-height: 1.65; color: #4a5c60; box-shadow: 0 6px 20px rgba(26,63,74,0.05); }
+.intro strong { color: var(--ocean); font-weight: 600; }
+.intro a { color: var(--ocean); text-decoration: none; font-weight: 500; }
+
+/* SECTIONS */
+.section { background: white; border-radius: 1.25rem; padding: 1.6rem; margin-bottom: 1.1rem; box-shadow: 0 6px 20px rgba(26,63,74,0.05); }
+.section h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; color: var(--deep); margin-bottom: 1.1rem; padding-bottom: 0.65rem; border-bottom: 1.5px solid var(--sand); line-height: 1.1; }
+.term { display: flex; gap: 0.75rem; margin-bottom: 0.85rem; align-items: flex-start; font-size: 0.88rem; line-height: 1.6; color: var(--text); }
+.term-dot { flex-shrink: 0; width: 6px; height: 6px; background: var(--foam); border-radius: 50%; margin-top: 0.5rem; }
+.term strong { color: var(--deep); font-weight: 600; }
+.warning { background: #fff8e6; border-left: 3px solid #e9a825; border-radius: 0 6px 6px 0; padding: 0.6rem 0.85rem; font-size: 0.82rem; margin: 0.1rem 0 0.85rem 1.35rem; color: #7a5800; line-height: 1.5; }
+
+/* PER-SECTION AGREE */
+.section-agree { display: flex; gap: 0.65rem; align-items: center; margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px dashed var(--dune); }
+.section-agree input[type="checkbox"] { flex-shrink: 0; width: 18px; height: 18px; accent-color: var(--ocean); cursor: pointer; }
+.section-agree label { font-size: 0.83rem; color: var(--text); cursor: pointer; }
+
+/* DRIVERS */
+.field-label { display: block; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; color: #7a8e92; margin-bottom: 0.35rem; }
+.driver-entry { position: relative; background: var(--sand); border: 1px solid var(--dune); border-radius: 0.75rem; padding: 1.1rem; margin-bottom: 0.75rem; }
+.driver-entry-header { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ocean); margin-bottom: 0.75rem; }
+.driver-row { display: flex; gap: 0.75rem; align-items: flex-end; flex-wrap: wrap; }
+.driver-name-wrap { flex: 2; min-width: 160px; }
+.driver-dl-wrap { flex: 2; min-width: 130px; }
+.driver-state-wrap { flex: 1; min-width: 70px; max-width: 100px; }
+.driver-row input[type="text"] { width: 100%; padding: 0.65rem 0.8rem; border: 1.5px solid var(--dune); border-radius: 0.55rem; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; color: var(--text); background: white; appearance: none; transition: border-color 0.15s; }
+.driver-row input:focus { outline: none; border-color: var(--ocean); }
+.driver-dob-row { display: flex; align-items: center; gap: 0.75rem; margin-top: 0.65rem; flex-wrap: wrap; }
+.driver-dob-wrap input[type="date"] { padding: 0.55rem 0.7rem; border: 1.5px solid var(--dune); border-radius: 0.55rem; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--text); background: white; appearance: none; }
+.driver-dob-wrap input[type="date"]:focus { outline: none; border-color: var(--ocean); }
+.dob-error { font-size: 0.76rem; color: var(--red); display: none; }
+.remove-driver-btn { position: absolute; top: 0.5rem; right: 0.5rem; background: none; border: none; color: #7a8e92; cursor: pointer; font-size: 0.85rem; padding: 0.2rem 0.4rem; border-radius: 4px; line-height: 1; }
+.remove-driver-btn:hover { background: #fde8e8; color: var(--red); }
+.add-driver-btn { display: flex; align-items: center; justify-content: center; width: 100%; padding: 0.65rem 1rem; background: none; border: 1.5px dashed var(--ocean); border-radius: 0.6rem; color: var(--ocean); font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 500; cursor: pointer; margin: 0.25rem 0 0.5rem; }
+.add-driver-btn:hover { background: var(--foam); }
+
+/* SIGN CARD */
+.sign-card { background: white; border-radius: 1.25rem; padding: 1.7rem 1.6rem; box-shadow: 0 10px 30px rgba(26,63,74,0.08); margin-top: 1.5rem; }
+.sign-card h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 600; color: var(--deep); margin-bottom: 1.3rem; }
+.field { margin-bottom: 1.1rem; }
+.field label { display: block; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #7a8e92; margin-bottom: 0.4rem; }
+.field input { width: 100%; padding: 0.75rem 0.9rem; border: 1.5px solid var(--dune); border-radius: 0.6rem; font-family: 'DM Sans', sans-serif; font-size: 1rem; color: var(--text); background: var(--sand); appearance: none; transition: border-color 0.15s, background 0.15s; }
+.field input:focus { outline: none; border-color: var(--ocean); background: white; }
+.agree-box { display: flex; gap: 0.85rem; align-items: flex-start; background: var(--foam); border: 1.5px solid #b3dde6; border-radius: 0.75rem; padding: 1rem 1.1rem; margin: 0.5rem 0 1.3rem; cursor: pointer; }
+.agree-box input[type="checkbox"] { flex-shrink: 0; width: 20px; height: 20px; accent-color: var(--ocean); margin-top: 0.1rem; cursor: pointer; }
+.agree-box span { font-size: 0.88rem; line-height: 1.55; color: var(--deep); }
+button[type="submit"] { width: 100%; padding: 1rem; background: var(--ocean); color: white; border: none; border-radius: 0.75rem; font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 500; letter-spacing: 0.03em; cursor: pointer; transition: background 0.15s, transform 0.1s; }
+button[type="submit"]:hover { background: var(--deep); }
+button[type="submit"]:active { transform: scale(0.99); }
+button[type="submit"]:disabled { background: #9db5ba; cursor: not-allowed; transform: none; }
+
+/* VALIDATION */
+.input-error { border-color: var(--red) !important; background: #fff5f5 !important; }
+.check-error { outline: 2px solid rgba(192,57,43,0.4); outline-offset: 2px; border-radius: 6px; }
+#validation-msg { display: none; background: #fef2f2; border: 1.5px solid var(--red); border-radius: 0.7rem; padding: 0.85rem 1.1rem; color: #b91c1c; font-size: 0.86rem; font-weight: 500; margin-bottom: 1rem; line-height: 1.55; }
+.hp-field { position: absolute; left: -9999px; }
+
+/* THANK YOU */
+.thank-you { display: none; text-align: center; padding: 2rem 0.5rem 3rem; }
+.thank-you .icon { width: 76px; height: 76px; background: var(--green-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.4rem; }
+.thank-you .icon svg { width: 38px; height: 38px; stroke: var(--green); }
+.thank-you h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.85rem; font-weight: 400; color: var(--deep); margin-bottom: 0.75rem; }
+.thank-you p { color: #4a5c60; font-size: 0.92rem; line-height: 1.65; max-width: 380px; margin: 0 auto; }
+.thank-you p a { color: var(--ocean); text-decoration: none; font-weight: 500; }
+.footer-note { text-align: center; font-size: 0.76rem; color: #7a8e92; margin-top: 2rem; }
+
+@media (max-width: 700px) { nav { padding: 0 1.25rem; } }
+</style>
 </head>
 <body>
+
+<nav>
+  <a class="nav-logo" href="/">LegaSea</a>
+  <a class="nav-back" href="/">← Back to Home</a>
+</nav>
+
 <header>
-  <h1>LegaSea</h1>
-  <p>Golf Cart Use Agreement &nbsp;&middot;&nbsp; Oak Island, NC</p>
+  <h1>Golf Cart <em>Agreement</em></h1>
+  <p>LegaSea &nbsp;·&nbsp; Oak Island, NC</p>
 </header>
 <div class="wave">
   <svg viewBox="0 0 1440 40" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-    <path d="M0,20 C360,40 1080,0 1440,20 L1440,0 L0,0 Z" fill="#1a5f7a"/>
+    <path d="M0,20 C360,40 1080,0 1440,20 L1440,0 L0,0 Z" fill="#1a3f4a"/>
   </svg>
 </div>
+
 <div class="container">
   <div class="intro">
-    The electric golf cart is included with your stay at <strong>LegaSea</strong>. Please read and sign the agreement below before use. Questions? Call us at <strong><a href="tel:7046167527" style="color:var(--ocean);text-decoration:none;">704-616-7527</a></strong>.
+    The electric golf cart is included with your stay at <strong>LegaSea</strong>. Please read and sign the agreement below before use. Questions? Call or text us at <a href="tel:7046167527">704-616-7527</a>.
   </div>
+
   <div id="form-area">
-    <form id="agreement-form" novalidate>
-      <input type="hidden" name="access_key" value="76f7bc2d-bc48-4ce2-8474-74964ac7f0ea" />
-      <input type="hidden" name="subject" id="w3f-subject" />
-      <input type="hidden" name="from_name" value="LegaSea Golf Cart Form" />
+    <form id="agreement-form" name="golf-cart-agreement" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+      <input type="hidden" name="form-name" value="golf-cart-agreement" />
+      <p class="hp-field"><label>Don't fill this out: <input name="bot-field" /></label></p>
       <input type="hidden" name="drivers" id="w3f-drivers" />
-      <input type="hidden" name="guest_name" id="w3f-guest-name" />
       <input type="hidden" name="submission_time" id="w3f-submission-time" />
 
       <div class="section">
@@ -191,7 +229,7 @@
         </div>
       </div>
 
-      <div class="sign-section">
+      <div class="sign-card">
         <h2>Sign Below</h2>
         <div class="field">
           <label for="full-name">Full Name (Guest Signing)</label>
@@ -199,7 +237,7 @@
         </div>
         <div class="field">
           <label for="email">Email Address</label>
-          <input type="text" id="email" name="email" placeholder="your@email.com" autocomplete="email" />
+          <input type="email" id="email" name="email" placeholder="your@email.com" autocomplete="email" />
         </div>
         <div class="field">
           <label for="sign-date">Date</label>
@@ -214,21 +252,22 @@
       </div>
     </form>
   </div>
+
   <div class="thank-you" id="thank-you">
     <div class="icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="20 6 9 17 4 12"/>
-      </svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
     </div>
     <h2>You&#8217;re all set!</h2>
     <p>Your agreement has been recorded. Enjoy the cart, and drive safely!</p>
-    <p style="margin-top:1rem;">If you have any difficulties, call us at <strong><a href="tel:7046167527" style="color:var(--ocean);text-decoration:none;">704-616-7527</a></strong>.</p>
+    <p style="margin-top:1rem;">If you have any difficulties, call us at <a href="tel:7046167527">704-616-7527</a>.</p>
   </div>
-  <p class="footer-note">LegaSea &nbsp;&middot;&nbsp; Oak Island, NC &nbsp;&middot;&nbsp; 704-616-7527</p>
+
+  <p class="footer-note">LegaSea &nbsp;·&nbsp; Oak Island, NC &nbsp;·&nbsp; 704-616-7527</p>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
-  emailjs.init('hhVHHpgnzfOmUf6Fp');
+  try { emailjs.init('hhVHHpgnzfOmUf6Fp'); } catch (e) {}
 
   const form = document.getElementById('agreement-form');
   const submitBtn = document.getElementById('submit-btn');
@@ -252,38 +291,19 @@
     return age;
   }
 
-  function checkReady() {
-    const allSections = Array.from(sectionChecks).every(c => c.checked);
-    const driverEntries = document.querySelectorAll('.driver-entry');
-    const driversValid = Array.from(driverEntries).every(entry => {
-      const n = entry.querySelector('.driver-name-wrap input').value.trim();
-      const dl = entry.querySelector('.driver-dl-wrap input').value.trim();
-      const state = entry.querySelector('.driver-state-wrap input').value.trim();
-      const d = entry.querySelector('.driver-dob').value;
-      return n.length > 0 && dl.length > 0 && state.length > 0 && d && calcAge(d) >= 21;
-    });
-    const ready = allSections && agreeCheck.checked
-      && nameInput.value.trim().length > 1 && dateInput.value && driversValid;
-  }
-
   function setupDriverEntry(idx, entry) {
     const dobInput = entry.querySelector('.driver-dob');
-    entry.querySelectorAll('input[type="text"]').forEach(el => el.addEventListener('input', checkReady));
     dobInput.addEventListener('change', () => {
       const err = document.getElementById('dob-error-' + idx);
       err.style.display = (dobInput.value && calcAge(dobInput.value) < 21) ? 'block' : 'none';
-      checkReady();
     });
     entry.querySelector('.remove-driver-btn').addEventListener('click', () => {
       entry.remove();
       updateDriverHeaders();
       updateRemoveButtons();
-      checkReady();
     });
     const stateInput = entry.querySelector('.driver-state-wrap input');
-    stateInput.addEventListener('input', () => {
-      stateInput.value = stateInput.value.toUpperCase();
-    });
+    stateInput.addEventListener('input', () => { stateInput.value = stateInput.value.toUpperCase(); });
   }
 
   function updateRemoveButtons() {
@@ -334,15 +354,9 @@
     document.getElementById('driver-list').appendChild(entry);
     setupDriverEntry(idx, entry);
     updateRemoveButtons();
-    checkReady();
   });
 
-  sectionChecks.forEach(c => c.addEventListener('change', checkReady));
-  agreeCheck.addEventListener('change', checkReady);
-  nameInput.addEventListener('input', checkReady);
-  dateInput.addEventListener('change', checkReady);
-
-  // Clear all error highlights when user touches a field
+  // Clear error highlights when a field is touched
   function clearErrors() {
     document.querySelectorAll('.input-error').forEach(el => el.classList.remove('input-error'));
     document.querySelectorAll('.check-error').forEach(el => el.classList.remove('check-error'));
@@ -357,7 +371,6 @@
     const errors = [];
     clearErrors();
 
-    // Section checkboxes
     const sectionMap = [
       { id: 'agree-liability', label: 'Operation & Liability' },
       { id: 'agree-electric',  label: 'Electric Cart Requirements' },
@@ -366,13 +379,9 @@
     ];
     sectionMap.forEach(s => {
       const el = document.getElementById(s.id);
-      if (!el.checked) {
-        el.closest('.section-agree').classList.add('check-error');
-        errors.push('Check the box for: ' + s.label);
-      }
+      if (!el.checked) { el.closest('.section-agree').classList.add('check-error'); errors.push('Check the box for: ' + s.label); }
     });
 
-    // Drivers
     document.querySelectorAll('.driver-entry').forEach((entry, i) => {
       const nameEl  = entry.querySelector('.driver-name-wrap input');
       const dlEl    = entry.querySelector('.driver-dl-wrap input');
@@ -382,46 +391,21 @@
       if (!nameEl.value.trim())  { nameEl.classList.add('input-error');  errors.push(label + ': Full name required'); }
       if (!dlEl.value.trim())    { dlEl.classList.add('input-error');    errors.push(label + ': DL number required'); }
       if (!stateEl.value.trim()) { stateEl.classList.add('input-error'); errors.push(label + ': State required'); }
-      if (!dobEl.value) {
-        dobEl.classList.add('input-error');
-        errors.push(label + ': Date of birth required');
-      } else if (calcAge(dobEl.value) < 21) {
-        dobEl.classList.add('input-error');
-        errors.push(label + ': Must be 21 or older');
-      }
+      if (!dobEl.value) { dobEl.classList.add('input-error'); errors.push(label + ': Date of birth required'); }
+      else if (calcAge(dobEl.value) < 21) { dobEl.classList.add('input-error'); errors.push(label + ': Must be 21 or older'); }
     });
 
-    // Agree-DL checkbox
     const dlCheck = document.getElementById('agree-dl');
-    if (!dlCheck.checked) {
-      dlCheck.closest('.section-agree').classList.add('check-error');
-      errors.push('Confirm all listed drivers are 21+ with a valid license');
-    }
+    if (!dlCheck.checked) { dlCheck.closest('.section-agree').classList.add('check-error'); errors.push('Confirm all listed drivers are 21+ with a valid license'); }
 
-    // Full name
-    if (nameInput.value.trim().length < 2) {
-      nameInput.classList.add('input-error');
-      errors.push('Full name (guest signing) is required');
-    }
-
-    // Sign date
-    if (!dateInput.value) {
-      dateInput.classList.add('input-error');
-      errors.push('Date is required');
-    }
-
-    // Final agreement checkbox
-    if (!agreeCheck.checked) {
-      agreeCheck.closest('.agree-box').classList.add('check-error');
-      errors.push('Check the final agreement box to confirm you have read and agree to all terms');
-    }
+    if (nameInput.value.trim().length < 2) { nameInput.classList.add('input-error'); errors.push('Full name (guest signing) is required'); }
+    if (!dateInput.value) { dateInput.classList.add('input-error'); errors.push('Date is required'); }
+    if (!agreeCheck.checked) { agreeCheck.closest('.agree-box').classList.add('check-error'); errors.push('Check the final agreement box to confirm you have read and agree to all terms'); }
 
     if (errors.length > 0) {
       const msg = document.getElementById('validation-msg');
-      msg.innerHTML = '<strong>Please complete the following before submitting:</strong><br>' +
-        errors.map(e => '• ' + e).join('<br>');
+      msg.innerHTML = '<strong>Please complete the following before submitting:</strong><br>' + errors.map(e => '• ' + e).join('<br>');
       msg.style.display = 'block';
-      // Scroll to first error
       const firstErr = document.querySelector('.input-error, .check-error');
       if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return false;
@@ -429,10 +413,14 @@
     return true;
   }
 
+  function encode(data) {
+    return Object.keys(data).map(k => encodeURIComponent(k) + '=' + encodeURIComponent(data[k])).join('&');
+  }
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
-    submitBtn.textContent = 'Submitting...';
+    submitBtn.textContent = 'Submitting…';
     submitBtn.disabled = true;
 
     const name = nameInput.value.trim();
@@ -458,47 +446,36 @@
       return 'Driver ' + (i + 1) + ': ' + dName + ' | DL# ' + dDl + ' (' + dState + ') | DOB: ' + dDob;
     }).join('\n');
 
-    // 1. Notify Jeff via Web3Forms (richer data)
+    // 1. Record + notify via Netlify Forms
     try {
-      const res = await fetch('https://api.web3forms.com/submit', {
+      await fetch('/', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          access_key: '76f7bc2d-bc48-4ce2-8474-74964ac7f0ea',
-          subject: 'Golf Cart Agreement - ' + name,
-          from_name: 'LegaSea Golf Cart Form',
-          cc: 'shelbyeellison@gmail.com',
-          guest_name: name,
-          guest_email: emailVal || 'not provided',
-          date_signed: dateSigned,
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encode({
+          'form-name': 'golf-cart-agreement',
+          'full-name': name,
+          email: emailVal || 'not provided',
+          date: dateSigned,
           submission_time: timeStr,
-          'Operation & Liability': liabilityAgreed,
-          'Electric Cart Requirements': electricAgreed,
-          'State & Local Requirements': stateAgreed,
-          'User Agreement': userAgreed,
-          'Driver License Confirmation': dlAgreed,
+          'agreed-liability': liabilityAgreed,
+          'agreed-electric': electricAgreed,
+          'agreed-state': stateAgreed,
+          'agreed-user': userAgreed,
+          'agreed-dl': dlAgreed,
+          agreed: 'yes',
           drivers: driverSummary
         })
       });
-      const json = await res.json();
-      if (!json.success) console.warn('Web3Forms:', json);
-    } catch (err) {
-      console.error('Web3Forms error:', err);
-    }
+    } catch (err) { console.error('Netlify Forms error:', err); }
 
-    // 2. Send confirmation email to guest via EmailJS
+    // 2. Send confirmation email to guest via EmailJS (non-blocking)
     if (emailVal) {
       try {
         await emailjs.send('service_67blfcs', 'template_swlvg2o', {
-          to_name:    name,
-          to_email:   emailVal,
-          date_signed: dateSigned,
-          drivers:    driverSummary,
-          phone:      '704-616-7527'
+          to_name: name, to_email: emailVal, date_signed: dateSigned,
+          drivers: driverSummary, phone: '704-616-7527'
         });
-      } catch (err) {
-        console.warn('EmailJS error:', err);
-      }
+      } catch (err) { console.warn('EmailJS error:', err); }
     }
 
     document.getElementById('form-area').style.display = 'none';
