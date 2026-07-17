@@ -6,7 +6,7 @@
 <title>LegaSea — Oak Island, NC</title>
 <meta name="description" content="LegaSea — a family beach house on Oak Island, North Carolina. Guest agreement, island guide, live beach conditions, and contact.">
 <meta property="og:title" content="LegaSea — Oak Island Beach House">
-<meta property="og:description" content="Sandy floors. Salty air. Sunsets that stop you mid-sentence. Welcome to LegaSea.">
+<meta property="og:description" content="Salt air. Bare feet. Sunsets that stop you mid-sentence. Welcome to LegaSea.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%8A%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -16,7 +16,8 @@
   --sand: #f5efe6; --dune: #e8d9c5; --ocean: #2c6b7a; --deep: #1a3f4a;
   --foam: #c9e8ee; --coral: #d4705a; --text: #1e2a2d; --light: #f9f5f0;
 }
-html, body { scroll-behavior: smooth; overflow-x: hidden; }
+html { scroll-behavior: smooth; }
+body { overflow-x: clip; }
 body { font-family: 'DM Sans', sans-serif; background: var(--light); color: var(--text); }
 
 /* HERO — the house */
@@ -56,6 +57,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--light); color: var(
   flex-shrink: 0; width: 3.1rem; height: 3.1rem; border-radius: 0.9rem;
   display: flex; align-items: center; justify-content: center; font-size: 1.5rem;
 }
+.deck-body { flex: 1; }
 .deck-btn h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 600; color: var(--deep); margin-bottom: 0.3rem; display: flex; align-items: center; gap: 0.4rem; }
 .deck-btn h2 .arrow { font-family: 'DM Sans', sans-serif; font-size: 1rem; color: var(--ocean); transition: transform 0.2s; }
 .deck-btn:hover h2 .arrow { transform: translateX(4px); }
@@ -63,7 +65,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--light); color: var(
 .deck-btn .hint { display: inline-block; margin-top: 0.55rem; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--coral); }
 
 /* CONTACT */
-.contact { max-width: 880px; margin: 0 auto; padding: 3.5rem 1.25rem 4rem; text-align: center; }
+.contact { max-width: 880px; margin: 0 auto; padding: 3.5rem 1.25rem 4rem; text-align: center; scroll-margin-top: 1.5rem; }
 .contact .lbl { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--coral); display: block; margin-bottom: 0.6rem; }
 .contact h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.7rem,3vw,2.4rem); font-weight: 300; color: var(--deep); margin-bottom: 0.75rem; }
 .contact h2 em { font-style: italic; color: var(--ocean); }
@@ -100,43 +102,43 @@ footer { background: var(--deep); color: white; padding: 2rem 1.75rem; display: 
   <div class="hero-content">
     <div class="hero-tag">📍 Oak Island, North Carolina</div>
     <h1>Lega<em>Sea</em></h1>
-    <p class="hero-quote">Sandy floors. Salty air. Sunsets that stop you mid-sentence. For years this house has held our family's best memories — <strong>now it's your turn to make yours.</strong></p>
+    <p class="hero-quote">Salt air. Bare feet. Sunsets that stop you mid-sentence. For years this house has held our family's best memories — <strong>now it's your turn to make yours.</strong></p>
   </div>
 </div>
 
 <div class="deck">
   <div class="deck-grid">
     <a class="deck-btn" href="/guest-agreement.html">
-      <span class="deck-ico" style="background:var(--foam);">✍️</span>
-      <span>
+      <div class="deck-ico" style="background:var(--foam);">✍️</div>
+      <div class="deck-body">
         <h2>Guest Agreement <span class="arrow">→</span></h2>
         <p>Staying with us? Read the guest guide and sign in about 3 minutes — it unlocks your <strong>WiFi</strong>, arrival details, and <strong>golf cart access</strong>.</p>
         <span class="hint">Start here before your stay</span>
-      </span>
+      </div>
     </a>
     <a class="deck-btn" href="/explore.html">
-      <span class="deck-ico" style="background:var(--sand);">🏝️</span>
-      <span>
+      <div class="deck-ico" style="background:var(--sand);">🏝️</div>
+      <div class="deck-body">
         <h2>Explore <span class="arrow">→</span></h2>
         <p>The house, the island, and our favorite spots — from the pier and the lighthouse to Provision Company and Lil &amp; John's Sweetreat.</p>
         <span class="hint">The house &amp; the island</span>
-      </span>
+      </div>
     </a>
     <a class="deck-btn" href="/beach-day.html">
-      <span class="deck-ico" style="background:#fbe9e2;">🌊</span>
-      <span>
+      <div class="deck-ico" style="background:#fbe9e2;">🌊</div>
+      <div class="deck-body">
         <h2>Beach Day <span class="arrow">→</span></h2>
         <p>Live local conditions — temperature, wind, UV, water temp, waves, today's tides, beach flags, and bonfire permits.</p>
         <span class="hint">Updated live</span>
-      </span>
+      </div>
     </a>
-    <a class="deck-btn" href="#contact">
-      <span class="deck-ico" style="background:var(--green-light,#e4f0e8);">💬</span>
-      <span>
+    <a class="deck-btn" href="#contact" id="contact-btn">
+      <div class="deck-ico" style="background:#e4f0e8;">💬</div>
+      <div class="deck-body">
         <h2>Contact Us <span class="arrow">→</span></h2>
         <p>Questions, early check-in, something not working, or booking your next stay — we're a call or text away and answer fast.</p>
         <span class="hint">We're quick to respond</span>
-      </span>
+      </div>
     </a>
   </div>
 </div>
@@ -164,6 +166,27 @@ footer { background: var(--deep); color: white; padding: 2rem 1.75rem; display: 
     <a href="#contact">Contact</a>
   </div>
 </footer>
+
+<script>
+  // Robust in-page scrolling for the Contact links (fragment jumps are unreliable
+  // with decorative overflow clipping in some browsers).
+  function goContact() {
+    var el = document.getElementById('contact');
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Fallback: if smooth scrolling is unsupported/disabled, jump instantly.
+    setTimeout(function () {
+      var r = el.getBoundingClientRect();
+      if (r.top > 150 || r.top < -150) el.scrollIntoView({ behavior: 'instant', block: 'start' });
+    }, 500);
+    history.replaceState(null, '', '#contact');
+  }
+  document.querySelectorAll('a[href="#contact"]').forEach(function (a) {
+    a.addEventListener('click', function (e) { e.preventDefault(); goContact(); });
+  });
+  if (location.hash === '#contact') {
+    document.getElementById('contact').scrollIntoView({ behavior: 'instant', block: 'start' });
+  }
+</script>
 
 </body>
 </html>

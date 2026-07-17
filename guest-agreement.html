@@ -112,19 +112,9 @@ nav {
 .agree-row input[type="checkbox"] { flex-shrink: 0; width: 19px; height: 19px; accent-color: var(--ocean); margin-top: 0.15rem; cursor: pointer; }
 .agree-row span { font-size: 0.88rem; line-height: 1.55; color: var(--deep); font-weight: 500; }
 
-/* INITIAL BOX */
-.initial-card {
-  display: flex; align-items: center; gap: 0.85rem; flex-wrap: wrap;
-  background: white; border: 1.5px dashed var(--dune); border-radius: 0.9rem;
-  padding: 1rem 1.25rem; margin-top: 1.6rem;
-  box-shadow: 0 4px 14px rgba(26,63,74,0.05);
-}
-.initial-label { font-size: 0.85rem; color: var(--text); flex: 1; min-width: 180px; line-height: 1.5; }
-.initial-input { width: 90px; padding: 0.6rem 0.7rem; border: 1.5px solid var(--dune); border-radius: 0.55rem; font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 500; text-align: center; text-transform: uppercase; letter-spacing: 0.1em; color: var(--deep); background: var(--sand); transition: border-color 0.15s, background 0.15s; }
-.initial-input:focus { outline: none; border-color: var(--ocean); background: white; }
-.initial-input.done { border-color: var(--green); background: var(--green-light); }
-.initial-check { color: var(--green); font-size: 1.1rem; font-weight: 700; opacity: 0; transition: opacity 0.2s; }
-.initial-check.show { opacity: 1; }
+/* SECTION-CONFIRM CHECKBOX (end of every section) */
+.agree-row.section-confirm { margin-top: 1.5rem; box-shadow: 0 4px 14px rgba(26,63,74,0.05); }
+.agree-row input[type="checkbox"]:checked + span { color: var(--green); }
 
 /* GOLF CART CHOICE */
 .cart-choice { display: flex; gap: 0.75rem; flex-wrap: wrap; margin: 0.5rem 0 0.25rem; }
@@ -257,7 +247,7 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
 </nav>
 
 <div class="progress-wrap" id="progressWrap">
-  <div class="progress-info"><strong id="progress-count">0</strong> of <span id="progress-total">5</span> sections initialed</div>
+  <div class="progress-info"><strong id="progress-count">0</strong> of <span id="progress-total">5</span> sections confirmed</div>
   <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
 </div>
 
@@ -280,9 +270,9 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
 
 <div class="col welcome">
   <h2>Thank you for choosing <em>LegaSea</em></h2>
-  <p class="pull">Sandy floors. Salty air. Sunsets that stop you mid-sentence.</p>
+  <p class="pull">Salt air. Bare feet. Sunsets that stop you mid-sentence.</p>
   <p>For years, LegaSea has been where our family's best memories are made — first steps in the surf, crab hunts by flashlight, and big dinners that run long into laughter you can hear down the beach. Now the house is yours, and we're so excited for you and your family to begin — or continue — building memories of your own here.</p>
-  <p>Below is your guide to everything you'll need to know for your stay. <strong style="color:var(--deep);">Initial each section as you read it</strong> and sign at the end — it takes about 3 minutes, gets your whole crew in the know, and helps make your stay safe and amazing. Your <strong style="color:var(--deep);">WiFi and arrival details unlock the moment you're done.</strong></p>
+  <p>Below is your guide to everything you'll need to know for your stay. <strong style="color:var(--deep);">Check the box at the end of each section as you read it</strong> and sign at the end — it takes about 3 minutes, gets your whole crew in the know, and helps make your stay safe and amazing. Your <strong style="color:var(--deep);">WiFi and arrival details unlock the moment you're done.</strong></p>
 </div>
 
 <form id="agreement-form" name="guest-agreement" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
@@ -298,11 +288,10 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
   <div class="item"><span class="item-ico">🕓</span><span><strong>Check-in is 4:00 PM. Check-out is 10:00 AM.</strong> Early check-in or late check-out may be available depending on the calendar — just ask.</span></div>
   <div class="item"><span class="item-ico">🔑</span><span><strong>Check-in is self-service via lockbox.</strong> Your lockbox &amp; garage code and full arrival details are sent about 48 hours before your stay.</span></div>
   <div class="item"><span class="item-ico">🚗</span><span><strong>The garage code is the same as the lockbox code.</strong> A button on the post opens and closes the door from inside the garage.</span></div>
-  <div class="initial-card">
-    <label class="initial-label" for="i1">Initial to confirm you've read <strong>Arrival &amp; Departure</strong></label>
-    <input type="text" class="initial-input" id="i1" name="initials_arrival" maxlength="4" autocomplete="off" placeholder="––" data-section="1">
-    <span class="initial-check" id="chk1">✓</span>
-  </div>
+  <label class="agree-row section-confirm" for="c1">
+    <input type="checkbox" id="c1" name="agreed_arrival" value="yes">
+    <span>I have read the <strong>Arrival &amp; Departure</strong> section.</span>
+  </label>
 </div>
 
 <!-- SECTION 2 -->
@@ -313,11 +302,10 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
   <div class="warning">Please ride with a cell phone and don't let children ride alone. If the elevator ever gets stuck, the emergency release button is located up high, between the accordion and main door.</div>
   <div class="item"><span class="item-ico">🚿</span><span><strong>Outdoor shower:</strong> please rinse all sand off before coming inside — it protects the home's plumbing from sand buildup. We appreciate your help keeping LegaSea in great shape!</span></div>
   <div class="item"><span class="item-ico">💨</span><span><strong>Apartment dehumidifier:</strong> please leave it running for your whole stay. It keeps the space comfortable and protects against moisture.</span></div>
-  <div class="initial-card">
-    <label class="initial-label" for="i2">Initial to confirm you've read <strong>Caring for the House</strong></label>
-    <input type="text" class="initial-input" id="i2" name="initials_housecare" maxlength="4" autocomplete="off" placeholder="––" data-section="2">
-    <span class="initial-check" id="chk2">✓</span>
-  </div>
+  <label class="agree-row section-confirm" for="c2">
+    <input type="checkbox" id="c2" name="agreed_housecare" value="yes">
+    <span>I have read the <strong>Caring for the House</strong> section.</span>
+  </label>
 </div>
 
 <!-- SECTION 3 -->
@@ -335,11 +323,10 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
   <div class="item"><span class="item-ico">🎉</span><span><strong>No parties or events.</strong> Gatherings beyond your registered guests require prior arrangement with us.</span></div>
   <div class="item"><span class="item-ico">🔇</span><span><strong>Quiet hours after 10:00 PM</strong> — please be mindful of our neighbors.</span></div>
   <div class="item"><span class="item-ico">♻️</span><span><strong>Waste &amp; recycling:</strong> sort trash using the labeled bins, and roll the cans to the road by Monday night — pickup is Tuesday.</span></div>
-  <div class="initial-card">
-    <label class="initial-label" for="i3">Initial to confirm you've read the <strong>House Rules — including the no-pets policy</strong></label>
-    <input type="text" class="initial-input" id="i3" name="initials_rules" maxlength="4" autocomplete="off" placeholder="––" data-section="3">
-    <span class="initial-check" id="chk3">✓</span>
-  </div>
+  <label class="agree-row section-confirm" for="c3">
+    <input type="checkbox" id="c3" name="agreed_rules" value="yes">
+    <span>I have read the <strong>House Rules — including the no-pets policy</strong>.</span>
+  </label>
 </div>
 
 <!-- SECTION 4 -->
@@ -351,11 +338,10 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
   <div class="item"><span class="item-ico">🛏️</span><span><strong>Strip the beds</strong>, leave linens piled on each mattress, and start a load of towels or sheets before you go.</span></div>
   <div class="item"><span class="item-ico">🗑️</span><span><strong>Bag all trash</strong>, take it to the outdoor cans, and roll the cans to the road.</span></div>
   <div class="item"><span class="item-ico">🪟</span><span><strong>Close and latch all windows</strong>, and <strong>lock all doors</strong> — including the apartment's separate entrance.</span></div>
-  <div class="initial-card">
-    <label class="initial-label" for="i4">Initial to confirm you've read the <strong>Checkout list</strong></label>
-    <input type="text" class="initial-input" id="i4" name="initials_checkout" maxlength="4" autocomplete="off" placeholder="––" data-section="4">
-    <span class="initial-check" id="chk4">✓</span>
-  </div>
+  <label class="agree-row section-confirm" for="c4">
+    <input type="checkbox" id="c4" name="agreed_checkout" value="yes">
+    <span>I have read the <strong>Checkout</strong> list.</span>
+  </label>
 </div>
 
 <!-- SECTION 5 -->
@@ -366,11 +352,10 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
   <div class="item"><span class="item-ico">📞</span><span>I will contact the owners promptly if anything is damaged or not working so it can be addressed.</span></div>
   <div class="item"><span class="item-ico">👥</span><span>My party will not exceed the number of registered guests, and I understand the home is non-smoking and pet-free.</span></div>
   <div class="item"><span class="item-ico">💳</span><span>I authorize the owners to charge my card on file for any damages or fees consistent with the rental terms, including the $500 pet fine.</span></div>
-  <div class="initial-card">
-    <label class="initial-label" for="i5">Initial to confirm you've read <strong>Liability &amp; Care of the Home</strong></label>
-    <input type="text" class="initial-input" id="i5" name="initials_liability" maxlength="4" autocomplete="off" placeholder="––" data-section="5">
-    <span class="initial-check" id="chk5">✓</span>
-  </div>
+  <label class="agree-row section-confirm" for="c5">
+    <input type="checkbox" id="c5" name="agreed_liability" value="yes">
+    <span>I have read and agree to <strong>Liability &amp; Care of the Home</strong>.</span>
+  </label>
 </div>
 
 <!-- SECTION 6: GOLF CART -->
@@ -458,11 +443,10 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
       <input type="checkbox" id="agree-dl" name="agreed-dl" value="yes">
       <span>All listed drivers are 21 or older and hold a valid driver's license.</span>
     </label>
-    <div class="initial-card">
-      <label class="initial-label" for="i6">Initial to accept the <strong>Golf Cart Use Agreement</strong></label>
-      <input type="text" class="initial-input" id="i6" name="initials_golfcart" maxlength="4" autocomplete="off" placeholder="––" data-section="6">
-      <span class="initial-check" id="chk6">✓</span>
-    </div>
+    <label class="agree-row section-confirm" for="c6">
+      <input type="checkbox" id="c6" name="agreed_golfcart" value="yes">
+      <span>I have read and accept the <strong>Golf Cart Use Agreement</strong>.</span>
+    </label>
   </div>
 </div>
 
@@ -560,8 +544,8 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
   const cartYes = document.getElementById('cart-yes');
   const cartNo = document.getElementById('cart-no');
   const cartBlock = document.getElementById('cart-required-block');
-  const baseInitials = ['i1','i2','i3','i4','i5'].map(id => document.getElementById(id));
-  const cartInitial = document.getElementById('i6');
+  const baseChecks = ['c1','c2','c3','c4','c5'].map(id => document.getElementById(id));
+  const cartFinal = document.getElementById('c6');
   const cartAgreeIds = ['agree-cart-liability','agree-cart-electric','agree-cart-state','agree-cart-user'];
   const cartAgreeLabels = ['Operation & Liability','Electric Cart Requirements','State & Local Requirements','User Agreement'];
 
@@ -572,9 +556,8 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
   let driverCount = 1;
 
   function isEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
-  function initialValid(v) { return v.trim().length >= 2; }
   function usingCart() { return cartYes.checked; }
-  function activeInitials() { return usingCart() ? baseInitials.concat([cartInitial]) : baseInitials; }
+  function activeChecks() { return usingCart() ? baseChecks.concat([cartFinal]) : baseChecks; }
 
   function calcAge(dob) {
     const now = new Date();
@@ -586,21 +569,16 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
   }
 
   function updateProgress() {
-    const inputs = activeInitials();
+    const inputs = activeChecks();
     let done = 0;
-    baseInitials.concat([cartInitial]).forEach(inp => {
-      const chk = document.getElementById('chk' + inp.dataset.section);
-      if (initialValid(inp.value)) { inp.classList.add('done'); if (chk) chk.classList.add('show'); }
-      else { inp.classList.remove('done'); if (chk) chk.classList.remove('show'); }
-    });
-    inputs.forEach(inp => { if (initialValid(inp.value)) done++; });
+    inputs.forEach(inp => { if (inp.checked) done++; });
     document.getElementById('progress-count').textContent = done;
     document.getElementById('progress-total').textContent = inputs.length;
     document.getElementById('progress-fill').style.width = (done / inputs.length * 100) + '%';
   }
 
-  baseInitials.concat([cartInitial]).forEach(inp => {
-    inp.addEventListener('input', () => { inp.value = inp.value.toUpperCase(); updateProgress(); });
+  baseChecks.concat([cartFinal]).forEach(inp => {
+    inp.addEventListener('change', updateProgress);
   });
 
   function refreshCartChoice() {
@@ -689,8 +667,8 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
     const errors = [];
     clearErrors();
 
-    baseInitials.forEach((inp, i) => {
-      if (!initialValid(inp.value)) { inp.classList.add('input-error'); errors.push('Initial Section ' + (i + 1) + ' — ' + sectionNames[i]); }
+    baseChecks.forEach((inp, i) => {
+      if (!inp.checked) { inp.closest('.agree-row').classList.add('check-error'); errors.push('Confirm Section ' + (i + 1) + ' — ' + sectionNames[i]); }
     });
 
     if (!cartYes.checked && !cartNo.checked) {
@@ -703,7 +681,7 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
         const el = document.getElementById(id);
         if (!el.checked) { el.closest('.agree-row').classList.add('check-error'); errors.push('Golf cart: check the box for ' + cartAgreeLabels[i]); }
       });
-      if (!initialValid(cartInitial.value)) { cartInitial.classList.add('input-error'); errors.push('Initial Section 6 — Golf Cart Use Agreement'); }
+      if (!cartFinal.checked) { cartFinal.closest('.agree-row').classList.add('check-error'); errors.push('Confirm Section 6 — Golf Cart Use Agreement'); }
       document.querySelectorAll('.driver-entry').forEach((entry, i) => {
         const nameEl  = entry.querySelector('.driver-name-wrap input');
         const dlEl    = entry.querySelector('.driver-dl-wrap input');
@@ -773,18 +751,18 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
       email: emailVal,
       date: dateInput.value,
       submission_time: timeStr,
-      initials_arrival: document.getElementById('i1').value.trim(),
-      initials_housecare: document.getElementById('i2').value.trim(),
-      initials_rules: document.getElementById('i3').value.trim(),
-      initials_checkout: document.getElementById('i4').value.trim(),
-      initials_liability: document.getElementById('i5').value.trim(),
+      agreed_arrival: 'YES',
+      agreed_housecare: 'YES',
+      agreed_rules: 'YES',
+      agreed_checkout: 'YES',
+      agreed_liability: 'YES',
       golf_cart: usingCart() ? 'yes' : 'no',
       'agreed-liability': cartVal('agree-cart-liability'),
       'agreed-electric': cartVal('agree-cart-electric'),
       'agreed-state': cartVal('agree-cart-state'),
       'agreed-user': cartVal('agree-cart-user'),
       'agreed-dl': cartVal('agree-dl'),
-      initials_golfcart: usingCart() ? cartInitial.value.trim() : 'n/a',
+      agreed_golfcart: usingCart() ? 'YES' : 'n/a',
       drivers: driverSummary,
       agreed: 'yes'
     };
