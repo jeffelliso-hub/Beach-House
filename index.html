@@ -43,6 +43,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--light); color: var(
 /* BUTTON DECK */
 .deck { max-width: 880px; margin: -2.25rem auto 0; padding: 0 1.25rem 1rem; position: relative; z-index: 3; }
 .deck-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.deck-btn.wide { grid-column: 1 / -1; }
 @media (max-width: 720px) { .deck-grid { grid-template-columns: 1fr; } }
 .deck-btn {
   display: flex; gap: 1.1rem; align-items: flex-start; text-decoration: none;
@@ -108,7 +109,7 @@ footer { background: var(--deep); color: white; padding: 2rem 1.75rem; display: 
 
 <div class="deck">
   <div class="deck-grid">
-    <a class="deck-btn" href="/guest-agreement.html">
+    <a class="deck-btn wide" href="/guest-agreement.html">
       <div class="deck-ico" style="background:var(--foam);">✍️</div>
       <div class="deck-body">
         <h2>Guest Agreement <span class="arrow">→</span></h2>
@@ -130,14 +131,6 @@ footer { background: var(--deep); color: white; padding: 2rem 1.75rem; display: 
         <h2>Beach Day <span class="arrow">→</span></h2>
         <p>Live local conditions — temperature, wind, UV, water temp, waves, today's tides, beach flags, and bonfire permits.</p>
         <span class="hint">Updated live</span>
-      </div>
-    </a>
-    <a class="deck-btn" href="#contact" id="contact-btn">
-      <div class="deck-ico" style="background:#e4f0e8;">💬</div>
-      <div class="deck-body">
-        <h2>Contact Us <span class="arrow">→</span></h2>
-        <p>Questions, early check-in, something not working, or booking your next stay — we're a call or text away and answer fast.</p>
-        <span class="hint">We're quick to respond</span>
       </div>
     </a>
   </div>

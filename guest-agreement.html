@@ -269,11 +269,25 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
   </div>
 </div>
 
-<div class="col welcome">
+<div class="col welcome" id="welcome-new">
   <h2>Thank you for choosing <em>LegaSea</em></h2>
   <p class="pull">Salt air. Bare feet. Sunsets that stop you mid-sentence.</p>
   <p>For years, LegaSea has been where our family's best memories are made — first steps in the surf, crab hunts by flashlight, and big dinners that run long into laughter you can hear down the beach. Now the house is yours, and we're so excited for you and your family to begin — or continue — building memories of your own here.</p>
   <p>Below is your guide to everything you'll need to know for your stay. <strong style="color:var(--deep);">Check the box at the end of each section as you read it</strong> and sign at the end — it takes about 3 minutes, gets your whole crew in the know, and helps make your stay safe and amazing. Your <strong style="color:var(--deep);">WiFi and arrival details unlock the moment you're done.</strong></p>
+</div>
+
+<!-- RETURNING VISITOR (shown when the agreement cookie is present) -->
+<div class="col welcome" id="returning" style="display:none;">
+  <h2>Welcome back to <em>LegaSea</em></h2>
+  <p class="pull" id="returning-sub">You've already completed the guest agreement — here's your info, ready whenever you need it.</p>
+  <div class="essentials" style="max-width:none;margin:0.5rem 0 1.5rem;">
+    <h3>🔑 House Essentials</h3>
+    <div class="ess-row"><div class="ess-label">WiFi Network</div><div class="ess-val">LegaseaWIFI</div></div>
+    <div class="ess-row"><div class="ess-label">WiFi Password</div><div class="ess-val">LiveOak79#</div></div>
+    <div class="ess-row"><div class="ess-label">Check-In / Check-Out</div><div class="ess-val">4:00 PM &nbsp;/&nbsp; 10:00 AM</div></div>
+    <div class="ess-note">Your lockbox &amp; garage code are the same and are sent by text about 48 hours before arrival. Need anything? Call or text <a href="tel:7046167527">704-616-7527</a>.</div>
+  </div>
+  <p>Everything about the house and the rules is below for your reference — <strong style="color:var(--deep);">no need to sign again.</strong> Not you, or need to add a golf-cart driver? <a href="#" id="resign-link" style="color:var(--ocean);font-weight:500;">Start the agreement over</a>.</p>
 </div>
 
 <form id="agreement-form" name="guest-agreement" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
@@ -810,6 +824,9 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
       emailed = true;
     } catch (err) { console.warn('EmailJS (guest agreement) not sent:', err); }
 
+    // Remember this guest for 30 days so they can re-open their info without re-signing
+    try { setCookie('legasea_agreed', encodeURIComponent(name + '|' + dateInput.value), 30); } catch (e) {}
+
     document.getElementById('ty-heading').textContent = "You're all set, " + name.split(' ')[0] + '!';
     if (!emailed) document.getElementById('ty-email-note').style.display = 'none';
     document.getElementById('form-area').style.display = 'none';
@@ -820,7 +837,28 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
 
   updateProgress();
 
-  // Live conditions moved to /beach-day.html
+  // ----- Returning-visitor mode: cookie set on submit keeps their info accessible -----
+  function getCookie(n){var m=document.cookie.split('; ').find(function(c){return c.indexOf(n+'=')===0;});return m?m.split('=')[1]:'';}
+  function setCookie(n,v,days){var d=new Date();d.setTime(d.getTime()+days*86400000);document.cookie=n+'='+v+';expires='+d.toUTCString()+';path=/;SameSite=Lax';}
+  function delCookie(n){document.cookie=n+'=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/';}
+
+  function showReturning(info){
+    document.getElementById('welcome-new').style.display='none';
+    document.getElementById('progressWrap').style.display='none';
+    document.getElementById('sign').style.display='none';
+    var chips=document.querySelector('.hero-chips'); if(chips) chips.style.display='none';
+    var lead=document.querySelector('#sec-6 .lead'); if(lead) lead.style.display='none';
+    document.querySelectorAll('.agree-row').forEach(function(el){el.style.display='none';});
+    ['cart-choice','cart-skip-note','cart-required-block'].forEach(function(id){var e=document.getElementById(id);if(e)e.style.display='none';});
+    document.getElementById('returning').style.display='block';
+    try{var p=decodeURIComponent(info).split('|');if(p[0])document.getElementById('returning-sub').textContent='Signed by '+p[0]+(p[1]?' on '+p[1]:'')+' — your info is ready whenever you need it.';}catch(e){}
+  }
+
+  var agreedCookie = getCookie('legasea_agreed');
+  if (agreedCookie) showReturning(agreedCookie);
+
+  var resignLink = document.getElementById('resign-link');
+  if (resignLink) resignLink.addEventListener('click', function(e){ e.preventDefault(); delCookie('legasea_agreed'); location.reload(); });
 </script>
 </body>
 </html>
