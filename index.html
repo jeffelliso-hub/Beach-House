@@ -3,7 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LegaSea — Vacation Rental</title>
+<title>LegaSea — Vacation Rental · Oak Island, NC</title>
+<meta name="description" content="LegaSea — a 4-bedroom family beach house on Oak Island, North Carolina. Sleeps 12, steps from the sand. Guest info, house rules, and booking.">
+<meta property="og:title" content="LegaSea — Oak Island Beach House">
+<meta property="og:description" content="A family beach house made for memories on Oak Island, NC. 4 bed · 3 bath · sleeps 12.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%8A%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -179,6 +184,7 @@ footer { flex-direction: column; text-align: center; }
     <li><a onclick="navScrollTo('layout')">Layout</a></li>
     <li><a onclick="navScrollTo('amenities')">Amenities</a></li>
     <li><a onclick="navScrollTo('attractions')">Explore</a></li>
+    <li><a href="/guest-agreement.html">Agreement</a></li>
     <li><a onclick="navScrollTo('booking')" class="nav-cta">Book Now</a></li>
   </ul>
   <div class="hamburger" onclick="toggleMenu()" id="hamburger">
@@ -191,6 +197,8 @@ footer { flex-direction: column; text-align: center; }
   <a onclick="navScrollTo('layout');closeMenu()">Layout</a>
   <a onclick="navScrollTo('amenities');closeMenu()">Amenities</a>
   <a onclick="navScrollTo('attractions');closeMenu()">Explore</a>
+  <a href="/guest-agreement.html">Guest Agreement</a>
+  <a href="/golf-cart-agreement.html">Golf Cart Agreement</a>
   <a onclick="navScrollTo('booking');closeMenu()">Book Now</a>
 </div>
 
@@ -233,13 +241,12 @@ footer { flex-direction: column; text-align: center; }
       <div style="height:1px;background:var(--dune);margin:0.75rem 0;"></div>
       <p style="font-size:0.8rem;color:#7a8e92;line-height:1.6;">Self check-in details will be sent 48 hours before arrival. Early check-in or late check-out may be available — just ask!</p>
     </div>
-    <div class="card">
-      <div class="card-icon">📶</div>
-      <div class="card-title">WiFi Access</div>
-      <div class="wifi-row"><div class="wifi-label">Network</div><div class="wifi-val">LegaseaWIFI</div></div>
-      <div class="wifi-row"><div class="wifi-label">Password</div><div class="wifi-val">LiveOak79#</div></div>
-      <div style="height:1px;background:var(--dune);margin:0.75rem 0;"></div>
-      <p style="font-size:0.8rem;color:#7a8e92;line-height:1.6;">High-speed WiFi throughout the home. Network info is also posted inside the house.</p>
+    <div class="card" style="display:flex;flex-direction:column;">
+      <div class="card-icon">🔑</div>
+      <div class="card-title">WiFi &amp; Arrival Details</div>
+      <p style="font-size:0.82rem;color:#7a8e92;line-height:1.6;margin-bottom:1rem;">Your WiFi network and password — along with arrival essentials — are shared the moment you complete our quick Guest Agreement.</p>
+      <div style="height:1px;background:var(--dune);margin:0 0 1.1rem;"></div>
+      <a href="/guest-agreement.html" class="btn-primary" style="margin-top:auto;text-align:center;padding:0.7rem 1.25rem;">Sign the Guest Agreement →</a>
     </div>
     <div class="card-ocean">
       <div class="card-icon">👋</div>
@@ -404,6 +411,8 @@ footer { flex-direction: column; text-align: center; }
     <a onclick="navScrollTo('layout')">Layout</a>
     <a onclick="navScrollTo('amenities')">Amenities</a>
     <a onclick="navScrollTo('attractions')">Explore</a>
+    <a href="/guest-agreement.html">Guest Agreement</a>
+    <a href="/golf-cart-agreement.html">Golf Cart Agreement</a>
     <a onclick="navScrollTo('booking')">Contact</a>
   </div>
 </footer>
