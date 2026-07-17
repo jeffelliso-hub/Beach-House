@@ -63,6 +63,8 @@ nav {
 .hero h1 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(2.3rem, 5.5vw, 3.5rem); line-height: 1.08; }
 .hero h1 em { font-style: italic; color: var(--foam); }
 .hero-meta { font-size: 0.82rem; color: rgba(255,255,255,0.85); margin-top: 0.5rem; }
+.hero-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+.hero-chip { font-size: 0.74rem; font-weight: 500; letter-spacing: 0.03em; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); backdrop-filter: blur(5px); border-radius: 2rem; padding: 0.4rem 0.9rem; }
 
 /* READABLE COLUMN */
 .col { max-width: 720px; margin: 0 auto; padding: 0 1.5rem; }
@@ -72,7 +74,7 @@ nav {
 .welcome h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.7rem,3vw,2.3rem); font-weight: 300; color: var(--deep); margin-bottom: 1.1rem; }
 .welcome h2 em { font-style: italic; color: var(--ocean); }
 .welcome p { font-size: 1rem; line-height: 1.85; color: #3b4b4f; margin-bottom: 1.1rem; }
-.welcome .sig { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-style: italic; color: var(--ocean); }
+.welcome .pull { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.25rem, 2.6vw, 1.6rem); font-style: italic; line-height: 1.5; color: var(--ocean); border-left: 3px solid var(--foam); padding-left: 1.1rem; margin: 1.4rem 0 1.3rem; }
 
 /* SECTIONS — single readable column */
 .gsec { padding-top: 2.5rem; padding-bottom: 2.75rem; border-top: 1px solid var(--dune); }
@@ -248,9 +250,9 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
 <nav>
   <a class="nav-logo" href="/">LegaSea</a>
   <ul class="nav-links">
-    <li class="hide-mobile"><a href="/">The House</a></li>
-    <li class="hide-mobile"><a href="/#attractions">Explore</a></li>
-    <li><a href="/#booking" class="nav-cta">Book a Stay</a></li>
+    <li class="hide-mobile"><a href="/">Home</a></li>
+    <li class="hide-mobile"><a href="/explore.html">Explore</a></li>
+    <li><a href="/beach-day.html" class="nav-cta">🌊 Beach Day</a></li>
   </ul>
 </nav>
 
@@ -267,15 +269,20 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
       <div class="hero-tag">📍 Oak Island, North Carolina</div>
       <h1>Welcome to <em>LegaSea</em></h1>
       <div class="hero-meta">Your guest guide &amp; agreement · takes about 3 minutes</div>
+      <div class="hero-chips">
+        <span class="hero-chip">📶 WiFi unlocks at the end</span>
+        <span class="hero-chip">🛺 Golf cart access</span>
+        <span class="hero-chip">🔑 Arrival details</span>
+      </div>
     </div>
   </div>
 </div>
 
 <div class="col welcome">
   <h2>Thank you for choosing <em>LegaSea</em></h2>
-  <p>LegaSea has been a place where we have built amazing memories over the years, and we are excited for you and your family to begin — or continue — building those memories.</p>
-  <p>Below is a guide to everything you'll need to know for your stay. Please <strong style="color:var(--deep);">initial each section as you read it</strong> and submit at the end. It ensures you know all you need to know while staying at LegaSea, and helps make sure your stay is safe and amazing. Your WiFi and arrival details unlock as soon as you're done.</p>
-  <p class="sig">— The Ellisons &nbsp;·&nbsp; 704-616-7527</p>
+  <p class="pull">Sandy floors. Salty air. Sunsets that stop you mid-sentence.</p>
+  <p>For years, LegaSea has been where our family's best memories are made — first steps in the surf, crab hunts by flashlight, and big dinners that run long into laughter you can hear down the beach. Now the house is yours, and we're so excited for you and your family to begin — or continue — building memories of your own here.</p>
+  <p>Below is your guide to everything you'll need to know for your stay. <strong style="color:var(--deep);">Initial each section as you read it</strong> and sign at the end — it takes about 3 minutes, gets your whole crew in the know, and helps make your stay safe and amazing. Your <strong style="color:var(--deep);">WiFi and arrival details unlock the moment you're done.</strong></p>
 </div>
 
 <form id="agreement-form" name="guest-agreement" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
@@ -496,7 +503,7 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
     <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
   </div>
   <h2 id="ty-heading">You're all set!</h2>
-  <p>Thanks for reviewing everything — we can't wait to have you. Here's what you need to get settled in, and below is your launchpad for the week.</p>
+  <p>Thanks for reviewing everything — we can't wait to have you. Here's what you need to get settled in, and below are your links for planning the week.</p>
   <div class="essentials">
     <h3>🔑 House Essentials</h3>
     <div class="ess-row"><div class="ess-label">WiFi Network</div><div class="ess-val">LegaseaWIFI</div></div>
@@ -507,47 +514,22 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
   <p class="footer-note" id="ty-email-note">A copy of these details has been emailed to you.</p>
 </div>
 
-<!-- LAUNCHPAD (stays visible before and after signing) -->
-<div class="launchpad" id="launchpad">
+<!-- NEXT STOPS (stays visible before and after signing) -->
+<div class="launchpad" id="next-stops">
   <div class="lp-inner">
-    <span class="section-label">Your launchpad</span>
-    <h2>Right now on <em>Oak Island</em></h2>
-    <p class="lp-sub">Live conditions at the beach, plus the links we send every guest.</p>
-
-    <div class="wx-strip" id="wx-strip">
-      <div class="wx-tile"><div class="wx-label">Temp</div><div class="wx-val" id="wx-temp">—</div><div class="wx-detail" id="wx-feels"></div></div>
-      <div class="wx-tile"><div class="wx-label">Wind</div><div class="wx-val" id="wx-wind">—</div><div class="wx-detail" id="wx-wind-note"></div></div>
-      <div class="wx-tile"><div class="wx-label">UV Index</div><div class="wx-val" id="wx-uv">—</div><div class="wx-detail" id="wx-uv-note"></div></div>
-      <div class="wx-tile"><div class="wx-label">Tides Today</div><div class="wx-val" id="wx-tide" style="font-size:0.95rem;line-height:1.5;">—</div></div>
-    </div>
-    <div class="wx-note">Weather: Open-Meteo · Tides: NOAA station 8659182 (Oak Island). Refreshes on page load.</div>
-
-    <div class="lp-links">
-      <a class="lp-link" href="https://www.oakislandnc.gov/Government/Public-Safety/Fire-Department/Beach-Bonfire-Permits" target="_blank" rel="noopener">
-        <span class="lp-ico">🔥</span>
-        <span><strong>Beach Bonfire Permit — Town of Oak Island</strong>
-        <span>Bonfire season is Nov 16 – Apr 30 (outside sea turtle nesting season). Permits are free, applied for online within 72 hours of your fire, and fires aren't allowed when winds exceed 15 mph.</span></span>
-      </a>
-      <a class="lp-link" href="https://www.oakislandnc.gov/Residents-Visitors/Beach-Information" target="_blank" rel="noopener">
-        <span class="lp-ico">🚩</span>
-        <span><strong>Beach Flags &amp; Beach Info — Town of Oak Island</strong>
-        <span>The Town's official page: daily beach flag conditions (updated by the NWS, April–October), beach rules, safety, parking, and 100+ free beach accesses.</span></span>
-      </a>
-      <a class="lp-link" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8659182" target="_blank" rel="noopener">
+    <span class="section-label">Keep going</span>
+    <h2>Plan the rest of <em>your week</em></h2>
+    <div class="lp-links" style="margin-top:1.5rem;">
+      <a class="lp-link" href="/beach-day.html">
         <span class="lp-ico">🌊</span>
-        <span><strong>Full Tide Tables — NOAA Oak Island</strong>
-        <span>Plan beach walks, fishing, and shelling around the week's tides.</span></span>
+        <span><strong>Beach Day — Live Conditions</strong>
+        <span>Right-now temperature, wind, UV, water temp, waves, today's tides, beach flags, and bonfire permits — updated every time you open it.</span></span>
       </a>
-      <a class="lp-link" href="/#attractions">
-        <span class="lp-ico">🗺️</span>
-        <span><strong>Explore the Island — Our Favorite Spots</strong>
-        <span>The pier, the lighthouse, Southport, Bald Head Island, and more — with maps.</span></span>
+      <a class="lp-link" href="/explore.html">
+        <span class="lp-ico">🏝️</span>
+        <span><strong>Explore the House &amp; Island</strong>
+        <span>Amenities, the layout, the pier and lighthouse, Southport, and our family's favorite places to eat &amp; treat — with maps.</span></span>
       </a>
-    </div>
-
-    <div class="lp-eats">
-      <div class="lp-eats-title">Where we love to eat &amp; treat</div>
-      <a href="https://www.google.com/maps/search/?api=1&query=Provision+Company+Southport+NC" target="_blank" rel="noopener">Provision Company</a><span class="sep">·</span><a href="https://www.google.com/maps/search/?api=1&query=Fishy+Fishy+Cafe+Southport+NC" target="_blank" rel="noopener">Fishy Fishy Café</a><span class="sep">·</span><a href="https://www.google.com/maps/search/?api=1&query=Island+Way+Restaurant+Oak+Island+NC" target="_blank" rel="noopener">Island Way</a><span class="sep">·</span><a href="https://www.google.com/maps/search/?api=1&query=Koko+Cabana+Oak+Island+NC" target="_blank" rel="noopener">Koko Cabana</a><span class="sep">·</span><a href="https://www.google.com/maps/search/?api=1&query=Lil+and+John's+Sweetreat+Oak+Island+NC" target="_blank" rel="noopener">Lil &amp; John's Sweetreat</a><span class="sep">·</span><a href="https://www.google.com/maps/search/?api=1&query=Old+Bridge+Diner+Oak+Island+NC" target="_blank" rel="noopener">Old Bridge Diner</a>
     </div>
   </div>
 </div>
@@ -558,10 +540,10 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
     <div class="footer-copy">© 2025 LegaSea · Oak Island, NC · 704-616-7527</div>
   </div>
   <div class="footer-links">
-    <a href="/">The House</a>
-    <a href="/#rules">House Rules</a>
-    <a href="/#attractions">Explore</a>
-    <a href="/#booking">Book a Stay</a>
+    <a href="/">Home</a>
+    <a href="/explore.html">Explore</a>
+    <a href="/beach-day.html">Beach Day</a>
+    <a href="/explore.html#booking">Book a Stay</a>
   </div>
 </footer>
 
@@ -838,39 +820,7 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
 
   updateProgress();
 
-  // ----- LAUNCHPAD: live conditions -----
-  (async function loadWeather() {
-    // Weather + UV (Open-Meteo, free, no key)
-    try {
-      const r = await fetch('https://api.open-meteo.com/v1/forecast?latitude=33.9166&longitude=-78.1103&current=temperature_2m,apparent_temperature,uv_index,wind_speed_10m,wind_direction_10m&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone=America%2FNew_York');
-      const d = await r.json();
-      const c = d.current;
-      document.getElementById('wx-temp').textContent = Math.round(c.temperature_2m) + '°F';
-      document.getElementById('wx-feels').textContent = 'feels like ' + Math.round(c.apparent_temperature) + '°';
-      const dirs = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
-      const dir = dirs[Math.round(c.wind_direction_10m / 22.5) % 16];
-      document.getElementById('wx-wind').textContent = Math.round(c.wind_speed_10m) + ' mph ' + dir;
-      document.getElementById('wx-wind-note').textContent = c.wind_speed_10m > 15 ? 'too windy for beach fires' : '';
-      const uv = c.uv_index;
-      document.getElementById('wx-uv').textContent = Math.round(uv * 10) / 10;
-      document.getElementById('wx-uv-note').textContent = uv >= 8 ? 'very high — reapply often' : uv >= 6 ? 'high — sunscreen up' : uv >= 3 ? 'moderate' : 'low';
-    } catch (e) { console.warn('weather unavailable', e); }
-
-    // Tides (NOAA CO-OPS, Oak Island station 8659182)
-    try {
-      const r = await fetch('https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?product=predictions&application=legasea-guest-guide&station=8659182&date=today&datum=MLLW&time_zone=lst_ldt&units=english&interval=hilo&format=json');
-      const d = await r.json();
-      if (d.predictions && d.predictions.length) {
-        const fmt = t => {
-          const dt = new Date(t.t.replace(' ', 'T'));
-          let h = dt.getHours(), m = dt.getMinutes();
-          const ap = h >= 12 ? 'PM' : 'AM'; h = h % 12 || 12;
-          return (t.type === 'H' ? 'High ' : 'Low ') + h + ':' + String(m).padStart(2, '0') + ' ' + ap;
-        };
-        document.getElementById('wx-tide').innerHTML = d.predictions.map(fmt).join('<br>');
-      }
-    } catch (e) { console.warn('tides unavailable', e); }
-  })();
+  // Live conditions moved to /beach-day.html
 </script>
 </body>
 </html>

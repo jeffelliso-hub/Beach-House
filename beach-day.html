@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beach Day — Live Conditions · LegaSea, Oak Island NC</title>
+<meta name="description" content="Live Oak Island beach conditions for LegaSea guests — temperature, wind, UV, water temp, waves, today's tides, sunrise & sunset, beach flags, and bonfire permits.">
+<meta property="og:title" content="Beach Day — Live Oak Island Conditions">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%8A%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --sand: #f5efe6; --dune: #e8d9c5; --ocean: #2c6b7a; --deep: #1a3f4a;
+  --foam: #c9e8ee; --coral: #d4705a; --text: #1e2a2d; --light: #f9f5f0;
+  --nav-h: 56px;
+}
+html, body { scroll-behavior: smooth; overflow-x: hidden; }
+body { font-family: 'DM Sans', sans-serif; background: var(--deep); color: white; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: var(--nav-h);
+  display: flex; justify-content: space-between; align-items: center; padding: 0 1.75rem;
+  background: rgba(26,63,74,0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(201,232,238,0.15);
+}
+.nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; color: white; text-decoration: none; }
+.nav-links { display: flex; gap: 1.25rem; list-style: none; align-items: center; }
+.nav-links a { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.75); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: var(--foam); }
+.nav-cta { background: var(--foam); color: var(--deep) !important; padding: 0.45rem 1.1rem; border-radius: 2rem; }
+
+/* HEADER */
+header {
+  padding: calc(var(--nav-h) + 3rem) 1.5rem 2rem; text-align: left;
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(201,232,238,0.14), transparent 55%),
+    radial-gradient(ellipse at 90% 100%, rgba(212,112,90,0.12), transparent 50%),
+    linear-gradient(170deg, #14323b 0%, var(--deep) 60%, #16404d 100%);
+}
+.head-inner { max-width: 860px; margin: 0 auto; }
+.head-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--coral); display: block; margin-bottom: 0.6rem; }
+header h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem,5.5vw,3.4rem); font-weight: 300; line-height: 1.05; }
+header h1 em { font-style: italic; color: var(--foam); }
+.head-sub { font-size: 0.92rem; color: rgba(255,255,255,0.65); margin-top: 0.75rem; line-height: 1.6; max-width: 560px; }
+#head-date { color: var(--foam); }
+
+/* SECTIONS */
+.wrap { max-width: 860px; margin: 0 auto; padding: 0 1.25rem 3rem; }
+.zone-title { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--foam); margin: 2.5rem 0 1rem; display: flex; align-items: center; gap: 0.6rem; }
+.zone-title::after { content: ''; flex: 1; height: 1px; background: rgba(201,232,238,0.2); }
+
+/* NOW TILES */
+.tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.85rem; }
+@media (max-width: 720px) { .tiles { grid-template-columns: repeat(2, 1fr); } }
+.tile {
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(201,232,238,0.22);
+  border-radius: 1.1rem; padding: 1.15rem 1.2rem; position: relative; overflow: hidden;
+}
+.tile .t-ico { position: absolute; right: 0.45rem; bottom: 0.1rem; font-size: 2.6rem; opacity: 0.16; }
+.t-label { font-size: 0.65rem; letter-spacing: 0.13em; text-transform: uppercase; color: var(--foam); margin-bottom: 0.4rem; }
+.t-val { font-size: 1.65rem; font-weight: 500; line-height: 1.1; }
+.t-val small { font-size: 0.9rem; font-weight: 400; color: rgba(255,255,255,0.7); }
+.t-note { font-size: 0.74rem; color: rgba(255,255,255,0.6); margin-top: 0.35rem; line-height: 1.45; }
+
+/* TIDES + SUN */
+.today-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 0.85rem; }
+@media (max-width: 720px) { .today-grid { grid-template-columns: 1fr; } }
+.panel { background: rgba(255,255,255,0.08); border: 1px solid rgba(201,232,238,0.22); border-radius: 1.1rem; padding: 1.2rem 1.3rem; }
+.panel h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 400; margin-bottom: 0.9rem; }
+.tide-row { display: flex; justify-content: space-between; align-items: center; padding: 0.55rem 0; border-bottom: 1px dashed rgba(201,232,238,0.18); font-size: 0.95rem; }
+.tide-row:last-child { border-bottom: none; }
+.tide-type { font-weight: 500; }
+.tide-type.high { color: var(--foam); }
+.tide-type.low { color: rgba(255,255,255,0.75); }
+.tide-time { font-size: 1.05rem; font-weight: 500; }
+.tide-past { opacity: 0.38; }
+.sun-row { display: flex; justify-content: space-between; align-items: center; padding: 0.7rem 0; font-size: 0.95rem; border-bottom: 1px dashed rgba(201,232,238,0.18); }
+.sun-row:last-child { border-bottom: none; }
+.sun-row .v { font-size: 1.05rem; font-weight: 500; }
+
+/* WEEK STRIP */
+.week { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.5rem; }
+@media (max-width: 720px) { .week { display: flex; overflow-x: auto; padding-bottom: 0.5rem; -webkit-overflow-scrolling: touch; } .day { min-width: 88px; } }
+.day { background: rgba(255,255,255,0.08); border: 1px solid rgba(201,232,238,0.18); border-radius: 0.9rem; padding: 0.8rem 0.5rem; text-align: center; }
+.day .d-name { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--foam); margin-bottom: 0.35rem; }
+.day .d-emoji { font-size: 1.4rem; margin-bottom: 0.35rem; }
+.day .d-hi { font-size: 0.95rem; font-weight: 500; }
+.day .d-lo { font-size: 0.78rem; color: rgba(255,255,255,0.55); }
+.day .d-rain { font-size: 0.7rem; color: var(--foam); margin-top: 0.25rem; }
+
+/* LINKS */
+.links { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
+@media (max-width: 720px) { .links { grid-template-columns: 1fr; } }
+.lk {
+  display: flex; gap: 0.9rem; align-items: flex-start; text-decoration: none;
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(201,232,238,0.22);
+  border-radius: 1.1rem; padding: 1.15rem 1.2rem; transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+.lk:hover { background: rgba(255,255,255,0.14); border-color: rgba(201,232,238,0.5); transform: translateY(-2px); }
+.lk-ico { font-size: 1.4rem; line-height: 1.3; }
+.lk strong { display: block; color: white; font-size: 0.95rem; font-weight: 500; margin-bottom: 0.2rem; }
+.lk span { display: block; font-size: 0.78rem; color: rgba(255,255,255,0.6); line-height: 1.55; }
+
+/* EATS */
+.eats { font-size: 0.9rem; line-height: 2.1; }
+.eats a { color: white; text-decoration: none; border-bottom: 1px solid rgba(201,232,238,0.4); padding-bottom: 1px; white-space: nowrap; }
+.eats a:hover { color: var(--foam); }
+.eats .sep { color: rgba(255,255,255,0.3); margin: 0 0.45rem; }
+
+.src-note { font-size: 0.7rem; color: rgba(255,255,255,0.4); margin-top: 2.25rem; line-height: 1.6; }
+
+/* FOOTER */
+footer { background: #122b33; color: white; padding: 2rem 1.75rem; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; margin-top: 1rem; }
+.footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 300; }
+.footer-copy { font-size: 0.72rem; opacity: 0.4; margin-top: 0.2rem; }
+.footer-links { display: flex; flex-wrap: wrap; gap: 1rem 1.6rem; }
+.footer-links a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.78rem; transition: color 0.2s; }
+.footer-links a:hover { color: var(--foam); }
+@media (max-width: 700px) {
+  nav { padding: 0 1.25rem; }
+  .nav-links { gap: 0.9rem; }
+  .nav-links .hide-mobile { display: none; }
+  footer { flex-direction: column; text-align: center; }
+  .footer-links { justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/">LegaSea</a>
+  <ul class="nav-links">
+    <li class="hide-mobile"><a href="/">Home</a></li>
+    <li class="hide-mobile"><a href="/explore.html">Explore</a></li>
+    <li><a href="/guest-agreement.html" class="nav-cta">Guest Agreement</a></li>
+  </ul>
+</nav>
+
+<header>
+  <div class="head-inner">
+    <span class="head-label">🌊 Live from the coast</span>
+    <h1>Beach <em>Day</em></h1>
+    <p class="head-sub"><span id="head-date">Today</span> on Oak Island — everything you need to plan the day, pulled live from the National Weather Service's data partners and NOAA.</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="zone-title">Right now</div>
+  <div class="tiles">
+    <div class="tile"><span class="t-ico">☀️</span><div class="t-label">Air Temp</div><div class="t-val" id="wx-temp">—</div><div class="t-note" id="wx-feels"></div></div>
+    <div class="tile"><span class="t-ico">💨</span><div class="t-label">Wind</div><div class="t-val" id="wx-wind">—</div><div class="t-note" id="wx-wind-note"></div></div>
+    <div class="tile"><span class="t-ico">🧴</span><div class="t-label">UV Index</div><div class="t-val" id="wx-uv">—</div><div class="t-note" id="wx-uv-note"></div></div>
+    <div class="tile"><span class="t-ico">🌡️</span><div class="t-label">Water Temp</div><div class="t-val" id="wx-water">—</div><div class="t-note">at the surf line</div></div>
+    <div class="tile"><span class="t-ico">🌊</span><div class="t-label">Waves</div><div class="t-val" id="wx-wave">—</div><div class="t-note" id="wx-wave-note"></div></div>
+    <div class="tile"><span class="t-ico">🌧️</span><div class="t-label">Rain Chance</div><div class="t-val" id="wx-rain">—</div><div class="t-note">today's max</div></div>
+  </div>
+
+  <div class="zone-title">Today's tides &amp; sun</div>
+  <div class="today-grid">
+    <div class="panel">
+      <h3>🌊 Tides — Oak Island</h3>
+      <div id="tide-list"><div class="tide-row"><span>Loading NOAA predictions…</span></div></div>
+    </div>
+    <div class="panel">
+      <h3>☀️ Sun</h3>
+      <div class="sun-row"><span>🌅 Sunrise</span><span class="v" id="sun-rise">—</span></div>
+      <div class="sun-row"><span>🌇 Sunset</span><span class="v" id="sun-set">—</span></div>
+      <div class="sun-row"><span>🕶️ Peak UV window</span><span class="v" style="font-size:0.88rem;">10 AM – 4 PM</span></div>
+    </div>
+  </div>
+
+  <div class="zone-title">The week ahead</div>
+  <div class="week" id="week-strip"></div>
+
+  <div class="zone-title">Know before you go</div>
+  <div class="links">
+    <a class="lk" href="https://www.oakislandnc.gov/Residents-Visitors/Beach-Information" target="_blank" rel="noopener">
+      <span class="lk-ico">🚩</span>
+      <span><strong>Beach Flags &amp; Beach Info</strong>
+      <span>The Town's official page — daily flag conditions (NWS, April–October), beach rules, safety, parking, and 100+ free accesses.</span></span>
+    </a>
+    <a class="lk" href="https://www.oakislandnc.gov/Government/Public-Safety/Fire-Department/Beach-Bonfire-Permits" target="_blank" rel="noopener">
+      <span class="lk-ico">🔥</span>
+      <span><strong>Beach Bonfire Permits</strong>
+      <span>Season is Nov 16 – Apr 30. Free, online, within 72 hours of your fire — and no fires when winds top 15 mph.</span></span>
+    </a>
+    <a class="lk" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8659182" target="_blank" rel="noopener">
+      <span class="lk-ico">📈</span>
+      <span><strong>Full Tide Tables — NOAA</strong>
+      <span>The whole week's highs and lows from the Oak Island station, for shelling walks and fishing plans.</span></span>
+    </a>
+    <a class="lk" href="/explore.html#attractions">
+      <span class="lk-ico">🗺️</span>
+      <span><strong>Explore the Island</strong>
+      <span>The pier, the lighthouse, Southport, Bald Head Island, and our family's favorite spots — with maps.</span></span>
+    </a>
+  </div>
+
+  <div class="zone-title">Hungry?</div>
+  <p class="eats">
+    <a href="https://www.google.com/maps/search/?api=1&query=Provision+Company+Southport+NC" target="_blank" rel="noopener">Provision Company</a><span class="sep">·</span><a href="https://www.google.com/maps/search/?api=1&query=Fishy+Fishy+Cafe+Southport+NC" target="_blank" rel="noopener">Fishy Fishy Café</a><span class="sep">·</span><a href="https://www.google.com/maps/search/?api=1&query=Island+Way+Restaurant+Oak+Island+NC" target="_blank" rel="noopener">Island Way</a><span class="sep">·</span><a href="https://www.google.com/maps/search/?api=1&query=Koko+Cabana+Oak+Island+NC" target="_blank" rel="noopener">Koko Cabana</a><span class="sep">·</span><a href="https://www.google.com/maps/search/?api=1&query=Lil+and+John's+Sweetreat+Oak+Island+NC" target="_blank" rel="noopener">Lil &amp; John's Sweetreat</a><span class="sep">·</span><a href="https://www.google.com/maps/search/?api=1&query=Old+Bridge+Diner+Oak+Island+NC" target="_blank" rel="noopener">Old Bridge Diner</a>
+  </p>
+
+  <p class="src-note">Weather &amp; marine data: Open-Meteo (NWS/NOAA model data) · Tides: NOAA CO-OPS station 8659182, Oak Island · Refreshes every time you open this page. Beach flag colors are posted by the Town — tap "Beach Flags" above for today's flag.</p>
+</div>
+
+<footer>
+  <div>
+    <div class="footer-brand">LegaSea</div>
+    <div class="footer-copy">© 2025 LegaSea · Oak Island, NC · 704-616-7527</div>
+  </div>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/guest-agreement.html">Guest Agreement</a>
+    <a href="/explore.html">Explore</a>
+  </div>
+</footer>
+
+<script>
+(function () {
+  const $ = id => document.getElementById(id);
+
+  // Header date
+  const now = new Date();
+  $('head-date').textContent = now.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+
+  function fmtClock(dt) {
+    let h = dt.getHours(), m = dt.getMinutes();
+    const ap = h >= 12 ? 'PM' : 'AM'; h = h % 12 || 12;
+    return h + ':' + String(m).padStart(2, '0') + ' ' + ap;
+  }
+
+  // ---- Weather + week (Open-Meteo forecast) ----
+  (async function () {
+    try {
+      const r = await fetch('https://api.open-meteo.com/v1/forecast?latitude=33.9166&longitude=-78.1103'
+        + '&current=temperature_2m,apparent_temperature,uv_index,wind_speed_10m,wind_direction_10m'
+        + '&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,sunrise,sunset,uv_index_max'
+        + '&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone=America%2FNew_York');
+      const d = await r.json();
+      const c = d.current;
+
+      $('wx-temp').innerHTML = Math.round(c.temperature_2m) + '<small>°F</small>';
+      $('wx-feels').textContent = 'feels like ' + Math.round(c.apparent_temperature) + '°';
+
+      const dirs = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
+      const dir = dirs[Math.round(c.wind_direction_10m / 22.5) % 16];
+      $('wx-wind').innerHTML = Math.round(c.wind_speed_10m) + '<small> mph ' + dir + '</small>';
+      $('wx-wind-note').textContent = c.wind_speed_10m > 15 ? '⚠️ too windy for beach fires' : 'ok for beach fires (if in season)';
+
+      const uv = c.uv_index;
+      $('wx-uv').textContent = Math.round(uv * 10) / 10;
+      $('wx-uv-note').textContent = uv >= 8 ? 'very high — reapply often' : uv >= 6 ? 'high — sunscreen up' : uv >= 3 ? 'moderate' : 'low';
+
+      // today rain chance
+      if (d.daily && d.daily.precipitation_probability_max) {
+        $('wx-rain').innerHTML = d.daily.precipitation_probability_max[0] + '<small>%</small>';
+      }
+      // sunrise/sunset
+      if (d.daily && d.daily.sunrise) {
+        $('sun-rise').textContent = fmtClock(new Date(d.daily.sunrise[0]));
+        $('sun-set').textContent = fmtClock(new Date(d.daily.sunset[0]));
+      }
+
+      // week strip
+      const emoji = code =>
+        code === 0 ? '☀️' : code <= 2 ? '🌤️' : code === 3 ? '☁️' :
+        code <= 48 ? '🌫️' : code <= 57 ? '🌦️' : code <= 67 ? '🌧️' :
+        code <= 77 ? '🌨️' : code <= 82 ? '🌧️' : code <= 86 ? '🌨️' : '⛈️';
+      const strip = $('week-strip');
+      strip.innerHTML = '';
+      for (let i = 0; i < 7 && i < d.daily.time.length; i++) {
+        const day = new Date(d.daily.time[i] + 'T12:00:00');
+        const name = i === 0 ? 'Today' : day.toLocaleDateString('en-US', { weekday: 'short' });
+        const el = document.createElement('div');
+        el.className = 'day';
+        el.innerHTML = '<div class="d-name">' + name + '</div>'
+          + '<div class="d-emoji">' + emoji(d.daily.weather_code[i]) + '</div>'
+          + '<div class="d-hi">' + Math.round(d.daily.temperature_2m_max[i]) + '°</div>'
+          + '<div class="d-lo">' + Math.round(d.daily.temperature_2m_min[i]) + '°</div>'
+          + '<div class="d-rain">' + (d.daily.precipitation_probability_max[i] || 0) + '% ☔</div>';
+        strip.appendChild(el);
+      }
+    } catch (e) { console.warn('weather unavailable', e); }
+  })();
+
+  // ---- Water temp + waves (Open-Meteo marine) ----
+  (async function () {
+    try {
+      const r = await fetch('https://marine-api.open-meteo.com/v1/marine?latitude=33.90&longitude=-78.11'
+        + '&current=sea_surface_temperature,wave_height&temperature_unit=fahrenheit&timezone=America%2FNew_York');
+      const d = await r.json();
+      const c = d.current;
+      if (c && c.sea_surface_temperature != null) {
+        $('wx-water').innerHTML = Math.round(c.sea_surface_temperature) + '<small>°F</small>';
+      }
+      if (c && c.wave_height != null) {
+        const ft = c.wave_height * 3.28084;
+        $('wx-wave').innerHTML = (Math.round(ft * 10) / 10) + '<small> ft</small>';
+        $('wx-wave-note').textContent = ft >= 4 ? 'rough — use caution' : ft >= 2.5 ? 'moderate surf' : 'gentle surf';
+      }
+    } catch (e) { console.warn('marine data unavailable', e); }
+  })();
+
+  // ---- Tides (NOAA CO-OPS, Oak Island 8659182) ----
+  (async function () {
+    try {
+      const r = await fetch('https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?product=predictions&application=legasea-beach-day&station=8659182&date=today&datum=MLLW&time_zone=lst_ldt&units=english&interval=hilo&format=json');
+      const d = await r.json();
+      if (d.predictions && d.predictions.length) {
+        const list = $('tide-list');
+        list.innerHTML = '';
+        d.predictions.forEach(p => {
+          const dt = new Date(p.t.replace(' ', 'T'));
+          const row = document.createElement('div');
+          row.className = 'tide-row' + (dt < now ? ' tide-past' : '');
+          row.innerHTML = '<span class="tide-type ' + (p.type === 'H' ? 'high' : 'low') + '">'
+            + (p.type === 'H' ? '▲ High tide' : '▽ Low tide') + '</span>'
+            + '<span class="tide-time">' + fmtClock(dt) + '</span>';
+          list.appendChild(row);
+        });
+      }
+    } catch (e) {
+      console.warn('tides unavailable', e);
+      document.getElementById('tide-list').innerHTML = '<div class="tide-row"><span>Tide data unavailable — tap "Full Tide Tables" below.</span></div>';
+    }
+  })();
+})();
+</script>
+</body>
+</html>
