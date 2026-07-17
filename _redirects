@@ -1,3 +1,7 @@
 # Old homepage URL (file had no extension) -> root
 /Beach%20House%201    /    301
 /Beach*20House*201    /    301
+
+# Golf cart agreement merged into the Guest Agreement (Section 6)
+/golf-cart-agreement.html    /guest-agreement.html    301
+/golf-cart-agreement         /guest-agreement.html    301
