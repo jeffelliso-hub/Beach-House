@@ -242,7 +242,8 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
   <ul class="nav-links">
     <li class="hide-mobile"><a href="/">Home</a></li>
     <li class="hide-mobile"><a href="/explore.html">Explore</a></li>
-    <li><a href="/beach-day.html" class="nav-cta">🌊 Beach Day</a></li>
+    <li class="hide-mobile"><a href="/beach-day.html">Beach Day</a></li>
+    <li><a href="/guest-agreement.html" class="nav-cta">Guest Agreement</a></li>
   </ul>
 </nav>
 
@@ -776,7 +777,28 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
       });
     } catch (err) { console.error('Netlify Forms error:', err); }
 
-    // 2. Email a confirmation copy to the guest (non-blocking).
+    // 2. Email the owners a notification via Web3Forms (reliable, no dashboard setup needed)
+    try {
+      await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          access_key: '76f7bc2d-bc48-4ce2-8474-74964ac7f0ea',
+          subject: 'LegaSea Guest Agreement — ' + name,
+          from_name: 'LegaSea Guest Guide',
+          cc: 'shelbyeellison@gmail.com',
+          guest_name: name,
+          guest_email: emailVal || 'not provided',
+          date_signed: dateInput.value,
+          submission_time: timeStr,
+          sections_read: 'Arrival, House Care, House Rules, Checkout, Liability' + (usingCart() ? ', Golf Cart' : ''),
+          using_golf_cart: usingCart() ? 'YES' : 'No',
+          drivers: driverSummary
+        })
+      });
+    } catch (err) { console.warn('Web3Forms error:', err); }
+
+    // 3. Email a confirmation copy to the guest (non-blocking).
     //    NOTE: requires EmailJS template 'template_guest_agr' — see Jeff task.
     let emailed = false;
     try {
