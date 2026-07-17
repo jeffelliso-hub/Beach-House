@@ -3,9 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Guest Agreement — LegaSea · Oak Island, NC</title>
-<meta name="description" content="LegaSea Guest Agreement — review the house information and rules, then sign to receive your WiFi and arrival details.">
-<meta property="og:title" content="LegaSea Guest Agreement">
+<title>Guest Guide &amp; Agreement — LegaSea · Oak Island, NC</title>
+<meta name="description" content="Your guest guide to LegaSea on Oak Island, NC — arrival details, house tips, and our quick guest agreement. Sign to unlock your WiFi and arrival details.">
+<meta property="og:title" content="LegaSea Guest Guide & Agreement">
+<meta property="og:description" content="Everything you need for a great week at LegaSea on Oak Island, NC.">
 <meta name="robots" content="noindex">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%8A%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -20,7 +21,7 @@
 html, body { scroll-behavior: smooth; overflow-x: hidden; scroll-padding-top: calc(var(--nav-h) + var(--prog-h) + 8px); }
 body { font-family: 'DM Sans', sans-serif; background: var(--light); color: var(--text); }
 
-/* NAV */
+/* NAV (matches homepage) */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: var(--nav-h);
   display: flex; justify-content: space-between; align-items: center; padding: 0 2rem;
@@ -28,8 +29,13 @@ nav {
   border-bottom: 1px solid rgba(44,107,122,0.1);
 }
 .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; color: var(--ocean); text-decoration: none; }
-.nav-back { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--deep); text-decoration: none; transition: color 0.2s; }
-.nav-back:hover { color: var(--ocean); }
+.nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
+.nav-links a {
+  font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--deep); text-decoration: none; cursor: pointer; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--ocean); }
+.nav-cta { background: var(--ocean); color: white !important; padding: 0.45rem 1.1rem; border-radius: 2rem; }
 
 /* PROGRESS BAR */
 .progress-wrap {
@@ -43,30 +49,65 @@ nav {
 .progress-track { height: 4px; background: var(--dune); border-radius: 3px; overflow: hidden; }
 .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--ocean), var(--foam)); border-radius: 3px; transition: width 0.35s ease; }
 
-/* HEADER — house photo with deep overlay */
-header {
-  background: linear-gradient(rgba(26,63,74,0.72), rgba(26,63,74,0.85)), url('https://i.imgur.com/38iO9Tt.jpg') center 35%/cover no-repeat;
-  padding: calc(var(--nav-h) + var(--prog-h) + 3.25rem) 1.5rem 2.25rem; text-align: center; color: white;
+/* HERO */
+.hero {
+  position: relative;
+  background: linear-gradient(rgba(26,63,74,0.55), rgba(26,63,74,0.78)), url('https://i.imgur.com/38iO9Tt.jpg') center 40%/cover no-repeat;
+  padding: calc(var(--nav-h) + var(--prog-h) + 4.5rem) 2rem 3.5rem; text-align: center; color: white;
 }
-header h1 { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: clamp(2rem, 5vw, 2.75rem); letter-spacing: 0.01em; }
-header h1 em { font-style: italic; color: var(--foam); }
-header p { color: rgba(255,255,255,0.78); font-size: 0.78rem; margin-top: 0.4rem; letter-spacing: 0.14em; text-transform: uppercase; }
+.hero-tag { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--foam); margin-bottom: 0.9rem; }
+.hero h1 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(2.4rem, 5.5vw, 3.75rem); line-height: 1.08; }
+.hero h1 em { font-style: italic; color: var(--foam); }
+.hero-sub { font-size: 0.95rem; font-weight: 300; line-height: 1.7; color: rgba(255,255,255,0.85); max-width: 520px; margin: 1.1rem auto 0; }
+.hero-chips { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; margin-top: 1.6rem; }
+.hero-chip { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.04em; background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.25); backdrop-filter: blur(4px); border-radius: 2rem; padding: 0.45rem 1rem; }
 .wave { display: block; width: 100%; line-height: 0; margin-top: -1px; }
 .wave svg { display: block; width: 100%; height: 32px; }
 
-/* CONTAINER */
-.container { max-width: 700px; margin: 0 auto; padding: 1.75rem 1.25rem 4rem; }
-.intro { background: white; border-radius: 1rem; padding: 1.4rem 1.6rem; margin-bottom: 1.5rem; font-size: 0.92rem; line-height: 1.65; color: #4a5c60; box-shadow: 0 6px 20px rgba(26,63,74,0.05); }
-.intro strong { color: var(--ocean); font-weight: 600; }
-.intro a { color: var(--ocean); text-decoration: none; font-weight: 500; }
+/* SECTIONS (homepage rhythm) */
+section { padding: 3.5rem 1.5rem; }
+@media (min-width: 700px) { section { padding: 4.25rem 3rem; } }
+@media (min-width: 1100px) { section { padding: 4.5rem 4rem; } }
+.sec-inner { max-width: 1000px; margin: 0 auto; }
+.section-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--coral); margin-bottom: 0.75rem; display: block; }
+.section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.7rem,2.8vw,2.6rem); font-weight: 300; color: var(--deep); line-height: 1.15; margin-bottom: 1.5rem; }
+.section-title em { font-style: italic; color: var(--ocean); }
+.section-intro { font-size: 0.92rem; color: #4a5c60; line-height: 1.7; max-width: 620px; margin: -0.5rem 0 1.5rem; }
 
-/* SECTIONS */
-.section { background: white; border-radius: 1.25rem; padding: 1.6rem 1.6rem 1.4rem; margin-bottom: 1.1rem; box-shadow: 0 6px 20px rgba(26,63,74,0.05); scroll-margin-top: calc(var(--nav-h) + var(--prog-h) + 12px); }
-.section-num { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--coral); }
-.section h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; color: var(--deep); margin: 0.15rem 0 1.1rem; line-height: 1.1; }
+/* GRID HELPERS */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+.grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; }
+@media (max-width: 900px) { .grid-3 { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 620px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+
+/* CARDS */
+.card { background: white; border-radius: 1.25rem; padding: 1.5rem; }
+.card-sand { background: var(--sand); border-radius: 1.25rem; padding: 1.5rem; }
+.card-ocean { background: linear-gradient(160deg,var(--ocean),var(--deep)); border-radius: 1.25rem; padding: 1.5rem; color: white; }
+.card-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; color: var(--deep); margin-bottom: 0.75rem; }
+.card-icon { font-size: 1.5rem; margin-bottom: 0.6rem; }
+
+/* INSTR CARDS (house care) */
+.instr-card { background: white; border-radius: 1rem; padding: 1.25rem; }
+.instr-card.on-white { background: var(--sand); }
+.instr-title { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.6rem; }
+.instr-title strong { font-size: 0.95rem; color: var(--deep); }
+.instr-card p { font-size: 0.82rem; color: #4a5c60; line-height: 1.7; margin-top: 0.4rem; }
+.instr-card p strong { color: var(--deep); }
+
+/* RULE ITEMS */
+.rule-item { display: flex; align-items: flex-start; gap: 0.9rem; padding: 1rem 1.1rem; background: var(--sand); border-radius: 0.75rem; }
+.rule-text { font-size: 0.88rem; line-height: 1.55; color: var(--text); }
+.rule-text strong { display: block; font-weight: 500; margin-bottom: 0.1rem; color: var(--deep); }
+
+/* CHECKOUT ITEMS */
+.co-item { display: flex; align-items: flex-start; gap: 0.75rem; background: white; border-radius: 0.75rem; padding: 0.9rem 1rem; }
+.co-text { font-size: 0.83rem; color: var(--text); line-height: 1.5; }
+.co-text strong { display: block; color: var(--deep); margin-bottom: 0.15rem; }
+
+/* TERMS LIST */
 .term { display: flex; gap: 0.75rem; margin-bottom: 0.85rem; align-items: flex-start; font-size: 0.88rem; line-height: 1.6; color: var(--text); }
-.term:last-of-type { margin-bottom: 0; }
-.term-dot { flex-shrink: 0; width: 6px; height: 6px; background: var(--foam); border-radius: 50%; margin-top: 0.5rem; }
+.term-dot { flex-shrink: 0; width: 6px; height: 6px; background: var(--ocean); opacity: 0.45; border-radius: 50%; margin-top: 0.5rem; }
 .term strong { color: var(--deep); font-weight: 600; }
 .warning { background: #fff8e6; border-left: 3px solid #e9a825; border-radius: 0 6px 6px 0; padding: 0.6rem 0.85rem; font-size: 0.82rem; margin: 0.15rem 0 0.85rem 1.35rem; color: #7a5800; line-height: 1.5; }
 
@@ -74,67 +115,72 @@ header p { color: rgba(255,255,255,0.78); font-size: 0.78rem; margin-top: 0.4rem
 .fine-banner {
   display: flex; gap: 0.9rem; align-items: flex-start;
   background: #fbe9e2; border: 1.5px solid var(--coral); border-radius: 0.9rem;
-  padding: 1.05rem 1.2rem; margin: 0.25rem 0 1rem;
+  padding: 1.05rem 1.2rem; margin-bottom: 1.25rem;
 }
 .fine-banner .fb-icon { font-size: 1.5rem; line-height: 1; }
 .fine-banner .fb-text { font-size: 0.88rem; line-height: 1.55; color: #7c3a26; }
 .fine-banner .fb-text strong { display: block; font-size: 0.95rem; color: #b3492f; margin-bottom: 0.2rem; letter-spacing: 0.01em; }
 
-/* GOLF CART OPTIONAL BLOCK */
-.cart-choice { display: flex; gap: 0.75rem; flex-wrap: wrap; margin: 0.4rem 0 0.25rem; }
-.cart-choice label {
-  flex: 1; min-width: 150px; display: flex; align-items: center; justify-content: center; gap: 0.55rem;
-  border: 1.5px solid var(--dune); border-radius: 0.75rem; background: var(--sand);
-  padding: 0.85rem 1rem; font-size: 0.9rem; font-weight: 500; color: var(--deep); cursor: pointer;
-  transition: border-color 0.15s, background 0.15s;
+/* INITIAL BOX — closes every section */
+.initial-card {
+  display: flex; align-items: center; gap: 0.85rem; flex-wrap: wrap;
+  background: white; border: 1.5px dashed var(--dune); border-radius: 0.9rem;
+  padding: 1rem 1.25rem; margin-top: 1.5rem; max-width: 620px;
+  box-shadow: 0 4px 14px rgba(26,63,74,0.05);
 }
-.cart-choice input[type="radio"] { accent-color: var(--ocean); width: 18px; height: 18px; cursor: pointer; }
-.cart-choice label.selected { border-color: var(--ocean); background: var(--foam); }
-#cart-terms { display: none; margin-top: 1.25rem; border-top: 1px dashed var(--dune); padding-top: 1.15rem; }
-#cart-terms.open { display: block; }
-.cart-subhead { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.13em; text-transform: uppercase; color: var(--coral); margin: 1.15rem 0 0.65rem; }
-.cart-subhead:first-child { margin-top: 0; }
-.cart-note { font-size: 0.82rem; color: #7a8e92; line-height: 1.55; margin-top: 0.5rem; }
-
-/* SECTION AGREE CHECKBOX (cart drivers confirm) */
-.section-agree { display: flex; gap: 0.65rem; align-items: center; margin-top: 1rem; }
-.section-agree input[type="checkbox"] { flex-shrink: 0; width: 18px; height: 18px; accent-color: var(--ocean); cursor: pointer; }
-.section-agree label { font-size: 0.83rem; color: var(--text); cursor: pointer; }
-
-/* DRIVERS */
-.field-label { display: block; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; color: #7a8e92; margin-bottom: 0.35rem; }
-.driver-entry { position: relative; background: var(--sand); border: 1px solid var(--dune); border-radius: 0.75rem; padding: 1.1rem; margin-bottom: 0.75rem; }
-.driver-entry-header { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ocean); margin-bottom: 0.75rem; }
-.driver-row { display: flex; gap: 0.75rem; align-items: flex-end; flex-wrap: wrap; }
-.driver-name-wrap { flex: 2; min-width: 160px; }
-.driver-dl-wrap { flex: 2; min-width: 130px; }
-.driver-state-wrap { flex: 1; min-width: 70px; max-width: 100px; }
-.driver-row input[type="text"] { width: 100%; padding: 0.65rem 0.8rem; border: 1.5px solid var(--dune); border-radius: 0.55rem; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; color: var(--text); background: white; appearance: none; transition: border-color 0.15s; }
-.driver-row input:focus { outline: none; border-color: var(--ocean); }
-.driver-dob-row { display: flex; align-items: center; gap: 0.75rem; margin-top: 0.65rem; flex-wrap: wrap; }
-.driver-dob-wrap input[type="date"] { padding: 0.55rem 0.7rem; border: 1.5px solid var(--dune); border-radius: 0.55rem; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--text); background: white; appearance: none; }
-.driver-dob-wrap input[type="date"]:focus { outline: none; border-color: var(--ocean); }
-.dob-error { font-size: 0.76rem; color: var(--red); display: none; }
-.remove-driver-btn { position: absolute; top: 0.5rem; right: 0.5rem; background: none; border: none; color: #7a8e92; cursor: pointer; font-size: 0.85rem; padding: 0.2rem 0.4rem; border-radius: 4px; line-height: 1; }
-.remove-driver-btn:hover { background: #fde8e8; color: var(--red); }
-.add-driver-btn { display: flex; align-items: center; justify-content: center; width: 100%; padding: 0.65rem 1rem; background: none; border: 1.5px dashed var(--ocean); border-radius: 0.6rem; color: var(--ocean); font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 500; cursor: pointer; margin: 0.25rem 0 0.25rem; }
-.add-driver-btn:hover { background: var(--foam); }
-
-/* INITIAL BOX */
-.initial-box { display: flex; align-items: center; gap: 0.85rem; flex-wrap: wrap; margin-top: 1.2rem; padding-top: 1.1rem; border-top: 1px dashed var(--dune); }
-.initial-label { font-size: 0.78rem; color: var(--text); flex: 1; min-width: 180px; }
-.initial-input { width: 90px; padding: 0.6rem 0.7rem; border: 1.5px solid var(--dune); border-radius: 0.55rem; font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 500; text-align: center; text-transform: uppercase; letter-spacing: 0.1em; color: var(--deep); background: var(--sand); transition: border-color 0.15s, background 0.15s; }
+.on-white .initial-card, section.bg-white .initial-card { background: var(--sand); }
+.initial-label { font-size: 0.8rem; color: var(--text); flex: 1; min-width: 180px; line-height: 1.5; }
+.initial-input { width: 90px; padding: 0.6rem 0.7rem; border: 1.5px solid var(--dune); border-radius: 0.55rem; font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 500; text-align: center; text-transform: uppercase; letter-spacing: 0.1em; color: var(--deep); background: var(--light); transition: border-color 0.15s, background 0.15s; }
 .initial-input:focus { outline: none; border-color: var(--ocean); background: white; }
 .initial-input.done { border-color: var(--green); background: var(--green-light); }
 .initial-check { color: var(--green); font-size: 1.1rem; font-weight: 700; opacity: 0; transition: opacity 0.2s; }
 .initial-check.show { opacity: 1; }
 
-/* SIGN CARD */
-.sign-card { background: white; border-radius: 1.25rem; padding: 1.7rem 1.6rem; box-shadow: 0 10px 30px rgba(26,63,74,0.08); margin-top: 1.5rem; }
-.sign-card h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 600; color: var(--deep); margin-bottom: 1.3rem; }
+/* GOLF CART */
+.cart-subhead { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.13em; text-transform: uppercase; color: var(--coral); margin: 0 0 0.75rem; }
+.cart-choice { display: flex; gap: 0.75rem; flex-wrap: wrap; margin: 0.25rem 0 0; max-width: 620px; }
+.cart-choice label {
+  flex: 1; min-width: 150px; display: flex; align-items: center; justify-content: center; gap: 0.55rem;
+  border: 1.5px solid var(--dune); border-radius: 0.75rem; background: white;
+  padding: 0.85rem 1rem; font-size: 0.9rem; font-weight: 500; color: var(--deep); cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+.cart-choice input[type="radio"] { accent-color: var(--ocean); width: 18px; height: 18px; cursor: pointer; }
+.cart-choice label.selected { border-color: var(--ocean); background: var(--foam); }
+.cart-note { font-size: 0.82rem; color: #7a8e92; line-height: 1.55; margin-top: 0.75rem; }
+#cart-required-block { display: none; margin-top: 1.5rem; }
+#cart-required-block.open { display: block; }
+
+/* SECTION AGREE CHECKBOX */
+.section-agree { display: flex; gap: 0.65rem; align-items: center; margin-top: 1rem; max-width: 620px; }
+.section-agree input[type="checkbox"] { flex-shrink: 0; width: 18px; height: 18px; accent-color: var(--ocean); cursor: pointer; }
+.section-agree label { font-size: 0.83rem; color: var(--text); cursor: pointer; }
+
+/* DRIVERS */
+.field-label { display: block; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; color: #7a8e92; margin-bottom: 0.35rem; }
+.driver-entry { position: relative; background: white; border: 1px solid var(--dune); border-radius: 0.75rem; padding: 1.1rem; margin-bottom: 0.75rem; max-width: 620px; }
+.driver-entry-header { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ocean); margin-bottom: 0.75rem; }
+.driver-row { display: flex; gap: 0.75rem; align-items: flex-end; flex-wrap: wrap; }
+.driver-name-wrap { flex: 2; min-width: 160px; }
+.driver-dl-wrap { flex: 2; min-width: 130px; }
+.driver-state-wrap { flex: 1; min-width: 70px; max-width: 100px; }
+.driver-row input[type="text"] { width: 100%; padding: 0.65rem 0.8rem; border: 1.5px solid var(--dune); border-radius: 0.55rem; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; color: var(--text); background: var(--light); appearance: none; transition: border-color 0.15s; }
+.driver-row input:focus { outline: none; border-color: var(--ocean); background: white; }
+.driver-dob-row { display: flex; align-items: center; gap: 0.75rem; margin-top: 0.65rem; flex-wrap: wrap; }
+.driver-dob-wrap input[type="date"] { padding: 0.55rem 0.7rem; border: 1.5px solid var(--dune); border-radius: 0.55rem; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--text); background: var(--light); appearance: none; }
+.driver-dob-wrap input[type="date"]:focus { outline: none; border-color: var(--ocean); background: white; }
+.dob-error { font-size: 0.76rem; color: var(--red); display: none; }
+.remove-driver-btn { position: absolute; top: 0.5rem; right: 0.5rem; background: none; border: none; color: #7a8e92; cursor: pointer; font-size: 0.85rem; padding: 0.2rem 0.4rem; border-radius: 4px; line-height: 1; }
+.remove-driver-btn:hover { background: #fde8e8; color: var(--red); }
+.add-driver-btn { display: flex; align-items: center; justify-content: center; width: 100%; max-width: 620px; padding: 0.65rem 1rem; background: none; border: 1.5px dashed var(--ocean); border-radius: 0.6rem; color: var(--ocean); font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 500; cursor: pointer; margin: 0.25rem 0; }
+.add-driver-btn:hover { background: var(--foam); }
+
+/* SIGN SECTION */
+.sign-card { background: white; border-radius: 1.5rem; padding: 2rem 1.75rem; box-shadow: 0 20px 60px rgba(26,63,74,0.1); max-width: 620px; margin: 0 auto; }
+.sign-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 600; color: var(--deep); margin-bottom: 1.3rem; }
 .field { margin-bottom: 1.1rem; }
 .field label { display: block; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #7a8e92; margin-bottom: 0.4rem; }
-.field input { width: 100%; padding: 0.75rem 0.9rem; border: 1.5px solid var(--dune); border-radius: 0.6rem; font-family: 'DM Sans', sans-serif; font-size: 1rem; color: var(--text); background: var(--sand); appearance: none; transition: border-color 0.15s, background 0.15s; }
+.field input { width: 100%; padding: 0.75rem 0.9rem; border: 1.5px solid var(--dune); border-radius: 0.6rem; font-family: 'DM Sans', sans-serif; font-size: 1rem; color: var(--text); background: var(--light); appearance: none; transition: border-color 0.15s, background 0.15s; }
 .field input:focus { outline: none; border-color: var(--ocean); background: white; }
 .agree-box { display: flex; gap: 0.85rem; align-items: flex-start; background: var(--foam); border: 1.5px solid #b3dde6; border-radius: 0.75rem; padding: 1rem 1.1rem; margin: 0.5rem 0 1.3rem; cursor: pointer; }
 .agree-box input[type="checkbox"] { flex-shrink: 0; width: 20px; height: 20px; accent-color: var(--ocean); margin-top: 0.1rem; cursor: pointer; }
@@ -150,8 +196,19 @@ button[type="submit"]:disabled { background: #9db5ba; cursor: not-allowed; trans
 #validation-msg { display: none; background: #fef2f2; border: 1.5px solid var(--red); border-radius: 0.7rem; padding: 0.85rem 1.1rem; color: #b91c1c; font-size: 0.86rem; font-weight: 500; margin-bottom: 1rem; line-height: 1.55; }
 .hp-field { position: absolute; left: -9999px; }
 
+/* EXPLORE TEASER (deep bg) */
+.attraction-card { border: 1px solid rgba(201,232,238,0.2); border-radius: 1.25rem; padding: 1.5rem; transition: all 0.25s; position: relative; overflow: hidden; }
+.attraction-card:hover { background: rgba(44,107,122,0.2); border-color: rgba(201,232,238,0.4); }
+.attraction-dist { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--foam); margin-bottom: 0.5rem; }
+.attraction-name { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 400; color: white; margin-bottom: 0.4rem; }
+.attraction-desc { font-size: 0.8rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
+.btn-primary { background: var(--ocean); color: white; padding: 0.85rem 2rem; border-radius: 3rem; text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.05em; transition: all 0.25s; display: inline-block; }
+.btn-primary:hover { background: var(--deep); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(44,107,122,0.3); }
+.btn-outline-light { border: 1.5px solid rgba(255,255,255,0.4); color: white; padding: 0.8rem 1.9rem; border-radius: 3rem; text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.05em; display: inline-block; transition: all 0.25s; }
+.btn-outline-light:hover { border-color: var(--foam); color: var(--foam); }
+
 /* THANK YOU */
-.thank-you { display: none; text-align: center; padding: 1rem 0.5rem 2rem; }
+.thank-you { display: none; text-align: center; padding: calc(var(--nav-h) + 4rem) 1.5rem 4rem; max-width: 640px; margin: 0 auto; }
 .thank-you .icon { width: 76px; height: 76px; background: var(--green-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.4rem; }
 .thank-you .icon svg { width: 38px; height: 38px; stroke: var(--green); }
 .thank-you h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.85rem; font-weight: 400; color: var(--deep); margin-bottom: 0.6rem; }
@@ -165,9 +222,21 @@ button[type="submit"]:disabled { background: #9db5ba; cursor: not-allowed; trans
 .ess-note a { color: var(--foam); text-decoration: none; }
 .footer-note { text-align: center; font-size: 0.76rem; color: #7a8e92; margin-top: 2rem; }
 
+/* FOOTER (matches homepage) */
+footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.5rem; }
+.footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; }
+.footer-copy { font-size: 0.75rem; opacity: 0.4; margin-top: 0.25rem; }
+.footer-links { display: flex; flex-wrap: wrap; gap: 1rem 1.75rem; }
+.footer-links a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.78rem; cursor: pointer; transition: color 0.2s; }
+.footer-links a:hover { color: var(--foam); }
+
 @media (max-width: 700px) {
   nav { padding: 0 1.25rem; }
   .progress-wrap { padding: 0 1.25rem; }
+  .nav-links { gap: 1rem; }
+  .nav-links .hide-mobile { display: none; }
+  footer { flex-direction: column; text-align: center; }
+  .footer-links { justify-content: center; }
 }
 </style>
 </head>
@@ -175,7 +244,11 @@ button[type="submit"]:disabled { background: #9db5ba; cursor: not-allowed; trans
 
 <nav>
   <a class="nav-logo" href="/">LegaSea</a>
-  <a class="nav-back" href="/">← Back to Home</a>
+  <ul class="nav-links">
+    <li class="hide-mobile"><a href="/">The House</a></li>
+    <li class="hide-mobile"><a href="/#attractions">Explore</a></li>
+    <li><a href="/#booking" class="nav-cta">Book a Stay</a></li>
+  </ul>
 </nav>
 
 <div class="progress-wrap" id="progressWrap">
@@ -183,229 +256,335 @@ button[type="submit"]:disabled { background: #9db5ba; cursor: not-allowed; trans
   <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
 </div>
 
-<header>
-  <h1>Guest <em>Agreement</em></h1>
-  <p>LegaSea &nbsp;·&nbsp; Oak Island, NC</p>
-</header>
+<div id="form-area">
+
+<div class="hero">
+  <div class="hero-tag">📍 Oak Island, North Carolina</div>
+  <h1>Welcome to <em>LegaSea</em></h1>
+  <p class="hero-sub">Your guest guide to the house, the island, and a great week at the beach. Read through, initial each section, and your WiFi &amp; arrival details unlock at the end.</p>
+  <div class="hero-chips">
+    <span class="hero-chip">🛏️ 4 bedrooms · sleeps 12</span>
+    <span class="hero-chip">🌊 Short walk to the beach</span>
+    <span class="hero-chip">🛺 Golf cart included</span>
+    <span class="hero-chip">⏱️ Takes about 3 minutes</span>
+  </div>
+</div>
 <div class="wave">
   <svg viewBox="0 0 1440 40" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
     <path d="M0,20 C360,40 1080,0 1440,20 L1440,0 L0,0 Z" fill="#1a3f4a"/>
   </svg>
 </div>
 
-<div class="container">
-  <div id="form-area">
-    <div class="intro">
-      Welcome! Please take a moment to read through the house information below and <strong>initial each section</strong>. When you're done, sign at the bottom and your <strong>WiFi and arrival details</strong> will appear right away. Questions? Call or text us at <a href="tel:7046167527">704-616-7527</a>.
+<form id="agreement-form" name="guest-agreement" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+<input type="hidden" name="form-name" value="guest-agreement">
+<p class="hp-field"><label>Don't fill this out: <input name="bot-field"></label></p>
+<input type="hidden" name="drivers" id="drivers-summary-field">
+<input type="hidden" name="submission_time" id="submission-time">
+
+<!-- SECTION 1 -->
+<section style="background:var(--sand);" id="sec-1">
+  <div class="sec-inner">
+    <span class="section-label">Section 1 · Guest Agreement</span>
+    <h2 class="section-title">Arrival &amp; <em>departure</em></h2>
+    <div class="grid-3" style="margin-bottom:1.5rem;">
+      <div class="card">
+        <div class="card-icon">🗓️</div>
+        <div class="card-title">Check-In &amp; Check-Out</div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:0.75rem;">
+          <div><div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;color:#7a8e92;">Check-In</div><div style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;color:var(--ocean);">4:00 PM</div></div>
+          <div style="text-align:right;"><div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;color:#7a8e92;">Check-Out</div><div style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;color:var(--ocean);">10:00 AM</div></div>
+        </div>
+        <div style="height:1px;background:var(--dune);margin:0.75rem 0;"></div>
+        <p style="font-size:0.8rem;color:#7a8e92;line-height:1.6;">Early check-in or late check-out may be available depending on the calendar — just ask!</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔑</div>
+        <div class="card-title">Self Check-In</div>
+        <p style="font-size:0.85rem;color:#4a5c60;line-height:1.7;">Check-in is self-service via lockbox. Your lockbox &amp; garage code and full arrival details are sent about <strong style="color:var(--deep);">48 hours before your stay</strong>.</p>
+      </div>
+      <div class="card-ocean">
+        <div class="card-icon">👋</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;margin-bottom:0.75rem;">Welcome to LegaSea</div>
+        <p style="font-size:0.85rem;opacity:0.85;line-height:1.75;">We are so glad that you will be sharing our house. We hope you add to the laughter and joy it has known through the years!</p>
+      </div>
     </div>
+    <div class="initial-card">
+      <label class="initial-label" for="i1">Initial here to confirm you've read <strong>Arrival &amp; Departure</strong></label>
+      <input type="text" class="initial-input" id="i1" name="initials_arrival" maxlength="4" autocomplete="off" placeholder="––" data-section="1">
+      <span class="initial-check" id="chk1">✓</span>
+    </div>
+  </div>
+</section>
 
-    <form id="agreement-form" name="guest-agreement" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
-      <input type="hidden" name="form-name" value="guest-agreement">
-      <p class="hp-field"><label>Don't fill this out: <input name="bot-field"></label></p>
-      <input type="hidden" name="drivers" id="drivers-summary-field">
-      <input type="hidden" name="submission_time" id="submission-time">
-
-      <!-- 1 -->
-      <div class="section" id="sec-1">
-        <div class="section-num">Section 1</div>
-        <h2>Arrival &amp; Departure</h2>
-        <div class="term"><div class="term-dot"></div><span><strong>Check-in is 4:00 PM</strong> and <strong>check-out is 10:00 AM.</strong></span></div>
-        <div class="term"><div class="term-dot"></div><span>Check-in is self-service via lockbox. Your lockbox and garage code and full arrival details are sent about 48 hours before your stay.</span></div>
-        <div class="term"><div class="term-dot"></div><span>Early check-in or late check-out may be available depending on the calendar — just ask and we'll do our best.</span></div>
-        <div class="initial-box">
-          <label class="initial-label" for="i1">Initial here to confirm you've read this section</label>
-          <input type="text" class="initial-input" id="i1" name="initials_arrival" maxlength="4" autocomplete="off" placeholder="––" data-section="1">
-          <span class="initial-check" id="chk1">✓</span>
-        </div>
+<!-- SECTION 2 -->
+<section style="background:white;" id="sec-2" class="bg-white">
+  <div class="sec-inner">
+    <span class="section-label">Section 2 · Guest Agreement</span>
+    <h2 class="section-title">Caring for <em>the house</em></h2>
+    <div class="grid-2" style="margin-bottom:0.25rem;">
+      <div class="instr-card on-white">
+        <div class="instr-title"><span style="font-size:1.2rem;">🛗</span><strong>Elevator</strong></div>
+        <p>Both doors (handle door and accordion door) must be fully closed in <strong>both</strong> the house and garage for it to operate. Press the call button and wait for the red light before riding, and close the door after each use.</p>
+        <p>Please ride with a cell phone and don't let children ride alone. The emergency release button is up high, between the accordion and main door, if it ever gets stuck.</p>
       </div>
-
-      <!-- 2 -->
-      <div class="section" id="sec-2">
-        <div class="section-num">Section 2</div>
-        <h2>House Care</h2>
-        <div class="term"><div class="term-dot"></div><span><strong>Elevator:</strong> both doors (the handle door and the accordion door) must be fully closed in <em>both</em> the house and garage for it to operate. Press the call button and wait for the red light before riding, and close the door after each use.</span></div>
-        <div class="warning">Please ride with a cell phone and do not let children ride alone. The emergency release button is located up high, between the accordion and main door, if it ever gets stuck.</div>
-        <div class="term"><div class="term-dot"></div><span><strong>Outdoor shower:</strong> please rinse off all sand before coming inside — it protects the home's plumbing from sand buildup.</span></div>
-        <div class="term"><div class="term-dot"></div><span><strong>Apartment dehumidifier:</strong> please leave it running during your stay. It keeps the space comfortable and protects against moisture.</span></div>
-        <div class="term"><div class="term-dot"></div><span><strong>Garage:</strong> the garage code is the same as the lockbox code. A button on the post opens and closes the door from inside the garage.</span></div>
-        <div class="initial-box">
-          <label class="initial-label" for="i2">Initial here to confirm you've read this section</label>
-          <input type="text" class="initial-input" id="i2" name="initials_housecare" maxlength="4" autocomplete="off" placeholder="––" data-section="2">
-          <span class="initial-check" id="chk2">✓</span>
-        </div>
+      <div class="instr-card on-white">
+        <div class="instr-title"><span style="font-size:1.2rem;">🚿</span><strong>Outdoor Shower</strong></div>
+        <p>Please rinse off all sand before coming inside — it protects the home's plumbing from sand buildup. We appreciate your help keeping LegaSea in great shape!</p>
       </div>
+      <div class="instr-card on-white">
+        <div class="instr-title"><span style="font-size:1.2rem;">🚗</span><strong>Garage</strong></div>
+        <p>The garage code is the same as the lockbox code. A button on the post opens and closes the door from inside the garage.</p>
+      </div>
+      <div class="instr-card on-white">
+        <div class="instr-title"><span style="font-size:1.2rem;">💨</span><strong>Apartment Dehumidifier</strong></div>
+        <p>Please leave the dehumidifier in the apartment running during your stay — it keeps the space comfortable and protects against moisture. Thank you!</p>
+      </div>
+    </div>
+    <div class="initial-card">
+      <label class="initial-label" for="i2">Initial here to confirm you've read <strong>Caring for the House</strong></label>
+      <input type="text" class="initial-input" id="i2" name="initials_housecare" maxlength="4" autocomplete="off" placeholder="––" data-section="2">
+      <span class="initial-check" id="chk2">✓</span>
+    </div>
+  </div>
+</section>
 
-      <!-- 3 -->
-      <div class="section" id="sec-3">
-        <div class="section-num">Section 3</div>
-        <h2>House Rules</h2>
-        <div class="fine-banner">
-          <div class="fb-icon">🐾</div>
-          <div class="fb-text">
-            <strong>Absolutely no dogs or other pets — $500 fine.</strong>
-            We love dogs, but LegaSea is a strictly pet-free home for the sake of guests with allergies. Any evidence of a pet on the property results in a <strong style="display:inline;">$500 fine</strong> plus the cost of any additional cleaning or repairs.
+<!-- SECTION 3 -->
+<section style="background:var(--sand);" id="sec-3">
+  <div class="sec-inner">
+    <span class="section-label">Section 3 · Guest Agreement</span>
+    <h2 class="section-title">A few simple <em>house rules</em></h2>
+    <div class="fine-banner">
+      <div class="fb-icon">🐾</div>
+      <div class="fb-text">
+        <strong>Absolutely no dogs or other pets — $500 fine.</strong>
+        We love dogs, but LegaSea is a strictly pet-free home for the sake of guests with allergies. Any evidence of a pet on the property results in a <strong style="display:inline;">$500 fine</strong> plus the cost of any additional cleaning or repairs.
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="rule-item" style="background:white;"><span style="font-size:1.1rem;">🚭</span><div class="rule-text"><strong>No Smoking</strong>Not permitted anywhere inside the property.</div></div>
+      <div class="rule-item" style="background:white;"><span style="font-size:1.1rem;">🎉</span><div class="rule-text"><strong>No Parties or Events</strong>Gatherings beyond registered guests require prior arrangement.</div></div>
+      <div class="rule-item" style="background:white;"><span style="font-size:1.1rem;">🔇</span><div class="rule-text"><strong>Quiet Hours</strong>Please be mindful of neighbors after 10:00 PM.</div></div>
+      <div class="rule-item" style="background:white;"><span style="font-size:1.1rem;">♻️</span><div class="rule-text"><strong>Waste &amp; Recycling</strong>Sort trash using the labeled bins. Cans to the road by Monday night — pickup is Tuesday.</div></div>
+    </div>
+    <div class="initial-card">
+      <label class="initial-label" for="i3">Initial here to confirm you've read the <strong>House Rules — including the no-pets policy</strong></label>
+      <input type="text" class="initial-input" id="i3" name="initials_rules" maxlength="4" autocomplete="off" placeholder="––" data-section="3">
+      <span class="initial-check" id="chk3">✓</span>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4 -->
+<section style="background:white;" id="sec-4" class="bg-white">
+  <div class="sec-inner">
+    <span class="section-label">Section 4 · Guest Agreement</span>
+    <h2 class="section-title">Before you <em>leave</em></h2>
+    <div class="grid-3">
+      <div class="co-item" style="background:var(--sand);"><span>🍽️</span><div class="co-text"><strong>Dishes &amp; Kitchen</strong>Run the dishwasher or hand wash dishes. No garbage disposal — food waste goes in the trash.</div></div>
+      <div class="co-item" style="background:var(--sand);"><span>🧹</span><div class="co-text"><strong>Clear Fridge &amp; Pantry</strong>Remove all food from the refrigerator and pantry before checkout.</div></div>
+      <div class="co-item" style="background:var(--sand);"><span>🛏️</span><div class="co-text"><strong>Strip Beds &amp; Start Laundry</strong>Leave linens piled on each mattress and start a load of towels or sheets.</div></div>
+      <div class="co-item" style="background:var(--sand);"><span>🗑️</span><div class="co-text"><strong>Take Out the Trash</strong>Bag all trash, take it to the outdoor cans, and roll the cans to the road.</div></div>
+      <div class="co-item" style="background:var(--sand);"><span>🪟</span><div class="co-text"><strong>Close All Windows</strong>Make sure all windows are closed and latched.</div></div>
+      <div class="co-item" style="background:var(--sand);"><span>🔒</span><div class="co-text"><strong>Lock All Doors</strong>Including the apartment's separate entrance.</div></div>
+    </div>
+    <div class="initial-card">
+      <label class="initial-label" for="i4">Initial here to confirm you've read the <strong>Checkout list</strong></label>
+      <input type="text" class="initial-input" id="i4" name="initials_checkout" maxlength="4" autocomplete="off" placeholder="––" data-section="4">
+      <span class="initial-check" id="chk4">✓</span>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5 -->
+<section style="background:var(--sand);" id="sec-5">
+  <div class="sec-inner">
+    <span class="section-label">Section 5 · Guest Agreement</span>
+    <h2 class="section-title">Liability &amp; care of <em>the home</em></h2>
+    <div class="card" style="max-width:720px;">
+      <div class="term"><div class="term-dot"></div><span>I will treat LegaSea with care and am responsible for any damage beyond normal wear and tear caused by me or my guests during the stay.</span></div>
+      <div class="term"><div class="term-dot"></div><span>I will contact the owners promptly if anything is damaged or not working so it can be addressed.</span></div>
+      <div class="term"><div class="term-dot"></div><span>My party will not exceed the number of registered guests, and I understand the home is non-smoking and pet-free.</span></div>
+      <div class="term"><div class="term-dot"></div><span>I authorize the owners to charge my card on file for any damages or fees consistent with the rental terms, including the $500 pet fine.</span></div>
+    </div>
+    <div class="initial-card">
+      <label class="initial-label" for="i5">Initial here to confirm you've read <strong>Liability &amp; Care of the Home</strong></label>
+      <input type="text" class="initial-input" id="i5" name="initials_liability" maxlength="4" autocomplete="off" placeholder="––" data-section="5">
+      <span class="initial-check" id="chk5">✓</span>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 6: GOLF CART -->
+<section style="background:white;" id="sec-6" class="bg-white">
+  <div class="sec-inner">
+    <span class="section-label">Section 6 · Guest Agreement</span>
+    <h2 class="section-title">The golf <em>cart</em> 🛺</h2>
+    <p class="section-intro">An electric golf cart is included with your stay — one of the best ways to get to the beach and around the island. Here's everything drivers need to know.</p>
+
+    <div class="grid-2" style="margin-bottom:1.25rem;">
+      <div class="instr-card on-white">
+        <div class="cart-subhead">Operation &amp; Liability</div>
+        <div class="term"><div class="term-dot"></div><span>I will return the cart in the same condition as received (normal wear and tear accepted) and operate it safely and responsibly.</span></div>
+        <div class="term"><div class="term-dot"></div><span>I am legally and financially liable for all repair costs and any loss, damage, or injuries to my person, the cart, or the property and persons of others, regardless of fault — including deductibles and uninsured loss.</span></div>
+        <div class="term"><div class="term-dot"></div><span>I hold the owners harmless for any damages or claims arising from use of the cart.</span></div>
+        <div class="term"><div class="term-dot"></div><span>I will inspect the cart before driving, report concerns before use, and contact the owners immediately if damage occurs. If the cart becomes inoperable through no fault of mine, the owners will take reasonable steps to repair or replace it.</span></div>
+      </div>
+      <div class="instr-card on-white">
+        <div class="cart-subhead">Charging the Electric Cart</div>
+        <div class="term"><div class="term-dot"></div><span>The cart is <strong>electric</strong> with lead-acid batteries — plug it in when not in use. A full charge takes up to 8 hours. Keeping it charged is my responsibility; a <strong>$100 service fee</strong> applies if it becomes inoperable from inadequate charging.</span></div>
+        <div class="warning" style="margin-left:0;"><strong>Caution:</strong> The garage door must remain open while charging — lead-acid batteries produce hydrogen gas. Never charge in an enclosed space, and don't leave charging unattended.</div>
+        <div class="warning" style="margin-left:0;"><strong>Caution:</strong> Do not drive during a rainstorm or through standing water — this can cause a <strong>$200 water-damage fee</strong>.</div>
+      </div>
+      <div class="instr-card on-white" style="grid-column:1/-1;">
+        <div class="cart-subhead">Road Rules — NC &amp; Oak Island</div>
+        <div class="grid-2">
+          <div>
+            <div class="term"><div class="term-dot"></div><span>Golf cart laws are the same as motor vehicle laws in North Carolina. Follow all NC, Brunswick County, and Town of Oak Island rules.</span></div>
+            <div class="term"><div class="term-dot"></div><span>Roads posted at <strong>35 mph or below</strong> only. No crossing any bridge off the island, and no sidewalks, beach, sand, surf, or standing water.</span></div>
+            <div class="term"><div class="term-dot"></div><span>No more passengers than seat belts.</span></div>
+          </div>
+          <div>
+            <div class="term"><div class="term-dot"></div><span><strong>Never drive under the influence</strong> — no open containers, no smoking on the cart.</span></div>
+            <div class="term"><div class="term-dot"></div><span>At the beach front, park <strong>only in designated Town of Oak Island spaces</strong>. Tickets and violations are the guest's responsibility.</span></div>
+            <div class="term"><div class="term-dot"></div><span>The cart is registered as an Oak Island resident vehicle and may use resident parking spots.</span></div>
           </div>
         </div>
-        <div class="term"><div class="term-dot"></div><span><strong>No smoking</strong> anywhere inside the property.</span></div>
-        <div class="term"><div class="term-dot"></div><span><strong>No parties or events.</strong> Gatherings beyond your registered guests require prior arrangement with us.</span></div>
-        <div class="term"><div class="term-dot"></div><span><strong>Quiet hours after 10:00 PM</strong> — please be mindful of our neighbors.</span></div>
-        <div class="term"><div class="term-dot"></div><span><strong>Waste &amp; recycling:</strong> sort trash using the labeled bins. Roll the cans to the road by Monday night — pickup is Tuesday.</span></div>
-        <div class="initial-box">
-          <label class="initial-label" for="i3">Initial here to confirm you've read this section — <strong>including the no-pets policy</strong></label>
-          <input type="text" class="initial-input" id="i3" name="initials_rules" maxlength="4" autocomplete="off" placeholder="––" data-section="3">
-          <span class="initial-check" id="chk3">✓</span>
-        </div>
       </div>
+    </div>
 
-      <!-- 4 -->
-      <div class="section" id="sec-4">
-        <div class="section-num">Section 4</div>
-        <h2>Before You Leave — Checkout</h2>
-        <div class="term"><div class="term-dot"></div><span><strong>Dishes &amp; kitchen:</strong> run the dishwasher or hand wash dishes. There is no garbage disposal — all food waste goes in the trash.</span></div>
-        <div class="term"><div class="term-dot"></div><span><strong>Clear the fridge &amp; pantry</strong> of all food before checkout.</span></div>
-        <div class="term"><div class="term-dot"></div><span><strong>Strip the beds</strong> and leave linens piled on each mattress. Please start a load of towels or sheets before you go.</span></div>
-        <div class="term"><div class="term-dot"></div><span><strong>Take out the trash</strong> to the outdoor cans, and roll the cans to the road.</span></div>
-        <div class="term"><div class="term-dot"></div><span><strong>Close and latch all windows.</strong></span></div>
-        <div class="term"><div class="term-dot"></div><span><strong>Lock all doors</strong>, including the apartment's separate entrance.</span></div>
-        <div class="initial-box">
-          <label class="initial-label" for="i4">Initial here to confirm you've read this section</label>
-          <input type="text" class="initial-input" id="i4" name="initials_checkout" maxlength="4" autocomplete="off" placeholder="––" data-section="4">
-          <span class="initial-check" id="chk4">✓</span>
-        </div>
+    <div class="card-sand" style="max-width:720px;">
+      <div class="card-title" style="margin-bottom:0.5rem;">Will anyone in your group drive the cart?</div>
+      <div class="cart-choice" id="cart-choice">
+        <label id="cart-yes-label"><input type="radio" name="golf_cart" value="yes" id="cart-yes"> 🛺 Yes, we'll use the cart</label>
+        <label id="cart-no-label"><input type="radio" name="golf_cart" value="no" id="cart-no"> No thanks</label>
       </div>
+      <p class="cart-note" id="cart-skip-note" style="display:none;">No problem — if you change your mind during your stay, just come back to this page or text us at 704-616-7527.</p>
 
-      <!-- 5 -->
-      <div class="section" id="sec-5">
-        <div class="section-num">Section 5</div>
-        <h2>Liability &amp; Care of the Home</h2>
-        <div class="term"><div class="term-dot"></div><span>I will treat LegaSea with care and am responsible for any damage beyond normal wear and tear caused by me or my guests during the stay.</span></div>
-        <div class="term"><div class="term-dot"></div><span>I will contact the owners promptly if anything is damaged or not working so it can be addressed.</span></div>
-        <div class="term"><div class="term-dot"></div><span>My party will not exceed the number of registered guests, and I understand the home is non-smoking and pet-free.</span></div>
-        <div class="term"><div class="term-dot"></div><span>I authorize the owners to charge my card on file for any damages or fees consistent with the rental terms, including the $500 pet fine.</span></div>
-        <div class="initial-box">
-          <label class="initial-label" for="i5">Initial here to confirm you've read this section</label>
-          <input type="text" class="initial-input" id="i5" name="initials_liability" maxlength="4" autocomplete="off" placeholder="––" data-section="5">
-          <span class="initial-check" id="chk5">✓</span>
-        </div>
-      </div>
-
-      <!-- 6: GOLF CART (optional) -->
-      <div class="section" id="sec-6">
-        <div class="section-num">Section 6 · Optional</div>
-        <h2>Golf Cart</h2>
-        <p style="font-size:0.88rem;line-height:1.6;color:#4a5c60;margin-bottom:0.9rem;">An electric golf cart is included with your stay. Will anyone in your group drive it?</p>
-        <div class="cart-choice" id="cart-choice">
-          <label id="cart-yes-label"><input type="radio" name="golf_cart" value="yes" id="cart-yes"> 🛺 Yes, we'll use the cart</label>
-          <label id="cart-no-label"><input type="radio" name="golf_cart" value="no" id="cart-no"> No thanks</label>
-        </div>
-        <p class="cart-note" id="cart-skip-note" style="display:none;">No problem — if you change your mind during your stay, just come back to this page or text us.</p>
-
-        <div id="cart-terms">
-          <div class="cart-subhead">Operation &amp; Liability</div>
-          <div class="term"><div class="term-dot"></div><span>I will return the golf cart in the same condition as received, normal wear and tear accepted, and will operate it safely and responsibly.</span></div>
-          <div class="term"><div class="term-dot"></div><span>I agree to be legally and financially liable for all costs of repairs and any loss, damage, or injuries to my person, the cart, or the property and persons of others, regardless of fault — and to reimburse the owners for unrecovered costs, including deductibles and uninsured loss.</span></div>
-          <div class="term"><div class="term-dot"></div><span>I agree to hold harmless the owners for any and all damages and claims arising from use of the golf cart.</span></div>
-          <div class="term"><div class="term-dot"></div><span>I will contact the owners immediately if I or any guest cause damage to the cart or others, and will inspect the cart before driving and report any concerns prior to use. If the cart becomes inoperable through no fault of mine, the owners will take reasonable steps to repair or replace it.</span></div>
-
-          <div class="cart-subhead">Charging the Electric Cart</div>
-          <div class="term"><div class="term-dot"></div><span>The cart is <strong>electric</strong> with lead-acid batteries. I will plug it in to charge when not in use — a full charge takes up to 8 hours. Keeping it charged is my responsibility; a <strong>$100 service fee</strong> applies if it becomes inoperable due to inadequate charging.</span></div>
-          <div class="warning"><strong>Caution:</strong> The garage door must remain open while charging — lead-acid batteries produce hydrogen gas, and charging in an enclosed space is a fire and health hazard. Do not leave charging unattended.</div>
-          <div class="warning"><strong>Caution:</strong> Do not operate the cart during a rainstorm or through standing water. Doing so is an operating error and may result in a <strong>$200 fee</strong> for water damage.</div>
-
-          <div class="cart-subhead">Road Rules (NC &amp; Oak Island)</div>
-          <div class="term"><div class="term-dot"></div><span>Golf cart driving laws are the same as motor vehicle laws in North Carolina. I will follow all laws of NC, Brunswick County, and the Town of Oak Island.</span></div>
-          <div class="term"><div class="term-dot"></div><span>The cart may only be driven on roads posted at <strong>35 mph or below</strong>. It is <strong>not permitted</strong> to cross any bridge leaving Oak Island, and is not permitted on sidewalks, the beach, in sand or surf, or through standing water.</span></div>
-          <div class="term"><div class="term-dot"></div><span><strong>No driving under the influence</strong> of alcohol or drugs, and no open containers of alcohol on the cart. No smoking on the cart.</span></div>
-          <div class="term"><div class="term-dot"></div><span>At the beach front, the cart may <strong>only park in designated Town of Oak Island parking spaces</strong>. I am responsible for all moving and parking violations while the cart is in my possession.</span></div>
-          <div class="term"><div class="term-dot"></div><span>The cart will not carry more passengers than the number of seat belts available.</span></div>
-
-          <div class="cart-subhead">Authorized Drivers</div>
-          <div class="term"><div class="term-dot"></div><span>All drivers must be <strong>21 or older</strong> with a valid driver&#8217;s license. Enter each driver below.</span></div>
-          <div id="driver-list">
-            <div class="driver-entry" id="driver-0">
-              <div class="driver-entry-header">Driver 1</div>
-              <button type="button" class="remove-driver-btn" style="display:none" aria-label="Remove driver">&#10005;</button>
-              <div class="driver-row">
-                <div class="driver-name-wrap">
-                  <label class="field-label" for="driver-name-0">Full Name</label>
-                  <input type="text" id="driver-name-0" name="driver_0_name" placeholder="Driver's full name" autocomplete="off">
-                </div>
-                <div class="driver-dl-wrap">
-                  <label class="field-label" for="driver-dl-0">DL Number</label>
-                  <input type="text" id="driver-dl-0" name="driver_0_dl" placeholder="License number" autocomplete="off">
-                </div>
-                <div class="driver-state-wrap">
-                  <label class="field-label" for="driver-state-0">State</label>
-                  <input type="text" id="driver-state-0" name="driver_0_state" placeholder="NC" maxlength="2" autocomplete="off" style="text-transform:uppercase">
-                </div>
+      <div id="cart-required-block">
+        <div class="cart-subhead">Authorized Drivers — 21+ with a valid license</div>
+        <div id="driver-list">
+          <div class="driver-entry" id="driver-0">
+            <div class="driver-entry-header">Driver 1</div>
+            <button type="button" class="remove-driver-btn" style="display:none" aria-label="Remove driver">&#10005;</button>
+            <div class="driver-row">
+              <div class="driver-name-wrap">
+                <label class="field-label" for="driver-name-0">Full Name</label>
+                <input type="text" id="driver-name-0" name="driver_0_name" placeholder="Driver's full name" autocomplete="off">
               </div>
-              <div class="driver-dob-row">
-                <div class="driver-dob-wrap">
-                  <label class="field-label" for="driver-dob-0">Date of Birth</label>
-                  <input type="date" id="driver-dob-0" name="driver_0_dob" class="driver-dob">
-                </div>
-                <span class="dob-error" id="dob-error-0">Must be 21 or older to operate the cart.</span>
+              <div class="driver-dl-wrap">
+                <label class="field-label" for="driver-dl-0">DL Number</label>
+                <input type="text" id="driver-dl-0" name="driver_0_dl" placeholder="License number" autocomplete="off">
+              </div>
+              <div class="driver-state-wrap">
+                <label class="field-label" for="driver-state-0">State</label>
+                <input type="text" id="driver-state-0" name="driver_0_state" placeholder="NC" maxlength="2" autocomplete="off" style="text-transform:uppercase">
               </div>
             </div>
+            <div class="driver-dob-row">
+              <div class="driver-dob-wrap">
+                <label class="field-label" for="driver-dob-0">Date of Birth</label>
+                <input type="date" id="driver-dob-0" name="driver_0_dob" class="driver-dob">
+              </div>
+              <span class="dob-error" id="dob-error-0">Must be 21 or older to operate the cart.</span>
+            </div>
           </div>
-          <button type="button" id="add-driver-btn" class="add-driver-btn">+ Add Another Driver</button>
-          <div class="section-agree">
-            <input type="checkbox" id="agree-dl" name="agreed-dl" value="yes">
-            <label for="agree-dl">All listed drivers are 21 or older and hold a valid driver&#8217;s license.</label>
-          </div>
-
-          <div class="initial-box">
-            <label class="initial-label" for="i6">Initial here to accept the Golf Cart terms above</label>
-            <input type="text" class="initial-input" id="i6" name="initials_golfcart" maxlength="4" autocomplete="off" placeholder="––" data-section="6">
-            <span class="initial-check" id="chk6">✓</span>
-          </div>
+        </div>
+        <button type="button" id="add-driver-btn" class="add-driver-btn">+ Add Another Driver</button>
+        <div class="section-agree">
+          <input type="checkbox" id="agree-dl" name="agreed-dl" value="yes">
+          <label for="agree-dl">All listed drivers are 21 or older and hold a valid driver&#8217;s license.</label>
+        </div>
+        <div class="initial-card" style="background:white;">
+          <label class="initial-label" for="i6">Initial here to accept the <strong>Golf Cart terms</strong></label>
+          <input type="text" class="initial-input" id="i6" name="initials_golfcart" maxlength="4" autocomplete="off" placeholder="––" data-section="6">
+          <span class="initial-check" id="chk6">✓</span>
         </div>
       </div>
+    </div>
+  </div>
+</section>
 
-      <!-- SIGN -->
-      <div class="sign-card">
-        <h2>Sign &amp; Submit</h2>
-        <div class="field">
-          <label for="full-name">Full Name</label>
-          <input type="text" id="full-name" name="guest_name" placeholder="Your full name" autocomplete="name">
-        </div>
-        <div class="field">
-          <label for="email">Email Address</label>
-          <input type="email" id="email" name="email" placeholder="your@email.com" autocomplete="email">
-        </div>
-        <div class="field">
-          <label for="sign-date">Date</label>
-          <input type="date" id="sign-date" name="date">
-        </div>
-        <label class="agree-box" for="agree">
-          <input type="checkbox" id="agree" name="agreed" value="yes">
-          <span>I have read and agree to all sections of the LegaSea Guest Agreement above.</span>
-        </label>
-        <div id="validation-msg"></div>
-        <button type="submit" id="submit-btn">Sign &amp; Get My Arrival Details</button>
+<!-- SIGN -->
+<section style="background:var(--sand);" id="sign">
+  <div class="sec-inner" style="max-width:720px;">
+    <div style="text-align:center;margin-bottom:2rem;">
+      <span class="section-label">Almost there</span>
+      <h2 class="section-title" style="margin-bottom:0;">Sign &amp; unlock your <em>arrival details</em></h2>
+    </div>
+    <div class="sign-card">
+      <h3>Sign &amp; Submit</h3>
+      <div class="field">
+        <label for="full-name">Full Name</label>
+        <input type="text" id="full-name" name="guest_name" placeholder="Your full name" autocomplete="name">
       </div>
-    </form>
-  </div>
-
-  <!-- THANK YOU -->
-  <div class="thank-you" id="thank-you">
-    <div class="icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      <div class="field">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="your@email.com" autocomplete="email">
+      </div>
+      <div class="field">
+        <label for="sign-date">Date</label>
+        <input type="date" id="sign-date" name="date">
+      </div>
+      <label class="agree-box" for="agree">
+        <input type="checkbox" id="agree" name="agreed" value="yes">
+        <span>I have read and agree to all sections of the LegaSea Guest Agreement above.</span>
+      </label>
+      <div id="validation-msg"></div>
+      <button type="submit" id="submit-btn">Sign &amp; Get My Arrival Details</button>
     </div>
-    <h2 id="ty-heading">You're all set!</h2>
-    <p>Thanks for reviewing everything — we can't wait to have you. Here's what you need to get settled in:</p>
-    <div class="essentials">
-      <h3>🔑 House Essentials</h3>
-      <div class="ess-row"><div class="ess-label">WiFi Network</div><div class="ess-val">LegaseaWIFI</div></div>
-      <div class="ess-row"><div class="ess-label">WiFi Password</div><div class="ess-val">LiveOak79#</div></div>
-      <div class="ess-row"><div class="ess-label">Check-In / Check-Out</div><div class="ess-val">4:00 PM &nbsp;/&nbsp; 10:00 AM</div></div>
-      <div class="ess-note">Your lockbox &amp; garage code are the same and are sent by text about 48 hours before arrival. Need anything? Call or text <a href="tel:7046167527">704-616-7527</a>.</div>
-    </div>
-    <p class="footer-note" id="ty-email-note">A copy of these details has been emailed to you.</p>
   </div>
+</section>
+</form>
 
-  <p class="footer-note">LegaSea &nbsp;·&nbsp; Oak Island, NC &nbsp;·&nbsp; 704-616-7527</p>
+<!-- EXPLORE TEASER -->
+<section style="background:var(--deep);color:white;">
+  <div class="sec-inner">
+    <span class="section-label" style="color:var(--foam);">While you're here</span>
+    <h2 class="section-title" style="color:white;">Make it a great <em style="color:var(--foam);">week</em></h2>
+    <div class="grid-3" style="margin-top:1.5rem;">
+      <div class="attraction-card"><div class="attraction-dist">On the Island</div><div class="attraction-name">Oak Island Pier</div><div class="attraction-desc">Fishing, sightseeing, and gorgeous sunsets from an 880-foot pier — no fishing license required.</div></div>
+      <div class="attraction-card"><div class="attraction-dist">5 min drive</div><div class="attraction-name">Downtown Southport</div><div class="attraction-desc">One of USA Today's "Best Coastal Small Towns" — shops, galleries, and waterfront dining.</div></div>
+      <div class="attraction-card"><div class="attraction-dist">Oak Island · Dessert</div><div class="attraction-name">Lil &amp; John's Sweetreat</div><div class="attraction-desc">The island's beloved ice cream stop — a post-beach ritual for our guests (and us).</div></div>
+    </div>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem;">
+      <a href="/#attractions" class="btn-primary">See all our favorite spots →</a>
+      <a href="https://www.vrbo.com/1548439?dateless=true" target="_blank" class="btn-outline-light">Check availability on VRBO</a>
+    </div>
+  </div>
+</section>
+
+</div><!-- /form-area -->
+
+<!-- THANK YOU -->
+<div class="thank-you" id="thank-you">
+  <div class="icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+  </div>
+  <h2 id="ty-heading">You're all set!</h2>
+  <p>Thanks for reviewing everything — we can't wait to have you. Here's what you need to get settled in:</p>
+  <div class="essentials">
+    <h3>🔑 House Essentials</h3>
+    <div class="ess-row"><div class="ess-label">WiFi Network</div><div class="ess-val">LegaseaWIFI</div></div>
+    <div class="ess-row"><div class="ess-label">WiFi Password</div><div class="ess-val">LiveOak79#</div></div>
+    <div class="ess-row"><div class="ess-label">Check-In / Check-Out</div><div class="ess-val">4:00 PM &nbsp;/&nbsp; 10:00 AM</div></div>
+    <div class="ess-note">Your lockbox &amp; garage code are the same and are sent by text about 48 hours before arrival. Need anything? Call or text <a href="tel:7046167527">704-616-7527</a>.</div>
+  </div>
+  <p class="footer-note" id="ty-email-note">A copy of these details has been emailed to you.</p>
+  <p style="margin-top:1.75rem;"><a href="/#attractions" class="btn-primary">Explore our favorite local spots →</a></p>
 </div>
+
+<footer>
+  <div>
+    <div class="footer-brand">LegaSea</div>
+    <div class="footer-copy">© 2025 LegaSea · Oak Island, NC · 704-616-7527</div>
+  </div>
+  <div class="footer-links">
+    <a href="/">The House</a>
+    <a href="/#rules">House Rules</a>
+    <a href="/#attractions">Explore</a>
+    <a href="/#booking">Book a Stay</a>
+  </div>
+</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
@@ -419,7 +598,7 @@ button[type="submit"]:disabled { background: #9db5ba; cursor: not-allowed; trans
   const agreeCheck = document.getElementById('agree');
   const cartYes = document.getElementById('cart-yes');
   const cartNo = document.getElementById('cart-no');
-  const cartTerms = document.getElementById('cart-terms');
+  const cartBlock = document.getElementById('cart-required-block');
   const baseInitials = ['i1','i2','i3','i4','i5'].map(id => document.getElementById(id));
   const cartInitial = document.getElementById('i6');
 
@@ -446,7 +625,6 @@ button[type="submit"]:disabled { background: #9db5ba; cursor: not-allowed; trans
   function updateProgress() {
     const inputs = activeInitials();
     let done = 0;
-    // update tick marks on all initials inputs (incl. inactive cart one)
     baseInitials.concat([cartInitial]).forEach(inp => {
       const chk = document.getElementById('chk' + inp.dataset.section);
       if (initialValid(inp.value)) { inp.classList.add('done'); if (chk) chk.classList.add('show'); }
@@ -465,7 +643,7 @@ button[type="submit"]:disabled { background: #9db5ba; cursor: not-allowed; trans
   function refreshCartChoice() {
     document.getElementById('cart-yes-label').classList.toggle('selected', cartYes.checked);
     document.getElementById('cart-no-label').classList.toggle('selected', cartNo.checked);
-    cartTerms.classList.toggle('open', cartYes.checked);
+    cartBlock.classList.toggle('open', cartYes.checked);
     document.getElementById('cart-skip-note').style.display = cartNo.checked ? 'block' : 'none';
     updateProgress();
   }
@@ -540,10 +718,9 @@ button[type="submit"]:disabled { background: #9db5ba; cursor: not-allowed; trans
     el.addEventListener('input', clearErrors);
     el.addEventListener('change', clearErrors);
   });
-  // dynamic driver inputs also need clearing
   document.getElementById('driver-list').addEventListener('input', clearErrors);
 
-  const sectionNames = ['Arrival & Departure', 'House Care', 'House Rules', 'Checkout', 'Liability'];
+  const sectionNames = ['Arrival & Departure', 'Caring for the House', 'House Rules', 'Checkout', 'Liability'];
 
   function validate() {
     const errors = [];
