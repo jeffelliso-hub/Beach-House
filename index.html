@@ -115,6 +115,10 @@ section { padding: 4rem 2rem; }
 .attraction-dist { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--foam); margin-bottom: 0.5rem; }
 .attraction-name { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 400; color: white; margin-bottom: 0.4rem; }
 .attraction-desc { font-size: 0.8rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
+.attraction-link { display: inline-block; margin-top: 0.75rem; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--foam); text-decoration: none; }
+.attraction-link:hover { color: white; }
+.food-strip-title { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; color: white; margin: 3rem 0 0.4rem; }
+.food-strip-sub { font-size: 0.85rem; color: rgba(255,255,255,0.55); margin-bottom: 1.5rem; }
 
 /* RULE ITEMS */
 .rule-item { display: flex; align-items: flex-start; gap: 0.9rem; padding: 1rem 1.1rem; background: var(--sand); border-radius: 0.75rem; }
@@ -198,7 +202,6 @@ footer { flex-direction: column; text-align: center; }
   <a onclick="navScrollTo('amenities');closeMenu()">Amenities</a>
   <a onclick="navScrollTo('attractions');closeMenu()">Explore</a>
   <a href="/guest-agreement.html">Guest Agreement</a>
-  <a href="/golf-cart-agreement.html">Golf Cart Agreement</a>
   <a onclick="navScrollTo('booking');closeMenu()">Book Now</a>
 </div>
 
@@ -216,7 +219,11 @@ footer { flex-direction: column; text-align: center; }
     <span class="hero-tag">📍 Oak Island, North Carolina</span>
     <h1 class="hero-title">Family fun on<br><em>Oak Island</em></h1>
     <p class="hero-sub">A beach house made for memories — where kids can play in the waves, families explore the island, and every day ends with a perfect sunset.</p>
-    <a href="https://www.vrbo.com/1548439?dateless=true" target="_blank" class="btn-ghost">View on VRBO →</a>
+    <div style="display:flex;align-items:center;gap:1.35rem;flex-wrap:wrap;">
+      <a href="/guest-agreement.html" class="btn-primary">✍️ Sign the Guest Agreement</a>
+      <a href="https://www.vrbo.com/1548439?dateless=true" target="_blank" class="btn-ghost">View on VRBO →</a>
+    </div>
+    <p style="font-size:0.75rem;color:#7a8e92;margin-top:0.7rem;">Booked with us? The agreement takes ~3 minutes and unlocks your WiFi &amp; arrival details.</p>
     <div class="hero-stats">
       <div><div class="stat-num">4</div><div class="stat-label">Bedrooms</div></div>
       <div><div class="stat-num">3</div><div class="stat-label">Bathrooms</div></div>
@@ -268,7 +275,7 @@ footer { flex-direction: column; text-align: center; }
       </div>
       <div class="instr-card">
         <div class="instr-title"><span style="font-size:1.2rem;">🛺</span><strong>Golf Cart</strong></div>
-        <p>Provided for beach trips only — <strong style="color:var(--deep);">not for general island transportation.</strong> Only licensed drivers 25+ may operate it. Ensure it's fully charged before heading out (green light = full). If the gauge reads 42, return home immediately.</p>
+        <p>An electric golf cart is included with your stay! Drivers must be listed in the <a href="/guest-agreement.html" style="color:var(--ocean);font-weight:500;">Guest Agreement</a> (Section 6) before use. Ensure it's fully charged before heading out (green light = full). If the gauge reads 42, return home immediately.</p>
         <p><strong style="color:var(--deep);">Do not leave charging unattended.</strong> The cart is registered as an Oak Island resident vehicle and can use resident parking spots. Any evidence of DUI results in forfeiture of your security deposit.</p>
       </div>
       <div class="instr-card">
@@ -306,9 +313,15 @@ footer { flex-direction: column; text-align: center; }
 <section style="background:white;" id="rules">
   <span class="section-label">House Rules</span>
   <h2 class="section-title">A few simple <em>guidelines</em></h2>
-  <div class="grid-2" style="margin-top:1.5rem;">
+  <div style="display:flex;gap:0.9rem;align-items:flex-start;background:#fbe9e2;border:1.5px solid var(--coral);border-radius:0.9rem;padding:1.1rem 1.25rem;margin-top:1.5rem;">
+    <span style="font-size:1.5rem;line-height:1;">🐾</span>
+    <div style="font-size:0.9rem;line-height:1.55;color:#7c3a26;">
+      <strong style="display:block;font-size:1rem;color:#b3492f;margin-bottom:0.2rem;">Absolutely no dogs or other pets — $500 fine</strong>
+      LegaSea is a strictly pet-free home for the sake of guests with allergies. Any evidence of a pet results in a $500 fine plus the cost of additional cleaning or repairs.
+    </div>
+  </div>
+  <div class="grid-2" style="margin-top:1rem;">
     <div class="rule-item"><span style="font-size:1.1rem;">🚭</span><div class="rule-text"><strong>No Smoking</strong>Not permitted anywhere inside the property.</div></div>
-    <div class="rule-item"><span style="font-size:1.1rem;">🐾</span><div class="rule-text"><strong>No Pets</strong>Pets are not permitted on the property.</div></div>
     <div class="rule-item"><span style="font-size:1.1rem;">🎉</span><div class="rule-text"><strong>No Parties or Events</strong>Gatherings beyond registered guests require prior arrangement.</div></div>
     <div class="rule-item"><span style="font-size:1.1rem;">🔇</span><div class="rule-text"><strong>Quiet Hours</strong>Please be mindful of neighbors after 10:00 PM.</div></div>
     <div class="rule-item"><span style="font-size:1.1rem;">🔑</span><div class="rule-text"><strong>Check-In & Check-Out</strong>Self-check-in via lockbox. Please vacate by check-out time.</div></div>
@@ -368,12 +381,23 @@ footer { flex-direction: column; text-align: center; }
   <span class="section-label" style="color:var(--foam);">Local Attractions</span>
   <h2 class="section-title" style="color:white;">Explore the <em>neighborhood</em></h2>
   <div class="grid-3" style="margin-top:2rem;">
-    <div class="attraction-card"><div class="attraction-dist">On the Island</div><div class="attraction-name">Oak Island Pier</div><div class="attraction-desc">An 880-foot pier for fishing, sightseeing, and gorgeous sunsets. Bait, tackle, rentals — no fishing license required.</div></div>
-    <div class="attraction-card"><div class="attraction-dist">On the Island</div><div class="attraction-name">Oak Island Lighthouse</div><div class="attraction-desc">The last lighthouse built in NC (1958). Climb 131 steps for panoramic views. Reservations required.</div></div>
-    <div class="attraction-card"><div class="attraction-dist">On the Island</div><div class="attraction-name">Oak Island Nature Center</div><div class="attraction-desc">Tree trail, butterfly garden, floating dock, and wildlife programs on the Intracoastal Waterway.</div></div>
-    <div class="attraction-card"><div class="attraction-dist">5 min drive</div><div class="attraction-name">Downtown Southport</div><div class="attraction-desc">One of USA Today's "Best Coastal Small Towns." Shops, galleries, history museums, and waterfront dining.</div></div>
-    <div class="attraction-card"><div class="attraction-dist">10 min drive</div><div class="attraction-name">Bald Head Island Ferry</div><div class="attraction-desc">Car-free island with golf cart exploration, an 1816 lighthouse, and some of the East Coast's most unspoiled beaches.</div></div>
-    <div class="attraction-card"><div class="attraction-dist">30 min drive</div><div class="attraction-name">NC Aquarium at Fort Fisher</div><div class="attraction-desc">Sharks, sea turtles, river otters, and coastal exhibits — a fantastic family outing near Kure Beach.</div></div>
+    <div class="attraction-card"><div class="attraction-dist">On the Island</div><div class="attraction-name">Oak Island Pier</div><div class="attraction-desc">An 880-foot pier for fishing, sightseeing, and gorgeous sunsets. Bait, tackle, rentals — no fishing license required.</div><a class="attraction-link" href="https://www.google.com/maps/search/?api=1&query=Oak+Island+Pier+Oak+Island+NC" target="_blank" rel="noopener">Open in Maps →</a></div>
+    <div class="attraction-card"><div class="attraction-dist">On the Island</div><div class="attraction-name">Oak Island Lighthouse</div><div class="attraction-desc">The last lighthouse built in NC (1958). Climb 131 steps for panoramic views. Reservations required.</div><a class="attraction-link" href="https://www.google.com/maps/search/?api=1&query=Oak+Island+Lighthouse+Caswell+Beach+NC" target="_blank" rel="noopener">Open in Maps →</a></div>
+    <div class="attraction-card"><div class="attraction-dist">On the Island</div><div class="attraction-name">Oak Island Nature Center</div><div class="attraction-desc">Tree trail, butterfly garden, floating dock, and wildlife programs on the Intracoastal Waterway.</div><a class="attraction-link" href="https://www.google.com/maps/search/?api=1&query=Oak+Island+Nature+Center+NC" target="_blank" rel="noopener">Open in Maps →</a></div>
+    <div class="attraction-card"><div class="attraction-dist">5 min drive</div><div class="attraction-name">Downtown Southport</div><div class="attraction-desc">One of USA Today's "Best Coastal Small Towns." Shops, galleries, history museums, and waterfront dining.</div><a class="attraction-link" href="https://www.google.com/maps/search/?api=1&query=Downtown+Southport+NC" target="_blank" rel="noopener">Open in Maps →</a></div>
+    <div class="attraction-card"><div class="attraction-dist">10 min drive</div><div class="attraction-name">Bald Head Island Ferry</div><div class="attraction-desc">Car-free island with golf cart exploration, an 1816 lighthouse, and some of the East Coast's most unspoiled beaches.</div><a class="attraction-link" href="https://www.google.com/maps/search/?api=1&query=Bald+Head+Island+Ferry+Deep+Point+Marina+Southport+NC" target="_blank" rel="noopener">Open in Maps →</a></div>
+    <div class="attraction-card"><div class="attraction-dist">30 min drive</div><div class="attraction-name">NC Aquarium at Fort Fisher</div><div class="attraction-desc">Sharks, sea turtles, river otters, and coastal exhibits — a fantastic family outing near Kure Beach.</div><a class="attraction-link" href="https://www.google.com/maps/search/?api=1&query=NC+Aquarium+at+Fort+Fisher+Kure+Beach+NC" target="_blank" rel="noopener">Open in Maps →</a></div>
+  </div>
+
+  <div class="food-strip-title">Where we love to <em style="color:var(--foam);">eat &amp; treat</em></div>
+  <div class="food-strip-sub">Our family's go-to spots — ask us for more anytime.</div>
+  <div class="grid-3">
+    <div class="attraction-card"><div class="attraction-dist">Southport · Waterfront</div><div class="attraction-name">Provision Company</div><div class="attraction-desc">Order at the counter, grab a picnic table over the water. Shrimp, crab cakes, and cold drinks — a Southport institution.</div><a class="attraction-link" href="https://www.google.com/maps/search/?api=1&query=Provision+Company+Southport+NC" target="_blank" rel="noopener">Open in Maps →</a></div>
+    <div class="attraction-card"><div class="attraction-dist">Southport · Dockside</div><div class="attraction-name">Fishy Fishy Café</div><div class="attraction-desc">Fresh local seafood with a view of the yacht basin. Great for a relaxed family dinner watching the boats.</div><a class="attraction-link" href="https://www.google.com/maps/search/?api=1&query=Fishy+Fishy+Cafe+Southport+NC" target="_blank" rel="noopener">Open in Maps →</a></div>
+    <div class="attraction-card"><div class="attraction-dist">Oak Island · Dinner</div><div class="attraction-name">Island Way</div><div class="attraction-desc">The island's date-night spot — steaks and seafood near the Intracoastal. Worth dressing up (a little) for.</div><a class="attraction-link" href="https://www.google.com/maps/search/?api=1&query=Island+Way+Restaurant+Oak+Island+NC" target="_blank" rel="noopener">Open in Maps →</a></div>
+    <div class="attraction-card"><div class="attraction-dist">Oak Island · Oceanfront</div><div class="attraction-name">Koko Cabana</div><div class="attraction-desc">Casual oceanfront food and drinks, often with live music — an easy golf cart ride away.</div><a class="attraction-link" href="https://www.google.com/maps/search/?api=1&query=Koko+Cabana+Oak+Island+NC" target="_blank" rel="noopener">Open in Maps →</a></div>
+    <div class="attraction-card"><div class="attraction-dist">Oak Island · Dessert</div><div class="attraction-name">Lil &amp; John's Sweetreat</div><div class="attraction-desc">The island's beloved ice cream stop. A post-beach ritual — expect a line on summer nights, and it moves fast.</div><a class="attraction-link" href="https://www.google.com/maps/search/?api=1&query=Lil+and+John's+Sweetreat+Oak+Island+NC" target="_blank" rel="noopener">Open in Maps →</a></div>
+    <div class="attraction-card"><div class="attraction-dist">Oak Island · Breakfast</div><div class="attraction-name">Old Bridge Diner</div><div class="attraction-desc">Hearty diner breakfast before a beach day — pancakes, omelets, and quick, friendly service.</div><a class="attraction-link" href="https://www.google.com/maps/search/?api=1&query=Old+Bridge+Diner+Oak+Island+NC" target="_blank" rel="noopener">Open in Maps →</a></div>
   </div>
 </section>
 
@@ -412,7 +436,6 @@ footer { flex-direction: column; text-align: center; }
     <a onclick="navScrollTo('amenities')">Amenities</a>
     <a onclick="navScrollTo('attractions')">Explore</a>
     <a href="/guest-agreement.html">Guest Agreement</a>
-    <a href="/golf-cart-agreement.html">Golf Cart Agreement</a>
     <a onclick="navScrollTo('booking')">Contact</a>
   </div>
 </footer>
