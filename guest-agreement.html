@@ -818,8 +818,7 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
       await emailjs.send('service_67blfcs', 'template_swlvg2o', {
         to_name: name, to_email: emailVal, date_signed: dateInput.value,
         wifi_network: 'LegaseaWIFI', wifi_password: 'LiveOak79#', phone: '704-616-7527',
-        golf_cart: usingCart() ? 'Yes' : 'No',
-        drivers: usingCart() ? driverSummary : ''   // empty hides the golf-cart block ({{#if drivers}})
+        golf_cart: usingCart() ? 'Yes' : 'No'
       });
       emailed = true;
     } catch (err) { console.warn('EmailJS (guest agreement) not sent:', err); }
