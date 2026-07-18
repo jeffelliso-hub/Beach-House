@@ -42,7 +42,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--light); color: var(
 
 /* BUTTON DECK */
 .deck { max-width: 880px; margin: -2.25rem auto 0; padding: 0 1.25rem 1rem; position: relative; z-index: 3; }
-.deck-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.deck-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 .deck-btn.wide { grid-column: 1 / -1; }
 @media (max-width: 780px) { .deck-grid { grid-template-columns: 1fr; } }
 .deck-btn {
@@ -125,6 +125,14 @@ footer { background: var(--deep); color: white; padding: 2rem 1.75rem; display: 
         <span class="hint">Tour the house</span>
       </div>
     </a>
+    <a class="deck-btn" href="/availability.html">
+      <div class="deck-ico" style="background:#e4f0e8;">📅</div>
+      <div class="deck-body">
+        <h2>Availability <span class="arrow">→</span></h2>
+        <p>See open weeks for the next 13 months, straight from our booking calendar — then book on VRBO or reach out directly.</p>
+        <span class="hint">Updated from VRBO</span>
+      </div>
+    </a>
     <a class="deck-btn" href="/explore.html">
       <div class="deck-ico" style="background:var(--sand);">🏝️</div>
       <div class="deck-body">
@@ -163,6 +171,7 @@ footer { background: var(--deep); color: white; padding: 2rem 1.75rem; display: 
   <div class="footer-links">
     <a href="/guest-agreement.html">Guest Agreement</a>
     <a href="/our-home.html">Our Home</a>
+    <a href="/availability.html">Availability</a>
     <a href="/explore.html">Explore</a>
     <a href="/beach-day.html">Beach Day</a>
     <a href="#contact">Contact</a>

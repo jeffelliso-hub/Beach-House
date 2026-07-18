@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Availability — LegaSea · Oak Island, NC</title>
+<meta name="description" content="Live availability calendar for LegaSea on Oak Island, NC — see open weeks for the next 13 months, then book on VRBO or reach out directly.">
+<meta property="og:title" content="Availability — LegaSea">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%8A%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --sand: #f5efe6; --dune: #e8d9c5; --ocean: #2c6b7a; --deep: #1a3f4a;
+  --foam: #c9e8ee; --coral: #d4705a; --text: #1e2a2d; --light: #f9f5f0;
+  --nav-h: 56px;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--light); color: var(--text); overflow-x: clip; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: var(--nav-h);
+  display: flex; justify-content: space-between; align-items: center; padding: 0 1.75rem;
+  background: rgba(249,245,240,0.95); backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(44,107,122,0.1);
+}
+.nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; color: var(--ocean); text-decoration: none; }
+.nav-links { display: flex; gap: 1.15rem; list-style: none; align-items: center; }
+.nav-links a { font-size: 0.73rem; font-weight: 500; letter-spacing: 0.09em; text-transform: uppercase; color: var(--deep); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: var(--ocean); }
+.nav-cta { background: var(--ocean); color: white !important; padding: 0.45rem 1.1rem; border-radius: 2rem; }
+
+/* HEADER */
+header { padding: calc(var(--nav-h) + 2.5rem) 1.5rem 1.75rem; background: var(--sand); }
+.head-inner { max-width: 1020px; margin: 0 auto; }
+.head-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--coral); display: block; margin-bottom: 0.5rem; }
+header h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem,4.5vw,3rem); font-weight: 300; color: var(--deep); line-height: 1.05; }
+header h1 em { font-style: italic; color: var(--ocean); }
+.head-sub { font-size: 0.9rem; color: #4a5c60; margin-top: 0.6rem; line-height: 1.6; max-width: 560px; }
+.legend { display: flex; gap: 1.25rem; flex-wrap: wrap; margin-top: 1.1rem; font-size: 0.78rem; color: #4a5c60; }
+.legend span { display: inline-flex; align-items: center; gap: 0.4rem; }
+.dotk { width: 14px; height: 14px; border-radius: 4px; display: inline-block; }
+.dot-open { background: white; border: 1.5px solid var(--dune); }
+.dot-booked { background: var(--coral); opacity: 0.85; }
+.dot-past { background: var(--dune); opacity: 0.55; }
+#updated { font-size: 0.72rem; color: #9aabaf; margin-top: 0.5rem; }
+
+/* CALENDAR */
+.wrap { max-width: 1020px; margin: 0 auto; padding: 1.75rem 1.25rem 3rem; }
+#cal-error {
+  display: none; background: var(--foam); border: 1.5px solid #b3dde6; border-radius: 1rem;
+  padding: 1.25rem 1.4rem; font-size: 0.92rem; line-height: 1.65; color: var(--deep); margin-bottom: 1.5rem;
+}
+#cal-error a { color: var(--ocean); font-weight: 500; }
+.months { display: grid; grid-template-columns: repeat(auto-fill, minmax(272px, 1fr)); gap: 1rem; }
+.month { background: white; border-radius: 1rem; padding: 1rem 1.05rem 1.1rem; box-shadow: 0 5px 16px rgba(26,63,74,0.06); }
+.month h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; color: var(--deep); margin-bottom: 0.6rem; text-align: center; }
+.dow, .days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
+.dow div { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.05em; color: #9aabaf; text-align: center; text-transform: uppercase; padding-bottom: 0.3rem; }
+.day {
+  aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+  font-size: 0.78rem; border-radius: 6px; background: white; border: 1px solid var(--sand);
+  color: var(--text);
+}
+.day.empty { background: transparent; border: none; }
+.day.past { background: var(--sand); border-color: var(--sand); color: #b9c4c7; }
+.day.booked { background: var(--coral); border-color: var(--coral); color: white; opacity: 0.88; }
+.day.today { outline: 2px solid var(--ocean); outline-offset: -1px; font-weight: 600; }
+
+/* CTA */
+.cta-band { background: linear-gradient(160deg, var(--ocean), var(--deep)); border-radius: 1.25rem; padding: 1.8rem 1.6rem; color: white; margin-top: 2rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; }
+.cta-band h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; }
+.cta-band p { font-size: 0.84rem; color: rgba(255,255,255,0.72); margin-top: 0.3rem; line-height: 1.55; }
+.cta-band p a { color: var(--foam); text-decoration: none; font-weight: 500; }
+.cta-actions { display: flex; gap: 0.7rem; flex-wrap: wrap; }
+.btn-solid { background: white; color: var(--deep); padding: 0.75rem 1.5rem; border-radius: 3rem; text-decoration: none; font-size: 0.85rem; font-weight: 500; }
+.btn-line { border: 1.5px solid rgba(255,255,255,0.5); color: white; padding: 0.7rem 1.4rem; border-radius: 3rem; text-decoration: none; font-size: 0.85rem; font-weight: 500; }
+
+footer { background: var(--deep); color: white; padding: 2rem 1.75rem; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; }
+.footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 300; }
+.footer-copy { font-size: 0.72rem; opacity: 0.4; margin-top: 0.2rem; }
+.footer-links { display: flex; flex-wrap: wrap; gap: 1rem 1.6rem; }
+.footer-links a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.78rem; }
+.footer-links a:hover { color: var(--foam); }
+@media (max-width: 760px) {
+  nav { padding: 0 1.25rem; }
+  .nav-links { gap: 0.9rem; }
+  .nav-links .hide-mobile { display: none; }
+  footer { flex-direction: column; text-align: center; }
+  .footer-links { justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/">LegaSea</a>
+  <ul class="nav-links">
+    <li class="hide-mobile"><a href="/">Home</a></li>
+    <li class="hide-mobile"><a href="/our-home.html">Our Home</a></li>
+    <li class="hide-mobile"><a href="/availability.html">Availability</a></li>
+    <li class="hide-mobile"><a href="/explore.html">Explore</a></li>
+    <li class="hide-mobile"><a href="/beach-day.html">Beach Day</a></li>
+    <li><a href="/guest-agreement.html" class="nav-cta">Guest Agreement</a></li>
+  </ul>
+</nav>
+
+<header>
+  <div class="head-inner">
+    <span class="head-label">📅 Live from our booking calendar</span>
+    <h1>Check <em>availability</em></h1>
+    <p class="head-sub">Open dates for the next 13 months, synced from our VRBO calendar. Find a week you love, then book on VRBO or reach out to us directly.</p>
+    <div class="legend">
+      <span><span class="dotk dot-open"></span> Available</span>
+      <span><span class="dotk dot-booked"></span> Booked</span>
+      <span><span class="dotk dot-past"></span> Past</span>
+    </div>
+    <div id="updated"></div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div id="cal-error">
+    📡 Our live calendar is syncing up — in the meantime, real-time availability is always on
+    <a href="https://www.vrbo.com/1548439?dateless=true" target="_blank" rel="noopener">our VRBO listing</a>,
+    or call/text us at <a href="tel:7046167527">704-616-7527</a>.
+  </div>
+  <div class="months" id="months"></div>
+
+  <div class="cta-band">
+    <div>
+      <h3>Ready to book?</h3>
+      <p>Feel free to book via VRBO — or reach out directly: call or text <a href="tel:7046167527">704-616-7527</a>, or email <a href="mailto:shelbyeellison@gmail.com">shelbyeellison@gmail.com</a>.</p>
+    </div>
+    <div class="cta-actions">
+      <a class="btn-solid" href="https://www.vrbo.com/1548439?dateless=true" target="_blank" rel="noopener">Book on VRBO</a>
+      <a class="btn-line" href="tel:7046167527">📞 Call or Text</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div>
+    <div class="footer-brand">LegaSea</div>
+    <div class="footer-copy">© 2025 LegaSea · Oak Island, NC · 704-616-7527</div>
+  </div>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/our-home.html">Our Home</a>
+    <a href="/availability.html">Availability</a>
+    <a href="/explore.html">Explore</a>
+    <a href="/beach-day.html">Beach Day</a>
+    <a href="/guest-agreement.html">Guest Agreement</a>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var MONTHS = 13;
+  var monthsEl = document.getElementById('months');
+  var now = new Date();
+  var todayKey = key(now.getFullYear(), now.getMonth(), now.getDate());
+
+  function key(y, m, d) {
+    return y + '-' + String(m + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+  }
+
+  // Render 13 empty month grids immediately; shade after data arrives
+  var cells = {}; // 'YYYY-MM-DD' -> element
+  var names = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  for (var i = 0; i < MONTHS; i++) {
+    var y = now.getFullYear(), m = now.getMonth() + i;
+    y += Math.floor(m / 12); m = m % 12;
+    var card = document.createElement('div');
+    card.className = 'month';
+    var dim = new Date(y, m + 1, 0).getDate();
+    var firstDow = new Date(y, m, 1).getDay();
+    var html = '<h3>' + names[m] + ' ' + y + '</h3>'
+      + '<div class="dow"><div>S</div><div>M</div><div>T</div><div>W</div><div>T</div><div>F</div><div>S</div></div>'
+      + '<div class="days">';
+    for (var b = 0; b < firstDow; b++) html += '<div class="day empty"></div>';
+    for (var d = 1; d <= dim; d++) {
+      var k = key(y, m, d);
+      var past = k < todayKey;
+      html += '<div class="day' + (past ? ' past' : '') + (k === todayKey ? ' today' : '') + '" data-k="' + k + '">' + d + '</div>';
+    }
+    html += '</div>';
+    card.innerHTML = html;
+    monthsEl.appendChild(card);
+  }
+  monthsEl.querySelectorAll('.day[data-k]').forEach(function (el) { cells[el.getAttribute('data-k')] = el; });
+
+  function markBooked(ranges) {
+    ranges.forEach(function (rg) {
+      // shade [s, e): checkout day stays open for the next arrival
+      var d = new Date(rg.s + 'T12:00:00');
+      var end = new Date(rg.e + 'T12:00:00');
+      while (d < end) {
+        var k = key(d.getFullYear(), d.getMonth(), d.getDate());
+        if (cells[k] && !cells[k].classList.contains('past')) cells[k].classList.add('booked');
+        d.setDate(d.getDate() + 1);
+      }
+    });
+  }
+
+  var demo = /[?&]demo/.test(location.search);
+  if (demo) {
+    var t = new Date();
+    function shift(n){ var x=new Date(); x.setDate(x.getDate()+n); return key(x.getFullYear(),x.getMonth(),x.getDate()); }
+    markBooked([{s:shift(3),e:shift(10)},{s:shift(24),e:shift(31)},{s:shift(60),e:shift(74)}]);
+    document.getElementById('updated').textContent = 'Demo data';
+    return;
+  }
+
+  fetch('/.netlify/functions/availability')
+    .then(function (r) { return r.json(); })
+    .then(function (d) {
+      if (d.error || !d.ranges) throw new Error(d.error || 'no data');
+      markBooked(d.ranges);
+      if (d.updated) {
+        var u = new Date(d.updated);
+        document.getElementById('updated').textContent =
+          'Synced from VRBO · updated ' + u.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+          + ' at ' + u.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+      }
+    })
+    .catch(function () {
+      document.getElementById('cal-error').style.display = 'block';
+    });
+})();
+</script>
+</body>
+</html>
