@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Home — LegaSea · Oak Island, NC</title>
+<meta name="description" content="LegaSea — a 4-bedroom, 3-bath beach house two blocks from the sand on Oak Island, NC. Elevator, golf cart, private apartment with separate entrance, outdoor shower, and room for 12.">
+<meta property="og:title" content="Our Home — LegaSea">
+<meta property="og:description" content="4 bedrooms · 3 baths · sleeps 12 · 2 blocks to the beach · elevator · golf cart included.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%8A%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --sand: #f5efe6; --dune: #e8d9c5; --ocean: #2c6b7a; --deep: #1a3f4a;
+  --foam: #c9e8ee; --coral: #d4705a; --text: #1e2a2d; --light: #f9f5f0;
+  --nav-h: 56px;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--light); color: var(--text); overflow-x: clip; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: var(--nav-h);
+  display: flex; justify-content: space-between; align-items: center; padding: 0 1.75rem;
+  background: rgba(249,245,240,0.95); backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(44,107,122,0.1);
+}
+.nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; color: var(--ocean); text-decoration: none; }
+.nav-links { display: flex; gap: 1.25rem; list-style: none; align-items: center; }
+.nav-links a { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--deep); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: var(--ocean); }
+.nav-cta { background: var(--ocean); color: white !important; padding: 0.45rem 1.1rem; border-radius: 2rem; }
+
+/* HERO */
+.hero { position: relative; margin-top: var(--nav-h); height: min(58vh, 520px); min-height: 320px; background: url('/photos/exterior-1.jpg') center 55%/cover no-repeat; }
+.hero-overlay { position: absolute; left: 0; right: 0; bottom: 0; padding: 4rem 1.5rem 1.75rem; background: linear-gradient(to top, rgba(26,63,74,0.82), rgba(26,63,74,0.3) 60%, transparent); color: white; }
+.hero-inner { max-width: 980px; margin: 0 auto; }
+.hero-tag { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--foam); margin-bottom: 0.35rem; }
+.hero h1 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(2.2rem, 5vw, 3.2rem); line-height: 1.05; }
+.hero h1 em { font-style: italic; color: var(--foam); }
+.hero-meta { font-size: 0.85rem; color: rgba(255,255,255,0.85); margin-top: 0.4rem; }
+
+/* WRAP */
+.wrap { max-width: 980px; margin: 0 auto; padding: 0 1.25rem 3.5rem; }
+.zone { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--coral); margin: 2.5rem 0 0.5rem; display: block; }
+h2.title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.5rem,2.6vw,2.1rem); font-weight: 300; color: var(--deep); line-height: 1.15; margin-bottom: 1.1rem; }
+h2.title em { font-style: italic; color: var(--ocean); }
+
+/* STATS */
+.stats { display: grid; grid-template-columns: repeat(4,1fr); gap: 0.75rem; margin-top: 1.5rem; }
+@media (max-width: 640px) { .stats { grid-template-columns: repeat(2,1fr); } }
+.stat { background: white; border-radius: 1rem; padding: 1rem; text-align: center; box-shadow: 0 5px 16px rgba(26,63,74,0.06); }
+.stat-num { font-family: 'Cormorant Garamond', serif; font-size: 1.9rem; font-weight: 400; color: var(--ocean); line-height: 1.1; }
+.stat-label { font-size: 0.72rem; color: #7a8e92; margin-top: 0.15rem; }
+
+/* FEATURES */
+.features { display: grid; grid-template-columns: repeat(auto-fill,minmax(215px,1fr)); gap: 0.7rem; }
+.feat { display: flex; gap: 0.7rem; align-items: flex-start; background: white; border-radius: 0.85rem; padding: 0.85rem 1rem; box-shadow: 0 4px 12px rgba(26,63,74,0.05); }
+.feat .ico { font-size: 1.15rem; line-height: 1.4; }
+.feat strong { display: block; font-size: 0.88rem; font-weight: 500; color: var(--deep); }
+.feat span { display: block; font-size: 0.76rem; color: #7a8e92; line-height: 1.45; margin-top: 0.1rem; }
+
+/* LAYOUT CARDS */
+.layout { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+@media (max-width: 720px) { .layout { grid-template-columns: 1fr; } }
+.lay-card { background: white; border-radius: 1.1rem; padding: 1.35rem 1.4rem; box-shadow: 0 6px 18px rgba(26,63,74,0.06); }
+.lay-card.foam { background: var(--foam); }
+.lay-head { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.9rem; }
+.lay-ico { width: 2.4rem; height: 2.4rem; border-radius: 0.6rem; background: var(--ocean); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+.lay-card.foam .lay-ico { background: var(--deep); }
+.lay-head strong { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; color: var(--deep); display: block; }
+.lay-head span { font-size: 0.72rem; color: #7a8e92; }
+.lay-row { display: flex; gap: 0.6rem; align-items: flex-start; padding: 0.5rem 0; border-bottom: 1px dashed var(--dune); font-size: 0.85rem; line-height: 1.5; }
+.lay-card.foam .lay-row { border-color: rgba(44,107,122,0.2); }
+.lay-row:last-child { border-bottom: none; }
+.lay-row .ico { flex-shrink: 0; }
+.lay-row strong { font-weight: 500; color: var(--deep); }
+
+/* GALLERY */
+.gallery { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.6rem; }
+@media (max-width: 640px) { .gallery { grid-template-columns: repeat(2,1fr); } }
+.gallery a { display: block; border-radius: 0.8rem; overflow: hidden; background: var(--dune); aspect-ratio: 4/3; }
+.gallery img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s; }
+.gallery a:hover img { transform: scale(1.04); }
+
+/* WALKABLE */
+.walk { display: grid; grid-template-columns: repeat(auto-fill,minmax(215px,1fr)); gap: 0.7rem; }
+
+/* CTA BAND */
+.cta-band { background: linear-gradient(160deg, var(--ocean), var(--deep)); border-radius: 1.25rem; padding: 1.8rem 1.6rem; color: white; margin-top: 2.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; }
+.cta-band h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; }
+.cta-band p { font-size: 0.82rem; color: rgba(255,255,255,0.7); margin-top: 0.25rem; }
+.cta-actions { display: flex; gap: 0.7rem; flex-wrap: wrap; }
+.btn-solid { background: white; color: var(--deep); padding: 0.75rem 1.5rem; border-radius: 3rem; text-decoration: none; font-size: 0.85rem; font-weight: 500; }
+.btn-line { border: 1.5px solid rgba(255,255,255,0.5); color: white; padding: 0.7rem 1.4rem; border-radius: 3rem; text-decoration: none; font-size: 0.85rem; font-weight: 500; }
+
+footer { background: var(--deep); color: white; padding: 2rem 1.75rem; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; }
+.footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 300; }
+.footer-copy { font-size: 0.72rem; opacity: 0.4; margin-top: 0.2rem; }
+.footer-links { display: flex; flex-wrap: wrap; gap: 1rem 1.6rem; }
+.footer-links a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.78rem; }
+.footer-links a:hover { color: var(--foam); }
+@media (max-width: 700px) {
+  nav { padding: 0 1.25rem; }
+  .nav-links { gap: 0.9rem; }
+  .nav-links .hide-mobile { display: none; }
+  footer { flex-direction: column; text-align: center; }
+  .footer-links { justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/">LegaSea</a>
+  <ul class="nav-links">
+    <li class="hide-mobile"><a href="/">Home</a></li>
+    <li class="hide-mobile"><a href="/our-home.html">Our Home</a></li>
+    <li class="hide-mobile"><a href="/explore.html">Explore</a></li>
+    <li class="hide-mobile"><a href="/beach-day.html">Beach Day</a></li>
+    <li><a href="/guest-agreement.html" class="nav-cta">Guest Agreement</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-overlay">
+    <div class="hero-inner">
+      <div class="hero-tag">📍 Oak Island, North Carolina</div>
+      <h1>Our <em>Home</em></h1>
+      <div class="hero-meta">Two blocks to the beach · elevator access · golf cart included</div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="stats">
+    <div class="stat"><div class="stat-num">4</div><div class="stat-label">Bedrooms</div></div>
+    <div class="stat"><div class="stat-num">3</div><div class="stat-label">Bathrooms</div></div>
+    <div class="stat"><div class="stat-num">12</div><div class="stat-label">Sleeps</div></div>
+    <div class="stat"><div class="stat-num">★ 9.4</div><div class="stat-label">42 reviews · Exceptional</div></div>
+  </div>
+
+  <span class="zone">The essentials</span>
+  <h2 class="title">Everything a beach week <em>needs</em></h2>
+  <div class="features">
+    <div class="feat"><span class="ico">🌊</span><div><strong>2 blocks to the beach</strong><span>Caswell Beach access is a 6-minute walk — load the cart and go.</span></div></div>
+    <div class="feat"><span class="ico">🛗</span><div><strong>Elevator</strong><span>Easy for luggage, groceries, and anyone who'd rather skip the stairs.</span></div></div>
+    <div class="feat"><span class="ico">🛺</span><div><strong>Golf cart included</strong><span>Registered as an Oak Island resident vehicle — beach runs made easy.</span></div></div>
+    <div class="feat"><span class="ico">🚪</span><div><strong>Apartment w/ private entrance</strong><span>A separate downstairs suite — perfect for grandparents or a second family.</span></div></div>
+    <div class="feat"><span class="ico">🚿</span><div><strong>Outdoor shower</strong><span>Rinse off the sand before heading inside.</span></div></div>
+    <div class="feat"><span class="ico">🚗</span><div><strong>Garage parking</strong><span>A rare find on the island — plus room for all the beach gear.</span></div></div>
+    <div class="feat"><span class="ico">🍳</span><div><strong>Two full kitchens</strong><span>Upstairs and in the apartment — no waiting on the stove.</span></div></div>
+    <div class="feat"><span class="ico">🧺</span><div><strong>Two washers &amp; dryers</strong><span>Big-crew laundry, handled.</span></div></div>
+    <div class="feat"><span class="ico">🪑</span><div><strong>Rocking-chair porch</strong><span>Morning coffee, evening breeze.</span></div></div>
+    <div class="feat"><span class="ico">📶</span><div><strong>Free WiFi &amp; central AC</strong><span>Cool, connected, and comfortable all week.</span></div></div>
+  </div>
+
+  <span class="zone">The layout</span>
+  <h2 class="title">Two spaces, <em>one house</em></h2>
+  <div class="layout">
+    <div class="lay-card">
+      <div class="lay-head"><div class="lay-ico">🏠</div><div><strong>Upstairs — Main House</strong><span>3 bedrooms · 2 bathrooms</span></div></div>
+      <div class="lay-row"><span class="ico">🛏️</span><span><strong>Bedroom 1:</strong> king bed</span></div>
+      <div class="lay-row"><span class="ico">🛏️</span><span><strong>Bedroom 2:</strong> two queen beds</span></div>
+      <div class="lay-row"><span class="ico">🛏️</span><span><strong>Bedroom 3:</strong> two queen beds</span></div>
+      <div class="lay-row"><span class="ico">🛋️</span><span>Large gathering space, full kitchen, laundry, and the rocking-chair front porch</span></div>
+    </div>
+    <div class="lay-card foam">
+      <div class="lay-head"><div class="lay-ico">🚪</div><div><strong>Downstairs — The Apartment</strong><span>1 bedroom · 1 bathroom · separate entrance</span></div></div>
+      <div class="lay-row"><span class="ico">🛏️</span><span><strong>Bedroom 4:</strong> queen bed</span></div>
+      <div class="lay-row"><span class="ico">🛋️</span><span>Second TV space with convertible sofa bed + double futon</span></div>
+      <div class="lay-row"><span class="ico">🍳</span><span>Second kitchen and second laundry</span></div>
+      <div class="lay-row"><span class="ico">🔑</span><span>Private outdoor entry — great for added privacy</span></div>
+    </div>
+  </div>
+
+  <span class="zone">Have a look around</span>
+  <h2 class="title">Inside &amp; <em>out</em></h2>
+  <div class="gallery">
+    <a href="/photos/exterior-2.jpg" target="_blank"><img src="/photos/exterior-2.jpg" alt="LegaSea exterior" loading="lazy"></a>
+    <a href="/photos/living.jpg" target="_blank"><img src="/photos/living.jpg" alt="Living area" loading="lazy"></a>
+    <a href="/photos/kitchen.jpg" target="_blank"><img src="/photos/kitchen.jpg" alt="Kitchen" loading="lazy"></a>
+    <a href="/photos/dining.jpg" target="_blank"><img src="/photos/dining.jpg" alt="Dining" loading="lazy"></a>
+    <a href="/photos/bedroom.jpg" target="_blank"><img src="/photos/bedroom.jpg" alt="Bedroom" loading="lazy"></a>
+    <a href="/photos/tv-room.jpg" target="_blank"><img src="/photos/tv-room.jpg" alt="TV room" loading="lazy"></a>
+    <a href="/photos/patio.jpg" target="_blank"><img src="/photos/patio.jpg" alt="Patio" loading="lazy"></a>
+    <a href="/photos/beach-path.jpg" target="_blank"><img src="/photos/beach-path.jpg" alt="Beach access path" loading="lazy"></a>
+    <a href="/photos/beach.jpg" target="_blank"><img src="/photos/beach.jpg" alt="The beach" loading="lazy"></a>
+  </div>
+
+  <span class="zone">Out the front door</span>
+  <h2 class="title">Walk to <em>everything</em></h2>
+  <div class="walk">
+    <div class="feat"><span class="ico">🏖️</span><div><strong>Caswell Beach access</strong><span>6-minute walk — two blocks, straight shot.</span></div></div>
+    <div class="feat"><span class="ico">☕</span><div><strong>Island Jo Coffee &amp; Cafe</strong><span>Walkable morning coffee run.</span></div></div>
+    <div class="feat"><span class="ico">🍔</span><div><strong>Shagger Jacks</strong><span>Restaurants, bars, and shops within walking distance.</span></div></div>
+    <div class="feat"><span class="ico">⛳</span><div><strong>Oak Island Golf Club</strong><span>3-minute drive.</span></div></div>
+  </div>
+
+  <div class="cta-band">
+    <div>
+      <h3>Come stay with us</h3>
+      <p>Real-time availability and secure booking on VRBO. Already booked? The Guest Agreement unlocks your arrival details.</p>
+    </div>
+    <div class="cta-actions">
+      <a class="btn-solid" href="https://www.vrbo.com/1548439?dateless=true" target="_blank" rel="noopener">Book on VRBO</a>
+      <a class="btn-line" href="/guest-agreement.html">Guest Agreement</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div>
+    <div class="footer-brand">LegaSea</div>
+    <div class="footer-copy">© 2025 LegaSea · Oak Island, NC · 704-616-7527</div>
+  </div>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/our-home.html">Our Home</a>
+    <a href="/explore.html">Explore</a>
+    <a href="/beach-day.html">Beach Day</a>
+    <a href="/guest-agreement.html">Guest Agreement</a>
+  </div>
+</footer>
+
+</body>
+</html>

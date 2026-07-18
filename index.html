@@ -42,9 +42,9 @@ body { font-family: 'DM Sans', sans-serif; background: var(--light); color: var(
 
 /* BUTTON DECK */
 .deck { max-width: 880px; margin: -2.25rem auto 0; padding: 0 1.25rem 1rem; position: relative; z-index: 3; }
-.deck-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.deck-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
 .deck-btn.wide { grid-column: 1 / -1; }
-@media (max-width: 720px) { .deck-grid { grid-template-columns: 1fr; } }
+@media (max-width: 780px) { .deck-grid { grid-template-columns: 1fr; } }
 .deck-btn {
   display: flex; gap: 1.1rem; align-items: flex-start; text-decoration: none;
   background: white; border-radius: 1.25rem; padding: 1.5rem 1.5rem 1.4rem;
@@ -117,12 +117,20 @@ footer { background: var(--deep); color: white; padding: 2rem 1.75rem; display: 
         <span class="hint">Start here before your stay</span>
       </div>
     </a>
+    <a class="deck-btn" href="/our-home.html">
+      <div class="deck-ico" style="background:var(--dune);">🏠</div>
+      <div class="deck-body">
+        <h2>Our Home <span class="arrow">→</span></h2>
+        <p>4 bedrooms, 3 baths, sleeps 12 — elevator, golf cart, private apartment, and the beach two blocks away.</p>
+        <span class="hint">Tour the house</span>
+      </div>
+    </a>
     <a class="deck-btn" href="/explore.html">
       <div class="deck-ico" style="background:var(--sand);">🏝️</div>
       <div class="deck-body">
         <h2>Explore <span class="arrow">→</span></h2>
-        <p>The house, the island, and our favorite spots — from the pier and the lighthouse to Provision Company and Lil &amp; John's Sweetreat.</p>
-        <span class="hint">The house &amp; the island</span>
+        <p>The island and our favorite spots — from the pier and the lighthouse to Provision Company and Lil &amp; John's Sweetreat.</p>
+        <span class="hint">The island</span>
       </div>
     </a>
     <a class="deck-btn" href="/beach-day.html">
@@ -154,6 +162,7 @@ footer { background: var(--deep); color: white; padding: 2rem 1.75rem; display: 
   </div>
   <div class="footer-links">
     <a href="/guest-agreement.html">Guest Agreement</a>
+    <a href="/our-home.html">Our Home</a>
     <a href="/explore.html">Explore</a>
     <a href="/beach-day.html">Beach Day</a>
     <a href="#contact">Contact</a>

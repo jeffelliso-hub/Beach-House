@@ -49,8 +49,8 @@ nav {
 /* HERO — the house, front and center */
 .hero {
   position: relative; margin-top: calc(var(--nav-h) + var(--prog-h));
-  height: min(72vh, 620px); min-height: 380px;
-  background: url('https://i.imgur.com/38iO9Tt.jpg') center 30%/cover no-repeat;
+  height: min(42vh, 360px); min-height: 250px;
+  background: url('/photos/exterior-1.jpg') center 55%/cover no-repeat;
 }
 .hero-overlay {
   position: absolute; left: 0; right: 0; bottom: 0;
@@ -70,21 +70,21 @@ nav {
 .col { max-width: 720px; margin: 0 auto; padding: 0 1.5rem; }
 
 /* WELCOME LETTER */
-.welcome { padding-top: 3rem; padding-bottom: 1rem; }
+.welcome { padding-top: 1.75rem; padding-bottom: 0; }
 .welcome h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.7rem,3vw,2.3rem); font-weight: 300; color: var(--deep); margin-bottom: 1.1rem; }
 .welcome h2 em { font-style: italic; color: var(--ocean); }
 .welcome p { font-size: 1rem; line-height: 1.85; color: #3b4b4f; margin-bottom: 1.1rem; }
 .welcome .pull { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.25rem, 2.6vw, 1.6rem); font-style: italic; line-height: 1.5; color: var(--ocean); border-left: 3px solid var(--foam); padding-left: 1.1rem; margin: 1.4rem 0 1.3rem; }
 
 /* SECTIONS — single readable column */
-.gsec { padding-top: 2.5rem; padding-bottom: 2.75rem; border-top: 1px solid var(--dune); }
+.gsec { padding-top: 1.75rem; padding-bottom: 2rem; border-top: 1px solid var(--dune); }
 .gsec .section-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--coral); margin-bottom: 0.6rem; display: block; }
-.gsec h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.6rem,2.8vw,2.15rem); font-weight: 300; color: var(--deep); line-height: 1.15; margin-bottom: 1.25rem; }
+.gsec h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.45rem,2.4vw,1.85rem); font-weight: 400; color: var(--deep); line-height: 1.15; margin-bottom: 1rem; }
 .gsec h2 em { font-style: italic; color: var(--ocean); }
 .gsec h2 .emoji { font-size: 0.8em; }
 .lead { font-size: 0.95rem; line-height: 1.75; color: #4a5c60; margin: -0.5rem 0 1.4rem; }
 
-.item { display: flex; gap: 0.9rem; margin-bottom: 1.05rem; align-items: flex-start; font-size: 0.95rem; line-height: 1.75; color: var(--text); }
+.item { display: flex; gap: 0.8rem; margin-bottom: 0.7rem; align-items: flex-start; font-size: 0.92rem; line-height: 1.6; color: var(--text); }
 .item:last-of-type { margin-bottom: 0; }
 .item-ico { flex-shrink: 0; font-size: 1.05rem; line-height: 1.6; width: 1.6rem; text-align: center; }
 .item strong { color: var(--deep); font-weight: 600; }
@@ -229,7 +229,7 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
   .progress-wrap { padding: 0 1.25rem; }
   .nav-links { gap: 1rem; }
   .nav-links .hide-mobile { display: none; }
-  .hero { height: 52vh; min-height: 320px; }
+  .hero { height: 36vh; min-height: 220px; }
   footer { flex-direction: column; text-align: center; }
   .footer-links { justify-content: center; }
 }
@@ -241,6 +241,7 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
   <a class="nav-logo" href="/">LegaSea</a>
   <ul class="nav-links">
     <li class="hide-mobile"><a href="/">Home</a></li>
+    <li class="hide-mobile"><a href="/our-home.html">Our Home</a></li>
     <li class="hide-mobile"><a href="/explore.html">Explore</a></li>
     <li class="hide-mobile"><a href="/beach-day.html">Beach Day</a></li>
     <li><a href="/guest-agreement.html" class="nav-cta">Guest Agreement</a></li>
@@ -248,7 +249,7 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
 </nav>
 
 <div class="progress-wrap" id="progressWrap">
-  <div class="progress-info"><strong id="progress-count">0</strong> of <span id="progress-total">5</span> sections confirmed</div>
+  <div class="progress-info"><strong id="progress-count">0</strong> of <span id="progress-total">3</span> sections confirmed</div>
   <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
 </div>
 
@@ -259,21 +260,14 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
     <div class="hero-overlay-inner">
       <div class="hero-tag">📍 Oak Island, North Carolina</div>
       <h1>Welcome to <em>LegaSea</em></h1>
-      <div class="hero-meta">Your guest guide &amp; agreement · takes about 3 minutes</div>
-      <div class="hero-chips">
-        <span class="hero-chip">📶 WiFi unlocks at the end</span>
-        <span class="hero-chip">🛺 Golf cart access</span>
-        <span class="hero-chip">🔑 Arrival details</span>
-      </div>
+      <div class="hero-meta">Guest agreement · about 3 minutes · WiFi &amp; arrival details unlock at the end</div>
     </div>
   </div>
 </div>
 
 <div class="col welcome" id="welcome-new">
-  <h2>Thank you for choosing <em>LegaSea</em></h2>
-  <p class="pull">Salt air. Bare feet. Sunsets that stop you mid-sentence.</p>
-  <p>For years, LegaSea has been where our family's best memories are made — first steps in the surf, crab hunts by flashlight, and big dinners that run long into laughter you can hear down the beach. Now the house is yours, and we're so excited for you and your family to begin — or continue — building memories of your own here.</p>
-  <p>Below is your guide to everything you'll need to know for your stay. <strong style="color:var(--deep);">Check the box at the end of each section as you read it</strong> and sign at the end — it takes about 3 minutes, gets your whole crew in the know, and helps make your stay safe and amazing. Your <strong style="color:var(--deep);">WiFi and arrival details unlock the moment you're done.</strong></p>
+  <h2>Four quick sections <em>before your stay</em></h2>
+  <p><strong style="color:var(--deep);">Check the box at the end of each section as you read it</strong>, then sign at the bottom. Your <strong style="color:var(--deep);">WiFi and arrival details unlock the moment you're done.</strong></p>
 </div>
 
 <!-- RETURNING VISITOR (shown when the agreement cookie is present) -->
@@ -296,88 +290,57 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
 <input type="hidden" name="drivers" id="drivers-summary-field">
 <input type="hidden" name="submission_time" id="submission-time">
 
-<!-- SECTION 1 -->
+<!-- SECTION 1: CHECK-IN & CHECK-OUT -->
 <div class="col gsec" id="sec-1">
   <span class="section-label">Section 1</span>
-  <h2>Arrival &amp; <em>departure</em></h2>
-  <div class="item"><span class="item-ico">🕓</span><span><strong>Check-in is 4:00 PM. Check-out is 10:00 AM.</strong> Early check-in or late check-out may be available depending on the calendar — just ask.</span></div>
-  <div class="item"><span class="item-ico">🔑</span><span><strong>Check-in is self-service via lockbox.</strong> Your lockbox &amp; garage code and full arrival details are sent about 48 hours before your stay.</span></div>
-  <div class="item"><span class="item-ico">🚗</span><span><strong>The garage code is the same as the lockbox code.</strong> A button on the post opens and closes the door from inside the garage.</span></div>
+  <h2>Check-in &amp; <em>check-out</em></h2>
+  <div class="item"><span class="item-ico">🕓</span><span><strong>Check-in 4:00 PM · Check-out 10:00 AM.</strong> Early or late may be possible — just ask.</span></div>
+  <div class="item"><span class="item-ico">🔑</span><span><strong>Self check-in via lockbox.</strong> Your code (same for lockbox and garage) is texted about 48 hours before arrival.</span></div>
+  <div class="item"><span class="item-ico">✅</span><span><strong>Before you leave:</strong> run or hand-wash the dishes (no garbage disposal — food waste in the trash), clear the fridge &amp; pantry, strip the beds and start a towel load, bag trash to the outdoor cans, close &amp; latch windows, and lock all doors — including the apartment's separate entrance.</span></div>
   <label class="agree-row section-confirm" for="c1">
     <input type="checkbox" id="c1" name="agreed_arrival" value="yes">
-    <span>I have read the <strong>Arrival &amp; Departure</strong> section.</span>
+    <span>I have read the <strong>check-in &amp; check-out procedures</strong>.</span>
   </label>
 </div>
 
-<!-- SECTION 2 -->
+<!-- SECTION 2: HOUSE RULES -->
 <div class="col gsec" id="sec-2">
   <span class="section-label">Section 2</span>
-  <h2>Caring for <em>the house</em></h2>
-  <div class="item"><span class="item-ico">🛗</span><span><strong>Elevator:</strong> both doors — the handle door <em>and</em> the accordion door — must be fully closed in both the house and the garage for it to operate. Press the call button, wait for the red light before riding, and close the door after each use.</span></div>
-  <div class="warning">Please ride with a cell phone and don't let children ride alone. If the elevator ever gets stuck, the emergency release button is located up high, between the accordion and main door.</div>
-  <div class="item"><span class="item-ico">🚿</span><span><strong>Outdoor shower:</strong> please rinse all sand off before coming inside — it protects the home's plumbing from sand buildup. We appreciate your help keeping LegaSea in great shape!</span></div>
-  <div class="item"><span class="item-ico">💨</span><span><strong>Apartment dehumidifier:</strong> please leave it running for your whole stay. It keeps the space comfortable and protects against moisture.</span></div>
-  <label class="agree-row section-confirm" for="c2">
-    <input type="checkbox" id="c2" name="agreed_housecare" value="yes">
-    <span>I have read the <strong>Caring for the House</strong> section.</span>
-  </label>
-</div>
-
-<!-- SECTION 3 -->
-<div class="col gsec" id="sec-3">
-  <span class="section-label">Section 3</span>
   <h2>House <em>rules</em></h2>
   <div class="fine-banner">
     <div class="fb-icon">🐾</div>
     <div class="fb-text">
       <strong>Absolutely no dogs or other pets — $500 fine.</strong>
-      We love dogs, but LegaSea is a strictly pet-free home for the sake of guests with allergies. Any evidence of a pet on the property results in a <strong style="display:inline;">$500 fine</strong> plus the cost of any additional cleaning or repairs.
+      LegaSea is strictly pet-free for guests with allergies. Any evidence of a pet means a <strong style="display:inline;">$500 fine</strong> plus the cost of extra cleaning or repairs.
     </div>
   </div>
-  <div class="item"><span class="item-ico">🚭</span><span><strong>No smoking</strong> anywhere inside the property.</span></div>
-  <div class="item"><span class="item-ico">🎉</span><span><strong>No parties or events.</strong> Gatherings beyond your registered guests require prior arrangement with us.</span></div>
-  <div class="item"><span class="item-ico">🔇</span><span><strong>Quiet hours after 10:00 PM</strong> — please be mindful of our neighbors.</span></div>
-  <div class="item"><span class="item-ico">♻️</span><span><strong>Waste &amp; recycling:</strong> sort trash using the labeled bins, and roll the cans to the road by Monday night — pickup is Tuesday.</span></div>
+  <div class="item"><span class="item-ico">🚭</span><span><strong>No smoking</strong> anywhere inside. <strong>No parties or events</strong> beyond your registered guests.</span></div>
+  <div class="item"><span class="item-ico">🔇</span><span><strong>Quiet hours after 10:00 PM.</strong> Sort trash in the labeled bins; cans to the road Monday night (pickup Tuesday).</span></div>
+  <div class="item"><span class="item-ico">💳</span><span><strong>Damage:</strong> you're responsible for damage beyond normal wear, and authorize charges to the card on file for damages or fees — including the $500 pet fine. If something breaks, just call us fast: <a href="tel:7046167527" style="color:var(--ocean);font-weight:500;text-decoration:none;">704-616-7527</a>.</span></div>
+  <label class="agree-row section-confirm" for="c2">
+    <input type="checkbox" id="c2" name="agreed_rules" value="yes">
+    <span>I agree to the <strong>House Rules — including the no-pets policy</strong>.</span>
+  </label>
+</div>
+
+<!-- SECTION 3: HOUSE CARE -->
+<div class="col gsec" id="sec-3">
+  <span class="section-label">Section 3</span>
+  <h2>Caring for <em>the house</em></h2>
+  <div class="item"><span class="item-ico">🛗</span><span><strong>Elevator:</strong> both doors (handle + accordion) must be fully closed in the house <em>and</em> garage for it to run. Ride with a phone, no kids alone — the emergency release is up high between the doors if it sticks.</span></div>
+  <div class="item"><span class="item-ico">🚿</span><span><strong>Outdoor shower:</strong> rinse the sand off before coming inside — it protects the plumbing.</span></div>
+  <div class="item"><span class="item-ico">💨</span><span><strong>Apartment dehumidifier:</strong> leave it running all stay.</span></div>
   <label class="agree-row section-confirm" for="c3">
-    <input type="checkbox" id="c3" name="agreed_rules" value="yes">
-    <span>I have read the <strong>House Rules — including the no-pets policy</strong>.</span>
+    <input type="checkbox" id="c3" name="agreed_housecare" value="yes">
+    <span>I have read <strong>Caring for the House</strong>.</span>
   </label>
 </div>
 
-<!-- SECTION 4 -->
+<!-- SECTION 4: GOLF CART -->
 <div class="col gsec" id="sec-4">
-  <span class="section-label">Section 4</span>
-  <h2>Before you <em>leave</em></h2>
-  <div class="item"><span class="item-ico">🍽️</span><span><strong>Dishes &amp; kitchen:</strong> run the dishwasher or hand wash dishes. There's no garbage disposal — all food waste goes in the trash.</span></div>
-  <div class="item"><span class="item-ico">🧹</span><span><strong>Clear the fridge and pantry</strong> of all food.</span></div>
-  <div class="item"><span class="item-ico">🛏️</span><span><strong>Strip the beds</strong>, leave linens piled on each mattress, and start a load of towels or sheets before you go.</span></div>
-  <div class="item"><span class="item-ico">🗑️</span><span><strong>Bag all trash</strong>, take it to the outdoor cans, and roll the cans to the road.</span></div>
-  <div class="item"><span class="item-ico">🪟</span><span><strong>Close and latch all windows</strong>, and <strong>lock all doors</strong> — including the apartment's separate entrance.</span></div>
-  <label class="agree-row section-confirm" for="c4">
-    <input type="checkbox" id="c4" name="agreed_checkout" value="yes">
-    <span>I have read the <strong>Checkout</strong> list.</span>
-  </label>
-</div>
-
-<!-- SECTION 5 -->
-<div class="col gsec" id="sec-5">
-  <span class="section-label">Section 5</span>
-  <h2>Liability &amp; care of <em>the home</em></h2>
-  <div class="item"><span class="item-ico">🏠</span><span>I will treat LegaSea with care and am responsible for any damage beyond normal wear and tear caused by me or my guests during the stay.</span></div>
-  <div class="item"><span class="item-ico">📞</span><span>I will contact the owners promptly if anything is damaged or not working so it can be addressed.</span></div>
-  <div class="item"><span class="item-ico">👥</span><span>My party will not exceed the number of registered guests, and I understand the home is non-smoking and pet-free.</span></div>
-  <div class="item"><span class="item-ico">💳</span><span>I authorize the owners to charge my card on file for any damages or fees consistent with the rental terms, including the $500 pet fine.</span></div>
-  <label class="agree-row section-confirm" for="c5">
-    <input type="checkbox" id="c5" name="agreed_liability" value="yes">
-    <span>I have read and agree to <strong>Liability &amp; Care of the Home</strong>.</span>
-  </label>
-</div>
-
-<!-- SECTION 6: GOLF CART -->
-<div class="col gsec" id="sec-6">
-  <span class="section-label">Section 6 · Golf Cart Use Agreement</span>
+  <span class="section-label">Section 4 · Golf Cart Use Agreement</span>
   <h2>The golf <em>cart</em> <span class="emoji">🛺</span></h2>
-  <p class="lead">An electric golf cart is included with your stay — one of the best parts of LegaSea. Because it's a real vehicle on real roads, this section works like the rest of the agreement but with a checkbox after each part. Will anyone in your group drive it?</p>
+  <p class="lead">The cart is a real vehicle on real roads — this is the part to read closely. Will anyone in your group drive it?</p>
 
   <div class="cart-choice" id="cart-choice">
     <label id="cart-yes-label"><input type="radio" name="golf_cart" value="yes" id="cart-yes"> 🛺 Yes, we'll use the cart</label>
@@ -540,9 +503,9 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
   </div>
   <div class="footer-links">
     <a href="/">Home</a>
+    <a href="/our-home.html">Our Home</a>
     <a href="/explore.html">Explore</a>
     <a href="/beach-day.html">Beach Day</a>
-    <a href="/explore.html#booking">Book a Stay</a>
   </div>
 </footer>
 
@@ -559,7 +522,7 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
   const cartYes = document.getElementById('cart-yes');
   const cartNo = document.getElementById('cart-no');
   const cartBlock = document.getElementById('cart-required-block');
-  const baseChecks = ['c1','c2','c3','c4','c5'].map(id => document.getElementById(id));
+  const baseChecks = ['c1','c2','c3'].map(id => document.getElementById(id));
   const cartFinal = document.getElementById('c6');
   const cartAgreeIds = ['agree-cart-liability','agree-cart-electric','agree-cart-state','agree-cart-user'];
   const cartAgreeLabels = ['Operation & Liability','Electric Cart Requirements','State & Local Requirements','User Agreement'];
@@ -676,7 +639,7 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
   });
   document.getElementById('driver-list').addEventListener('input', clearErrors);
 
-  const sectionNames = ['Arrival & Departure', 'Caring for the House', 'House Rules', 'Checkout', 'Liability'];
+  const sectionNames = ['Check-In & Check-Out', 'House Rules', 'Caring for the House'];
 
   function validate() {
     const errors = [];
@@ -688,7 +651,7 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
 
     if (!cartYes.checked && !cartNo.checked) {
       document.getElementById('cart-choice').classList.add('check-error');
-      errors.push('Section 6: tell us whether your group will use the golf cart');
+      errors.push('Section 4: tell us whether your group will use the golf cart');
     }
 
     if (usingCart()) {
@@ -696,7 +659,7 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
         const el = document.getElementById(id);
         if (!el.checked) { el.closest('.agree-row').classList.add('check-error'); errors.push('Golf cart: check the box for ' + cartAgreeLabels[i]); }
       });
-      if (!cartFinal.checked) { cartFinal.closest('.agree-row').classList.add('check-error'); errors.push('Confirm Section 6 — Golf Cart Use Agreement'); }
+      if (!cartFinal.checked) { cartFinal.closest('.agree-row').classList.add('check-error'); errors.push('Confirm Section 4 — Golf Cart Use Agreement'); }
       document.querySelectorAll('.driver-entry').forEach((entry, i) => {
         const nameEl  = entry.querySelector('.driver-name-wrap input');
         const dlEl    = entry.querySelector('.driver-dl-wrap input');
@@ -767,10 +730,8 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
       date: dateInput.value,
       submission_time: timeStr,
       agreed_arrival: 'YES',
-      agreed_housecare: 'YES',
       agreed_rules: 'YES',
-      agreed_checkout: 'YES',
-      agreed_liability: 'YES',
+      agreed_housecare: 'YES',
       golf_cart: usingCart() ? 'yes' : 'no',
       'agreed-liability': cartVal('agree-cart-liability'),
       'agreed-electric': cartVal('agree-cart-electric'),
@@ -805,7 +766,7 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
           guest_email: emailVal || 'not provided',
           date_signed: dateInput.value,
           submission_time: timeStr,
-          sections_read: 'Arrival, House Care, House Rules, Checkout, Liability' + (usingCart() ? ', Golf Cart' : ''),
+          sections_read: 'Check-in/out, House Rules, House Care' + (usingCart() ? ', Golf Cart' : ''),
           using_golf_cart: usingCart() ? 'YES' : 'No',
           drivers: driverSummary
         })
@@ -846,7 +807,7 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
     document.getElementById('progressWrap').style.display='none';
     document.getElementById('sign').style.display='none';
     var chips=document.querySelector('.hero-chips'); if(chips) chips.style.display='none';
-    var lead=document.querySelector('#sec-6 .lead'); if(lead) lead.style.display='none';
+    var lead=document.querySelector('#sec-4 .lead'); if(lead) lead.style.display='none';
     document.querySelectorAll('.agree-row').forEach(function(el){el.style.display='none';});
     ['cart-choice','cart-skip-note','cart-required-block'].forEach(function(id){var e=document.getElementById(id);if(e)e.style.display='none';});
     document.getElementById('returning').style.display='block';
