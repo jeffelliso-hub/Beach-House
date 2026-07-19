@@ -1,5 +1,5 @@
 // Netlify Function: reads the VRBO reservation-calendar iCal export and returns
-// booked date ranges for the next 13 months as JSON for /availability.html.
+// booked date ranges for the next 14 months as JSON for /availability.html.
 //
 // Setup: Netlify → Site configuration → Environment variables →
 //   VRBO_ICAL_URL = the listing's calendar "Export" link from the Vrbo owner
@@ -20,7 +20,7 @@ exports.handler = async function () {
 
   var now = Date.now();
   var winStart = now - 7 * DAY;                 // a few days back for context
-  var winEnd = now + 396 * DAY;                 // ~13 months ahead
+  var winEnd = now + 430 * DAY;                 // ~14 months ahead
   try {
     var events = [];
     for (var i = 0; i < urls.length; i++) {

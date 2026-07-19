@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Availability — LegaSea · Oak Island, NC</title>
-<meta name="description" content="Live availability calendar for LegaSea on Oak Island, NC — see open weeks for the next 13 months, then book on VRBO or reach out directly.">
+<meta name="description" content="Live availability calendar for LegaSea on Oak Island, NC — see open weeks for the next 14 months, then book on VRBO or reach out directly.">
 <meta property="og:title" content="Availability — LegaSea">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%8A%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -109,7 +109,7 @@ footer { background: var(--deep); color: white; padding: 2rem 1.75rem; display: 
   <div class="head-inner">
     <span class="head-label">📅 Live from our booking calendar</span>
     <h1>Check <em>availability</em></h1>
-    <p class="head-sub">Open dates for the next 13 months, synced from our VRBO calendar. Find a week you love, then book on VRBO or reach out to us directly.</p>
+    <p class="head-sub">Open dates for the next 14 months, always starting with the current month. Find a week you love, then book on VRBO or reach out to us directly.</p>
     <div class="legend">
       <span><span class="dotk dot-open"></span> Available</span>
       <span><span class="dotk dot-booked"></span> Booked</span>
@@ -156,7 +156,7 @@ footer { background: var(--deep); color: white; padding: 2rem 1.75rem; display: 
 
 <script>
 (function () {
-  var MONTHS = 13;
+  var MONTHS = 14;
   var monthsEl = document.getElementById('months');
   var now = new Date();
   var todayKey = key(now.getFullYear(), now.getMonth(), now.getDate());
@@ -220,7 +220,7 @@ footer { background: var(--deep); color: white; padding: 2rem 1.75rem; display: 
       if (d.updated) {
         var u = new Date(d.updated);
         document.getElementById('updated').textContent =
-          'Synced from VRBO · updated ' + u.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+          'Updated ' + u.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
           + ' at ' + u.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
       }
     })
