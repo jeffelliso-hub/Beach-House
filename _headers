@@ -1,0 +1,3 @@
+# Keep the whole site out of search engines (still viewable by anyone with the link)
+/*
+  X-Robots-Tag: noindex, nofollow
