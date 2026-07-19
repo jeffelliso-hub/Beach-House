@@ -280,7 +280,7 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
     <div class="ess-row"><div class="ess-label">WiFi Network</div><div class="ess-val">LegaseaWIFI</div></div>
     <div class="ess-row"><div class="ess-label">WiFi Password</div><div class="ess-val">LiveOak79#</div></div>
     <div class="ess-row"><div class="ess-label">Check-In / Check-Out</div><div class="ess-val">4:00 PM &nbsp;/&nbsp; 10:00 AM</div></div>
-    <div class="ess-note">Your lockbox &amp; garage code are the same and are sent by text about 48 hours before arrival. Need anything? Call or text <a href="tel:7046167527">704-616-7527</a>.</div>
+    <div class="ess-note">Your lockbox &amp; garage code are the same and are sent by text about 48 hours before arrival. Need anything? Call or text <a href="#" data-tel data-tel-text></a>.</div>
   </div>
   <p>Everything about the house and the rules is below for your reference — <strong style="color:var(--deep);">no need to sign again.</strong> Not you, or need to add a golf-cart driver? <a href="#" id="resign-link" style="color:var(--ocean);font-weight:500;">Start the agreement over</a>.</p>
 </div>
@@ -322,7 +322,7 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
   <div class="item"><span class="item-ico">🚭</span><span><strong>No smoking</strong> anywhere inside the property.</span></div>
   <div class="item"><span class="item-ico">🎉</span><span><strong>No parties or events.</strong> Your group won't exceed your registered guests — anything larger needs prior arrangement with us.</span></div>
   <div class="item"><span class="item-ico">🔇</span><span><strong>Quiet hours after 10:00 PM</strong> — please be mindful of our neighbors. Sort trash using the labeled bins.</span></div>
-  <div class="item"><span class="item-ico">💳</span><span><strong>Damage:</strong> you're responsible for damage beyond normal wear and authorize charges to the card on file for damages or fees — including the $500 pet fine. If anything is damaged or not working, tell us right away — <a href="tel:7046167527" style="color:var(--ocean);font-weight:500;text-decoration:none;">704-616-7527</a> — and we'll take care of it.</span></div>
+  <div class="item"><span class="item-ico">💳</span><span><strong>Damage:</strong> you're responsible for damage beyond normal wear and authorize charges to the card on file for damages or fees — including the $500 pet fine. If anything is damaged or not working, tell us right away — <a href="#" data-tel data-tel-text style="color:var(--ocean);font-weight:500;text-decoration:none;"></a> — and we'll take care of it.</span></div>
   <label class="agree-row section-confirm" for="c2">
     <input type="checkbox" id="c2" name="agreed_rules" value="yes">
     <span>I agree to the <strong>House Rules — including the no-pets policy</strong>.</span>
@@ -354,7 +354,7 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
     <label id="cart-yes-label"><input type="radio" name="golf_cart" value="yes" id="cart-yes"> 🛺 Yes, we'll use the cart</label>
     <label id="cart-no-label"><input type="radio" name="golf_cart" value="no" id="cart-no"> No thanks</label>
   </div>
-  <p class="cart-note" id="cart-skip-note" style="display:none;">No problem — the terms below still apply if anyone changes their mind. Just come back to this page or text us at 704-616-7527 before using the cart.</p>
+  <p class="cart-note" id="cart-skip-note" style="display:none;">No problem — the terms below still apply if anyone changes their mind. Just come back to this page or text us at <span data-tel-text></span> before using the cart.</p>
 
   <div class="subhead">Operation &amp; Liability</div>
   <div class="item"><span class="item-ico">·</span><span>I will return the golf cart in the same condition as received, normal wear and tear accepted, and will operate it safely and responsibly.</span></div>
@@ -479,7 +479,7 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
     <div class="ess-row"><div class="ess-label">WiFi Network</div><div class="ess-val">LegaseaWIFI</div></div>
     <div class="ess-row"><div class="ess-label">WiFi Password</div><div class="ess-val">LiveOak79#</div></div>
     <div class="ess-row"><div class="ess-label">Check-In / Check-Out</div><div class="ess-val">4:00 PM &nbsp;/&nbsp; 10:00 AM</div></div>
-    <div class="ess-note">Your lockbox &amp; garage code are the same and are sent by text about 48 hours before arrival. Need anything? Call or text <a href="tel:7046167527">704-616-7527</a>.</div>
+    <div class="ess-note">Your lockbox &amp; garage code are the same and are sent by text about 48 hours before arrival. Need anything? Call or text <a href="#" data-tel data-tel-text></a>.</div>
   </div>
   <p class="footer-note" id="ty-email-note">A copy of these details has been emailed to you.</p>
 </div>
@@ -507,7 +507,7 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
 <footer>
   <div>
     <div class="footer-brand">LegaSea</div>
-    <div class="footer-copy">© 2025 LegaSea · Oak Island, NC · 704-616-7527</div>
+    <div class="footer-copy">© 2025 LegaSea · Oak Island, NC · <span data-tel-text></span></div>
   </div>
   <div class="footer-links">
     <a href="/">Home</a>
@@ -787,7 +787,7 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
     try {
       await emailjs.send('service_67blfcs', 'template_swlvg2o', {
         to_name: name, to_email: emailVal, date_signed: dateInput.value,
-        wifi_network: 'LegaseaWIFI', wifi_password: 'LiveOak79#', phone: '704-616-7527',
+        wifi_network: 'LegaseaWIFI', wifi_password: 'LiveOak79#', phone: atob('NzA0LTYxNi03NTI3'),
         golf_cart: usingCart() ? 'Yes' : 'No'
       });
       emailed = true;
@@ -829,5 +829,6 @@ footer { background: var(--deep); color: white; padding: 2.5rem 2rem; display: f
   var resignLink = document.getElementById('resign-link');
   if (resignLink) resignLink.addEventListener('click', function(e){ e.preventDefault(); delCookie('legasea_agreed'); location.reload(); });
 </script>
+<script src="/contact.js"></script>
 </body>
 </html>

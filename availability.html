@@ -123,18 +123,18 @@ footer { background: var(--deep); color: white; padding: 2rem 1.75rem; display: 
   <div id="cal-error">
     📡 Our live calendar is syncing up — in the meantime, real-time availability is always on
     <a href="https://www.vrbo.com/1548439?dateless=true" target="_blank" rel="noopener">our VRBO listing</a>,
-    or call/text us at <a href="tel:7046167527">704-616-7527</a>.
+    or call/text us at <a href="#" data-tel data-tel-text></a>.
   </div>
   <div class="months" id="months"></div>
 
   <div class="cta-band">
     <div>
       <h3>Ready to book?</h3>
-      <p>Feel free to book via VRBO — or reach out directly: call or text <a href="tel:7046167527">704-616-7527</a>, or email <a href="mailto:shelbyeellison@gmail.com">shelbyeellison@gmail.com</a>.</p>
+      <p>Feel free to book via VRBO — or reach out directly: call or text <a href="#" data-tel data-tel-text></a>, or email <a href="#" data-eml data-eml-text></a>.</p>
     </div>
     <div class="cta-actions">
       <a class="btn-solid" href="https://www.vrbo.com/1548439?dateless=true" target="_blank" rel="noopener">Book on VRBO</a>
-      <a class="btn-line" href="tel:7046167527">📞 Call or Text</a>
+      <a class="btn-line" href="#" data-tel>📞 Call or Text</a>
     </div>
   </div>
 </div>
@@ -142,7 +142,7 @@ footer { background: var(--deep); color: white; padding: 2rem 1.75rem; display: 
 <footer>
   <div>
     <div class="footer-brand">LegaSea</div>
-    <div class="footer-copy">© 2025 LegaSea · Oak Island, NC · 704-616-7527</div>
+    <div class="footer-copy">© 2025 LegaSea · Oak Island, NC · <span data-tel-text></span></div>
   </div>
   <div class="footer-links">
     <a href="/">Home</a>
@@ -229,5 +229,6 @@ footer { background: var(--deep); color: white; padding: 2rem 1.75rem; display: 
     });
 })();
 </script>
+<script src="/contact.js"></script>
 </body>
 </html>
