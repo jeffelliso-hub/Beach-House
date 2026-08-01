@@ -501,7 +501,7 @@ html, body {
 <div id="home-hint">Tap Share → Add to Home Screen for fullscreen</div>
 
 <!-- ═══ BUILD MARKER (temporary — confirms new version loaded) ═══ -->
-<div style="position:fixed;bottom:4px;left:6px;font-size:11px;color:var(--text-5);opacity:0.55;z-index:500;font-family:sans-serif">build 11</div>
+<div style="position:fixed;bottom:4px;left:6px;font-size:11px;color:var(--text-5);opacity:0.55;z-index:500;font-family:sans-serif">build 12</div>
 
 <!-- ═══ MAIN SCREEN ═══ -->
 <div class="main-screen" id="main-screen">
@@ -926,8 +926,14 @@ function calNav(delta) {
 // Calendar data comes from the site's own Netlify function, which reads the
 // calendar's private iCal feed. No sign-in, no tokens, nothing to expire.
 var calAll = null; // cached ±31-day event window from the server
+var calRetries = 0;
 
 function fetchCalendar() {
+  calRetries = 0;
+  doFetchCalendar();
+}
+
+function doFetchCalendar() {
   xhrGet('/.netlify/functions/calendar', null,
     function(d) {
       if (d && d.error) {
@@ -935,10 +941,21 @@ function fetchCalendar() {
         return; // keep showing the cached events on a transient feed error
       }
       calAll = (d && d.events) || [];
+      calRetries = 0;
       renderFromCache(null);
     },
     function() {
-      if (calAll) renderFromCache(null); else renderCalendar([], 'Network error');
+      // Retry with backoff — right after the iPad wakes, this request often fires
+      // before Wi-Fi has reconnected (the weather already retried like this).
+      if (calRetries < 3) {
+        calRetries++;
+        setTimeout(doFetchCalendar, calRetries * 8000);
+        if (!calAll) renderCalendar([], 'Reconnecting…');
+      } else if (calAll) {
+        renderFromCache(null);
+      } else {
+        renderCalendar([], 'Network error');
+      }
     }
   );
 }
@@ -1030,6 +1047,19 @@ function closeCalDetail() {
 
 fetchCalendar();
 setInterval(fetchCalendar, 5 * 60 * 1000);
+
+// Refresh everything the moment the iPad wakes / the app returns to the foreground.
+// Overnight, iOS suspends the page; on wake the timers may not have fired yet and
+// the first automatic refresh could be minutes away — this makes it instant.
+function wakeRefresh() {
+  updateClock();
+  fetchCalendar();
+  fetchWeather();
+}
+document.addEventListener('visibilitychange', function() {
+  if (!document.hidden) wakeRefresh();
+});
+window.addEventListener('pageshow', wakeRefresh);
 
 // ════════════════════════════════
 // HELPERS
