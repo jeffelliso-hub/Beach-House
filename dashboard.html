@@ -501,7 +501,7 @@ html, body {
 <div id="home-hint">Tap Share → Add to Home Screen for fullscreen</div>
 
 <!-- ═══ BUILD MARKER (temporary — confirms new version loaded) ═══ -->
-<div style="position:fixed;bottom:4px;left:6px;font-size:11px;color:var(--text-5);opacity:0.55;z-index:500;font-family:sans-serif">build 12</div>
+<div style="position:fixed;bottom:4px;left:6px;font-size:11px;color:var(--text-5);opacity:0.55;z-index:500;font-family:sans-serif">build 13</div>
 
 <!-- ═══ MAIN SCREEN ═══ -->
 <div class="main-screen" id="main-screen">
@@ -741,7 +741,15 @@ function updateClock() {
     fetchCalendar();
     fetchWeather();
   }
+
+  // Always-on kiosk: reload once a day at 4 AM so long-running Safari never
+  // gets purged/reloaded on its own at a bad moment. The uptime guard stops
+  // it re-reloading every second during the 4:00 minute.
+  if (now.getHours() === 4 && now.getMinutes() === 0 && Date.now() - bootedAt > 120000) {
+    location.reload();
+  }
 }
+var bootedAt = Date.now();
 var lastDateStr = new Date().toDateString();
 setInterval(updateClock, 1000);
 updateClock();
@@ -1060,6 +1068,12 @@ document.addEventListener('visibilitychange', function() {
   if (!document.hidden) wakeRefresh();
 });
 window.addEventListener('pageshow', wakeRefresh);
+
+// Any tap while the calendar has no data (error state) → try again right now,
+// instead of waiting for the next 5-minute cycle.
+document.addEventListener('touchend', function() {
+  if (!calAll) fetchCalendar();
+});
 
 // ════════════════════════════════
 // HELPERS
